@@ -1,0 +1,16 @@
+# 実行ファイル・ビルド成果物
+*.exe
+*.o
+/sim/bin/
+
+# Python 仮想環境
+.venv/
+__pycache__/
+
+# シム出力（大量 CSV は追跡しない）
+/data/**/*.csv
+/marginal/
+
+# OS
+.DS_Store
+Thumbs.db
