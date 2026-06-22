@@ -19,7 +19,8 @@ sim/partN/
   partN.go             Part ロジック（package main）
   run.py               Go ビルド + シム + グラフ
   __tests__/           Go テスト
-sim/_common.py         Python 共通（ビルド・進捗・出力先）
+sim/_common.py         Python 共通（ビルド・進捗・出力先・CLI）
+sim/plotting.py        グラフ描画 API（フォント・dark theme・save_*_chart）
 sim/run_all.py         全 Part オーケストレーション
 data/                  実行出力（タイムスタンプ付き）
 ```
@@ -48,7 +49,7 @@ data/                  実行出力（タイムスタンプ付き）
 - 出力先: `data/<YYYYMMDD_HHMMSS>/`
 - CSV: `data/<ts>/csv/`、PNG: `data/<ts>/` 直下
 - 進捗: `PROGRESS1`〜`PROGRESS5`（Python が表示）
-- グラフ日本語: `sim/_common.py` が `Noto Sans JP` 等の CJK フォントを自動選択（`sim/fonts/` に同梱可）
+- グラフ日本語: [`sim/plotting.py`](sim/plotting.py) が CJK フォントを自動選択（`sim/fonts/` に同梱可）
 
 ## Go 規約
 

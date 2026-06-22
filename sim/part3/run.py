@@ -2,32 +2,27 @@
 
 from __future__ import annotations
 
-import argparse
-import csv
 import sys
 from pathlib import Path
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from _common import (  # noqa: E402
-    BG_COLOR,
-    apply_dark_style,
-    build_go,
-    resolve_out_dir,
-    run_go,
-    csv_dir,
+from _common import csv_dir, part_main, run_go  # noqa: E402
+from plotting import (  # noqa: E402
+    AxisSpec,
+    HLineOverlay,
+    LineChartSpec,
+    LineSeries,
+    read_matrix_csv,
+    require_csv,
+    save_line_chart,
 )
 
 DIFF_LEVELS = [
-    ("Easy(85%)", 85, "#44ff44"),
-    ("Normal(70%)", 70, "#ffff44"),
-    ("Hard(55%)", 55, "#ffaa22"),
-    ("Very Hard(30%)", 30, "#ff4444"),
-    ("Near Impossible(3%)", 3, "#ff00ff"),
+    ("易(85%)", 85, "#44ff44"),
+    ("普通(70%)", 70, "#ffff44"),
+    ("難(55%)", 55, "#ffaa22"),
+    ("超難(30%)", 30, "#ff4444"),
+    ("ほぼ不可能(3%)", 3, "#ff00ff"),
 ]
 COMBO_COLORS = {
     "d10only": "#9b59b6",
@@ -55,80 +50,51 @@ def run_sim(out_dir: Path, seed: int, trials: int) -> None:
 
 def plot(out_dir: Path) -> None:
     csv_path = csv_dir(out_dir) / "difficulty_table.csv"
-    if not csv_path.exists():
-        print(f"エラー: {csv_path} がありません。")
-        sys.exit(1)
+    require_csv(csv_path)
+    dice_names, data = read_matrix_csv(csv_path, "target")
 
-    dice_names: list[str] = []
-    data: dict[str, dict[str, list]] = {}
-    with open(csv_path, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        assert reader.fieldnames is not None
-        dice_names = [c for c in reader.fieldnames if c != "target"]
-        for name in dice_names:
-            data[name] = {"x": [], "y": []}
-        for row in reader:
-            tgt = int(row["target"])
-            for name in dice_names:
-                val = row[name].strip()
-                if val:
-                    data[name]["x"].append(tgt)
-                    data[name]["y"].append(float(val) * 100.0)
-
-    plt.style.use("dark_background")
-    fig, ax = plt.subplots(figsize=(13, 7), facecolor=BG_COLOR)
-    apply_dark_style(ax)
-    for name in dice_names:
-        ax.plot(
-            data[name]["x"],
-            data[name]["y"],
-            label=name,
-            color=COMBO_COLORS.get(name, "#ffffff"),
-            marker=COMBO_MARKERS.get(name, "o"),
-            markersize=4,
-            linewidth=2,
-        )
-    for label, pct, col in DIFF_LEVELS:
-        ax.axhline(y=pct, color=col, linestyle="--", linewidth=1.0, alpha=0.6)
-        ax.text(25.2, pct, label, color=col, fontsize=8.5, va="center", ha="left")
-    ax.set_xlabel("Target value", fontsize=13)
-    ax.set_ylabel("Success rate (%)", fontsize=13)
-    ax.set_title("Difficulty Table: Success Rate by Target\n(1d10 + 1 Elemental Die)", fontsize=14)
-    ax.set_xlim(1, 27)
-    ax.set_ylim(-2, 103)
-    ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
-    ax.yaxis.set_major_locator(ticker.MultipleLocator(10))
-    ax.legend(fontsize=11, loc="lower right", facecolor="#2a2a3e", edgecolor="#555555", labelcolor="#eeeeee")
-    fig.tight_layout()
-    out_png = out_dir / "difficulty_table.png"
-    fig.savefig(out_png, dpi=150, facecolor=BG_COLOR)
-    plt.close(fig)
-    print(f"    出力: {out_png.name}")
+    save_line_chart(
+        LineChartSpec(
+            series=[
+                LineSeries(
+                    x=data[name]["x"],
+                    y=[y * 100.0 for y in data[name]["y"]],
+                    label=name,
+                    color=COMBO_COLORS.get(name, "#ffffff"),
+                    marker=COMBO_MARKERS.get(name, "o"),
+                    markersize=4,
+                )
+                for name in dice_names
+            ],
+            axis=AxisSpec(
+                xlabel="目標値",
+                ylabel="成功率 (%)",
+                title="難易度表: 目標値別成功率\n(1d10 + 属性ダイス1個)",
+                xlim=(1, 27),
+                ylim=(-2, 103),
+                x_major=1,
+                y_major=10,
+            ),
+            figsize=(13, 7),
+            legend_loc="lower right",
+        ),
+        out_dir / "difficulty_table.png",
+        hlines=[
+            HLineOverlay(y=pct, color=col, label=label, label_x=25.2)
+            for label, pct, col in DIFF_LEVELS
+        ],
+    )
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="Part3 sim + plot")
-    p.add_argument("--out-dir", type=Path, default=None, help="output dir (default: data/<timestamp>)")
-    p.add_argument("--seed", type=int, default=42)
-    p.add_argument("--trials", type=int, default=100000)
-    p.add_argument("--plot-only", action="store_true")
-    args = p.parse_args()
-
-    if args.out_dir is not None:
-        out_dir = resolve_out_dir(args.out_dir, create=True)
-    elif args.plot_only:
-        out_dir = resolve_out_dir(None, create=False)
-    else:
-        out_dir = resolve_out_dir(None, create=True)
-
-    print(f"出力: {out_dir}")
-
-    if not args.plot_only:
-        build_go(("part3",))
-        print("[Part3] Go シム実行中...")
-        run_sim(out_dir, args.seed, args.trials)
-    print("[Part3] グラフ生成中...")
-    plot(out_dir)
+    part_main(
+        part_label="Part3",
+        go_part="part3",
+        description="Part3 sim + plot",
+        default_trials=100000,
+        plot_fn=plot,
+        run_sim_fn=run_sim,
+    )
 
 
 if __name__ == "__main__":

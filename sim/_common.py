@@ -2,62 +2,17 @@
 
 from __future__ import annotations
 
+import argparse
 import subprocess
 import sys
+from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
-
-import matplotlib.pyplot as plt
-from matplotlib import font_manager
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 SIM_DIR = Path(__file__).resolve().parent
 DATA_DIR = ROOT_DIR / "data"
 CSV_SUBDIR = "csv"
-FONTS_DIR = SIM_DIR / "fonts"
-
-# Prefer bundled Noto, then common OS Japanese fonts (Windows / macOS / Linux).
-JP_FONT_CANDIDATES = (
-    "Noto Sans JP",
-    "Noto Sans CJK JP",
-    "Yu Gothic",
-    "Yu Gothic UI",
-    "Meiryo",
-    "MS Gothic",
-    "Hiragino Sans",
-    "Hiragino Kaku Gothic ProN",
-    "IPAGothic",
-    "TakaoGothic",
-    "Source Han Sans JP",
-)
-
-
-def configure_plot_fonts() -> str | None:
-    """Use a CJK-capable sans font so Japanese labels render without glyph warnings."""
-    bundled = (
-        FONTS_DIR / "NotoSansJP-Regular.otf",
-        FONTS_DIR / "NotoSansJP-Regular.ttf",
-        FONTS_DIR / "NotoSansCJKjp-Regular.otf",
-    )
-    for path in bundled:
-        if path.is_file():
-            font_manager.fontManager.addfont(str(path))
-            break
-
-    available = {f.name for f in font_manager.fontManager.ttflist}
-    chosen = next((name for name in JP_FONT_CANDIDATES if name in available), None)
-    if chosen is None:
-        return None
-
-    sans = [chosen, "DejaVu Sans"]
-    plt.rcParams["font.family"] = "sans-serif"
-    plt.rcParams["font.sans-serif"] = sans
-    # Avoid minus signs rendering as tofu with Japanese fonts.
-    plt.rcParams["axes.unicode_minus"] = False
-    return chosen
-
-
-configure_plot_fonts()
 
 
 def csv_dir(out_dir: Path) -> Path:
@@ -81,19 +36,6 @@ MARKERS = {
     "d20": "v",
     "d12": "*",
 }
-
-BG_COLOR = "#0f0f1a"
-
-
-def apply_dark_style(ax) -> None:
-    ax.set_facecolor("#1a1a2e")
-    ax.grid(True, linestyle="--", alpha=0.3, color="#aaaaaa")
-    for spine in ax.spines.values():
-        spine.set_edgecolor("#555555")
-    ax.tick_params(colors="#cccccc")
-    ax.xaxis.label.set_color("#cccccc")
-    ax.yaxis.label.set_color("#cccccc")
-    ax.title.set_color("#eeeeee")
 
 
 def exe_path(name: str) -> Path:
@@ -180,3 +122,36 @@ def run_go(exe: str, args: list[str], *, stream_progress: bool = False) -> None:
     if proc.returncode != 0:
         print(f"エラー: {exe} が終了コード {proc.returncode} で終了しました。")
         sys.exit(proc.returncode)
+
+
+def part_main(
+    *,
+    part_label: str,
+    go_part: str,
+    description: str,
+    default_trials: int,
+    plot_fn: Callable[[Path], None],
+    run_sim_fn: Callable[[Path, int, int], None],
+) -> None:
+    p = argparse.ArgumentParser(description=description)
+    p.add_argument("--out-dir", type=Path, default=None, help="output dir (default: data/<timestamp>)")
+    p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--trials", type=int, default=default_trials)
+    p.add_argument("--plot-only", action="store_true")
+    args = p.parse_args()
+
+    if args.out_dir is not None:
+        out_dir = resolve_out_dir(args.out_dir, create=True)
+    elif args.plot_only:
+        out_dir = resolve_out_dir(None, create=False)
+    else:
+        out_dir = resolve_out_dir(None, create=True)
+
+    print(f"出力: {out_dir}")
+
+    if not args.plot_only:
+        build_go((go_part,))
+        print(f"[{part_label}] Go シム実行中...")
+        run_sim_fn(out_dir, args.seed, args.trials)
+    print(f"[{part_label}] グラフ生成中...")
+    plot_fn(out_dir)
