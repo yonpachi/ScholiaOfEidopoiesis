@@ -8,7 +8,7 @@ alwaysApply: true
 ## 言語の使い分け
 
 - **コード**（`sim/`, `plot/`, `monte_carlo.c`）: 識別子・コメントは英語
-- **ルール文書**（`docs/`, `drafts/`, `html/`）: 日本語
+- **ルール文書**（`docs/`, `html/`）: 日本語
 - **コミットメッセージ**: 日本語可（例: `feat: 限界貢献度シムをGoに移植`）
 
 ## ドキュメントの正本
@@ -16,8 +16,9 @@ alwaysApply: true
 | 場所 | 役割 |
 |------|------|
 | `docs/` | 開発時の正本（GM・制作者向け） |
-| `drafts/` | 検討中・WIP |
-| `html/` / Notion | PL提示用（開発中は `docs/` を優先） |
+| `html/` / Notion | PL提示用（Notionで確定した内容を `docs/` に反映） |
+
+検討中・WIP の草案は、必要になったとき `drafts/` を再作成して置く（現時点では未使用）。
 
 - 同一ルールを複数ファイルに書かない。担当ファイルだけに本文を書き、他は参照のみ
 - 更新手順は `docs/update_guide.md` に従う
@@ -27,7 +28,6 @@ alwaysApply: true
 
 ```
 docs/       ルール正本
-drafts/     草案
 sim/        Go シミュレータ（今後の主戦場）
 plot/       Python 可視化
 data/       シム出力（タイムスタンプ付きサブフォルダ）

@@ -1,0 +1,743 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>TODO</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3476daa5-6d0a-80aa-a8ac-f8eaa5e50f04" class="page sans"><header><h1 class="page-title" dir="auto">TODO</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-80a4-80d5-d396e0b1ba29" class="">最優先：戦闘ルール</h2></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-80e1-a241-d9a2887a4974" class="">攻撃処理の整理</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-802d-a17b-cd5c8942723f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">攻撃処理にフェーズ名を付ける</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80b7-bee7-c98f295951c1" class="bulleted-list"><li style="list-style-type:disc">攻撃宣言フェーズ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80fe-a05e-ee3239375eb5" class="bulleted-list"><li style="list-style-type:disc">属性確認フェーズ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80ce-8432-e18c90d7df6c" class="bulleted-list"><li style="list-style-type:disc">基礎ダメージ算出フェーズ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80f8-b919-ceba131aa1d0" class="bulleted-list"><li style="list-style-type:disc">攻撃側補正フェーズ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80bc-9791-d8fb6e04171e" class="bulleted-list"><li style="list-style-type:disc">耐性適用フェーズ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-800a-ad40-d80578fba27e" class="bulleted-list"><li style="list-style-type:disc">回避フェーズ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80b5-8ecb-c26b2a80d0b5" class="bulleted-list"><li style="list-style-type:disc">防護適用フェーズ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80ca-ba08-f59b800140b0" class="bulleted-list"><li style="list-style-type:disc">最終ダメージ確定フェーズ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8071-9959-f1b0e4702bc3" class="bulleted-list"><li style="list-style-type:disc">追加効果適用フェーズ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-802c-b38d-c3367205dad8" class="bulleted-list"><li style="list-style-type:disc">待機処理フェーズ</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a5-9f34-c1268bd9978f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">各フェーズで何を処理するか明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8077-9dd9-d54e9cabe986" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">武器・アイテム・印記効果が、どのフェーズに割り込むかを書けるようにする</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-801d-868d-e6ff8bbb033c" class="">ダメージ処理</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80ed-bc98-c5173bcab533" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">ダメージを受ける処理順を明文化する</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80b6-ba61-c25ca553718a" class="bulleted-list"><li style="list-style-type:disc">耐性</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80e9-9ad5-dffff9379f20" class="bulleted-list"><li style="list-style-type:disc">回避</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-803a-9bf2-e544e951061f" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;装甲&gt;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80da-8b29-f46a118ed4c3" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;障壁&gt;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8086-8c90-f58d77ebb2c2" class="bulleted-list"><li style="list-style-type:disc">防御値</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80f5-bedb-db13876ad122" class="bulleted-list"><li style="list-style-type:disc">HP減少</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8018-b39a-dc797cbacf54" class="bulleted-list"><li style="list-style-type:disc">追加効果</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8020-8e82-d8ccd42d032f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">「基礎ダメージ」「最終ダメージ」などの用語を定義する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8052-ae85-c89ebdd41635" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">「1点以上ダメージを与えた場合」の定義を追加する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8040-ab71-fb190814703d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">「ダメージを与えた対象」「攻撃が命中した対象」の違いを定義する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-80e6-b329-dd1ade372a2f" class="">防護・軽減</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80dc-976b-d7b9b51284d6" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">「防御値を無視する」を定義する</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-807c-ba4e-fcf3cf2a72d6" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;装甲&gt;</code> や <code>&lt;障壁&gt;</code> は無視しないのか</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-802c-ae7e-d26794b2acf0" class="bulleted-list"><li style="list-style-type:disc">防御値だけを無視するのか</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80f9-b045-cd0d46f35f7b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">「装甲を無視する」を定義する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-801f-af9f-f40ac4f85741" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">「障壁を無視する」を定義する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-807d-883d-d3fdcf4e528c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">複数の軽減効果がある場合の適用順を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-80ff-b3ae-e7917d43145a" class="">耐性</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-806a-be57-f1c8703852e2" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">弱点時のダメージ増加量を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8061-8010-f7d147904a09" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">弱点時のノックバック・スタン値増加の処理を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8064-b602-cf6fe7bb0c9d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">半減時の端数処理を確認する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-800d-820d-e572f3dd3269" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">無効時に追加効果が発生するか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-803f-8bf7-c935ebd370c5" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">反射時に追加効果が発生するか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8038-8efa-fd1715f3a0d3" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">反射ダメージの属性・軽減不可・発生タイミングを明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-8082-bb71-dbcd7e78db69" class="">回避</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8033-9fad-fd7ca591e66d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">回避判定のタイミングを攻撃処理内に固定する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8085-9696-e2ed1715dbfb" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">回避成功時にダメージ以外の追加効果も無効になることを明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-808c-b789-e963a76fdd84" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">回避値の上限があるか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80b5-91a5-e173f43dfa23" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked"><code>&lt;回避&gt;</code> と <code>&lt;機敏&gt;</code> の違いを整理する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-80e7-8ad9-d2f8d663300a" class="">防御行動</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8088-8e46-c1622650f841" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">防御係数表を作る</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-806a-ac5b-ca4d36c3691b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">防具重量と行動帯による待機値 / 防御係数を表にする</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a5-a4dc-f04389cce202" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">防御行動で得る <code>&lt;装甲&gt;</code> の処理例を追加する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80ba-8497-dd1daa519be9" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">常時防御と防御行動の違いを明確にする</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-801a-ba60-f1a7de73d0c7" class="">実体使用・想成使用・分解</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80c6-9c7e-c4c0d756b0d9" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">実体使用の戦闘中処理を明文化する</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-800a-9b63-fa5191c58b10" class="bulleted-list"><li style="list-style-type:disc">対象</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8018-b30b-c6849e290bc0" class="bulleted-list"><li style="list-style-type:disc">コスト</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80e6-860a-fd7435b7f026" class="bulleted-list"><li style="list-style-type:disc">アイテム消費</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8088-a052-d338f1a4dd8c" class="bulleted-list"><li style="list-style-type:disc">待機値</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8001-b46f-e5e9a1135efa" class="bulleted-list"><li style="list-style-type:disc">効果解決</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a2-a154-d6e61d60e5ae" class="bulleted-list"><li style="list-style-type:disc">打ち消された場合</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-800f-9d7e-d0443cf52918" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">想成使用の戦闘中処理を明文化する</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8094-bdd0-cca315b62eeb" class="bulleted-list"><li style="list-style-type:disc">レシピ選択</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-809e-b433-cd734ab2114b" class="bulleted-list"><li style="list-style-type:disc">マナ支払い</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a0-acba-dbdbe93a182c" class="bulleted-list"><li style="list-style-type:disc">品質参照</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-800a-95e7-e94deee3d89c" class="bulleted-list"><li style="list-style-type:disc">待機値</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8039-80c0-c6afb9fc5ef2" class="bulleted-list"><li style="list-style-type:disc">実体使用との差</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80d7-85ba-c411677e6949" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">分解の戦闘中処理を明文化する</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-803c-8f47-fbbad2072bdc" class="bulleted-list"><li style="list-style-type:disc">分解対象</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80e9-8b47-fa159a147287" class="bulleted-list"><li style="list-style-type:disc">得られるマナ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-804d-a52e-d44ed19e4eea" class="bulleted-list"><li style="list-style-type:disc">使用カードのスートによる追加マナ</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8023-8a49-f83ffa0487b1" class="bulleted-list"><li style="list-style-type:disc">待機値</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80dc-b4b2-eb9661deb6f7" class="bulleted-list"><li style="list-style-type:disc">素材カゴから分解できるか</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-8093-b344-d7a216a05765" class="">離脱・戦闘不能・簡易戦闘</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-800d-9adb-e919c5637bce" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">離脱時の待機値の参照元を明確にする</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-807e-8688-ec7afecac13b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">離脱中に攻撃や効果を受けるか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a7-8b70-c10db4b96b4e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">戦闘不能解除後、いつタイムラインに戻るかを明確にする</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-801d-8608-dc9a19dbac2b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">簡易戦闘の勝利・撤退・戦果処理を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="35e6daa5-6d0a-8018-849e-f91423603a6d"/></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-8059-b51b-cf2003314684" class="">最優先に近い：戦闘処理サマリ</h2></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80af-a47e-ed31d46f9c85" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">戦闘ページとは別に、卓中に見る用のサマリを作る</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8033-8153-ec7248af7f5b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">攻撃処理サマリを作る</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8019-b0df-e03623ba0cdf" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">ダメージ処理サマリを作る</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8031-83f3-dc52baba7b7e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">防御・回避処理サマリを作る</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8068-a5b4-e2c5623ce44a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">基本行動サマリを作る</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-802d-bada-f59d5bf62982" class="bulleted-list"><li style="list-style-type:disc">攻撃</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8060-9846-f6708c22c9e6" class="bulleted-list"><li style="list-style-type:disc">防御</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80b8-be0c-ff40022087e1" class="bulleted-list"><li style="list-style-type:disc">回避</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8056-992c-e76d91f7b580" class="bulleted-list"><li style="list-style-type:disc">分解</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80d2-8247-ea5189932715" class="bulleted-list"><li style="list-style-type:disc">実体使用</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8024-845e-e084e9ad38f1" class="bulleted-list"><li style="list-style-type:disc">想成使用</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8015-a13f-cf9eb7853e9c" class="bulleted-list"><li style="list-style-type:disc">離脱</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><hr id="35e6daa5-6d0a-8070-86ff-fda13b5adb3f"/></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-8068-a263-d0246300f097" class="">印記一覧</h2></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-80de-98f8-ef34967b4885" class="">印記の共通ルール</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8004-b8dc-caedcc73dc04" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">印記の付与ルールを決める</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80f5-80e7-ff1bc346db1e" class="bulleted-list"><li style="list-style-type:disc">同じ印記を付与した場合、加算か上書きか</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80cd-bcb5-c979e2717a58" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">印記の強度が0になった時の処理を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8040-923a-d41e38514eb0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">複数の印記が同時に発動する場合の処理順を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-804e-a2b8-f254e7b72c63" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">複数の減衰が同時に発生する場合の処理順を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-808c-8384-c9ec7119f439" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">開始時解除のタイミングを詳しく書く</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8007-9841-caeae9cda164" class="bulleted-list"><li style="list-style-type:disc">手番開始時の最初か</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80ed-8b34-c76a0ce9e0ad" class="bulleted-list"><li style="list-style-type:disc">毒などの開始時効果より前か後か</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8051-afda-cbf2579dca33" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">発動時減衰のタイミングを確認する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-801f-8325-fe3cb8364245" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">終了時減衰のタイミングを詳しく書く</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-80fe-ace0-fcf56f373b9e" class="">属性・トリガー印記</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80f3-962c-fc0107ddb853" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">属性印記がアイテムに付く場合とキャラクターに付く場合を区別する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8058-b442-e892a9963c70" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked"><code>&lt;軌転&gt;</code> <code>&lt;定常&gt;</code> <code>&lt;励起&gt;</code> <code>&lt;臨界&gt;</code> を印記として扱うか、武器効果タグとして扱うか整理する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8090-b222-ec1d7988e0b1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">カード帯トリガーの発動タイミングを戦闘処理フェーズと接続する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="35e6daa5-6d0a-80e0-a606-cf36ded8c7a7"/></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-803a-8319-e1c84d676e60" class="">武器一覧</h2></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8039-91fc-ee4e0ca79574" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">戦闘ページのフェーズ名に合わせて、武器効果文を統一する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8063-81ed-dc0a40e661f8" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">エストックの効果文を確定する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8082-a864-f26da00ef0af" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">ダガーの効果文を確定する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-804a-9aa4-e4662050f816" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">トライデントの効果文を確定する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-807c-aae5-f3d7d139888d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">残り初期武器の効果文を埋める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80d1-8d36-e3cecd62129f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">各武器のタグを設定する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-806d-baf2-cf811788f645" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">武器レシピとして必要な素材タグを設定する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80dc-9b4d-cc6dc9211078" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">武器一覧ページから戦闘ページ・印記一覧へのリンクを整える</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="35e6daa5-6d0a-80a0-8a46-fbc3e3d05ef1"/></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-80ad-a03b-d42fc3f37d35" class="">一日の流れ</h2></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-80b5-bcff-e04c60424b29" class="">朝</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-805b-84cb-c71f20d4a2e5" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">評判の自然低下量を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8052-968e-e526ae284551" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">評判の下限・上限を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80c2-ab08-c9d13ecfdd1a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">依頼の期限日数が減るタイミングを明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a7-ac67-f63b85db0d48" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">依頼追加の件数・種類・決定方法を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a1-b51b-eeccdb160de6" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">依頼の受注上限を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8048-aa90-fef7df4fc242" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">依頼の破棄・失敗時の処理を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8072-ba35-f75d0a00468b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">スコーリオン配置の具体手順を追加する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8015-8ec5-efa42b6f0d60" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">施設設置の条件と反映タイミングを決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-807d-a478-c0864df06369" class="">昼・夕</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-806c-bd1b-ce527f1cfcd0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">街務の各行動の実処理を追加する</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80e3-a922-c5620a81f040" class="bulleted-list"><li style="list-style-type:disc">錬金</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8042-a5c7-f510200dbe04" class="bulleted-list"><li style="list-style-type:disc">買い物</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8049-9529-f3f4c7f8d084" class="bulleted-list"><li style="list-style-type:disc">交流</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80fc-956e-c6f5fcbc24a8" class="bulleted-list"><li style="list-style-type:disc">調査・研究</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-805e-99f1-d4c781672c0c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">街務2回の扱いを明文化する</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-802e-b4c8-d440cebc27b7" class="bulleted-list"><li style="list-style-type:disc">同じ行動を2回できるか</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-804d-a85c-fbfaa45d3dc2" class="bulleted-list"><li style="list-style-type:disc">PCごとに別処理か</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a8-9550-de6c461a8c8e" class="bulleted-list"><li style="list-style-type:disc">パーティ共有処理か</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-800e-90ba-da2fee57a85f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">夕探索の危険度+2がどのタイミングで乗るか明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-802c-947e-c76cbbcec27c" class="">夜</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-806f-9f34-c02d0b130756" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">依頼達成時の納品処理を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-807a-8d5d-c7d75f0c2734" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">納品物が消費されるか明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8032-af12-d288037e1795" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">報酬の受け取りタイミングを決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-806e-a9dd-c09988589725" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">評判増減の処理を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80eb-8f4b-eb6f54b7c8cb" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">研究成果の確定処理を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8005-8446-f99abb6022b5" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">倉庫・素材カゴ・所持品の整理タイミングを決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="35e6daa5-6d0a-808f-b01b-ecf3ca4c3787"/></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-807a-bd22-f11b37ca7a11" class="">探索</h2></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-80d5-84fe-e981125a5c07" class="">探索の流れ</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8038-8f62-ce74eda0728b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">イベント解決の具体処理を作る</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8048-95c5-c11272c3c50c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">スートごとのイベント表を作る</span><div class="indented"><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8098-b34e-caf7a1d476ee" class="bulleted-list"><li style="list-style-type:disc">スペード：戦闘</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8024-86fd-efce55294b3c" class="bulleted-list"><li style="list-style-type:disc">ダイヤ：素材獲得</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80d8-bd4b-fba395f20a6f" class="bulleted-list"><li style="list-style-type:disc">ハート：交流・恩恵</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8057-a7a3-d86cfce2b5e4" class="bulleted-list"><li style="list-style-type:disc">クラブ：地形・自然の脅威</li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8041-9c05-c6759bbb875c" class="bulleted-list"><li style="list-style-type:disc">Joker：特殊イベント</li></ul></div></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8013-a729-dad3321fc956" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">イベント数の目安「5回前後」をルールとして扱うか、GM目安にするか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-8040-bef6-ed969883c4a1" class="">危険度</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8094-a85e-caab42b190fd" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">危険度が敵の強さにどう影響するか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8011-b170-c4fd337410ce" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">危険度が素材の品質・数・タグにどう影響するか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80f8-85a5-cbbee8357b8a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">危険度がイベント難易度にどう影響するか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-8086-a173-c718c511b8bb" class="">素材カゴ</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80d5-b388-fae28163c086" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">素材カゴがいっぱいの時の処理順を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80bd-99e6-cd0cbe3c87ad" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">素材カゴ内の素材を探索中に分解する処理を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8018-91a1-e25508f9657e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">帰還時に素材カゴから倉庫へ移す処理を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a2-acc1-d00d8f2542df" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">全滅時に素材カゴから失う素材の決定方法を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="35e6daa5-6d0a-8071-a3f1-cc8d956fa788" class="">探索中アイテム使用</h3></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8016-bd33-d7686fad8c91" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">探索中に使えるアイテム種を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-807c-a74d-d6dc4ab73a91" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">アイテム使用のタイミングを明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-800f-8cad-c65df9f57179" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">カード公開後に使える例外があるか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="35e6daa5-6d0a-80bf-8b5c-d24c8ee6f5e5"/></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-80c1-8514-c22ed8edee74" class="">キャラクター作成</h2></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-801e-8d0b-e5e57db9d8ed" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">初期装備を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-805e-ba51-c072b8cd37ee" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">初期武器の選択ルールを追加する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80b3-af3d-eefdb98b4d23" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">初期防具の有無を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8050-8b17-dcf783535c1b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">初期アイテム・初期レシピを決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8012-9484-c1c74dfe4e4a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">初期マナの有無を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-802f-b532-c2862f5cc41c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">初期素材・倉庫の有無を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a5-a5ed-d393fd5b747f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">選んだアイテム種によって何が変わるか明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-808e-96c3-fc1cf1696b24" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">精霊の役割を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8074-aa11-fb48f5a5ddbf" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">種族選択後に得る能力をキャラ作成ページ側でも案内する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a6-b675-dc558eee062d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">職業がルール効果を持つかどうか決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="35e6daa5-6d0a-809b-a2ad-fff72d7c7c83"/></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-8075-b45f-c11e618b1b27" class="">判定</h2></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-80b7-91b7-eca5ca7bfedf" class="">優先度は低め。</p></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8088-94d7-dc069c2eb024" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">判定例を追加する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80a8-b6f1-d3a00988a1df" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">「反応中」「澱み発生前」「達成値決定」などのタイミングを一覧化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8091-bd79-ceaba68df3d4" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">種族能力がどのタイミングで割り込むか整理する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80df-bdcf-c50b6ca840fd" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">複数能力が同時に使える場合の処理順を決める</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="35e6daa5-6d0a-80f3-8bdf-c02ab964d47d"/></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-80ae-b0f8-f1249102b1fb" class="">錬金</h2></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-80ff-a3eb-e67a6a14cfa0" class="">優先度は中。</p></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80ce-9900-d1e6fb7c5b49" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">作成難易度の決め方を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8093-92af-e53c6794337d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">余剰タグの具体例を追加する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8071-a94c-c439647b5782" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">タグ一致の具体例を追加する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8039-808c-dc5ec7016160" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">失敗作の処理を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80c2-b3ee-cb632ac11423" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">想成使用時の品質参照を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-805d-8b0f-c92e4027f7ff" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">戦闘中の想成使用と錬金ルールを接続する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-80b7-b25e-c8e43d87696b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">分解ルールと錬金ルールの接続を明確にする</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><hr id="35e6daa5-6d0a-80e4-8641-f5f80b6d62d9"/></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-804e-913b-f7dbcbc15d96" class="">装備品・アイテム</h2></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8050-869f-f0be131f8ccf" class="">優先度は中〜低。</p></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8050-b29f-c6f0b9ab8df9" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">装備品ページと戦闘ページの役割分担を整理する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8001-8a2b-e1a99655650e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">武器・防具・装飾品の参照先を整理する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-800a-b6cd-fb607335d361" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">アイテム使用時の重量補正を明文化する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-806f-a2a5-c566c5f415d3" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">実体使用と想成使用の共通ルールをアイテムページ側にも案内する</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="35e6daa5-6d0a-8069-ba57-eabfee793d5a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">戦闘中・探索中・街務中で使えるアイテムの違いを整理する</span><div class="indented"></div></li></ul></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

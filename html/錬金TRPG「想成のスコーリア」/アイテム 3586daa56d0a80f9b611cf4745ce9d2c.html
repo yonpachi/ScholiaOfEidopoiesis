@@ -1,0 +1,743 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>アイテム</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3586daa5-6d0a-80f9-b611-cf4745ce9d2c" class="page sans"><header><h1 class="page-title" dir="auto">アイテム</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/list_gray.svg" style="width:14px;height:14px;display:block"/></span>タグ</th><td><span class="selected-value select-value-color-blue">ルール</span></td></tr></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8035-935a-fec5b0b496b0" class="">アイテムは、このゲームで扱う物品全般を指します</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8037-90dd-d8c6df0ef7f9" class="">素材、消耗品、装備品、納品物などは、全てアイテムとして扱います</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80df-877e-feb21bc0d025" class="">このゲームでは</p></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-8037-966e-f466db983237" class="bulleted-list"><li style="list-style-type:disc">探索で素材を持ち帰り</li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-8088-9fce-d8134ffbbb07" class="bulleted-list"><li style="list-style-type:disc">アイテムを分解してマナを得て</li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-800b-905e-f7a636c9c47b" class="bulleted-list"><li style="list-style-type:disc">錬金によって新たなアイテムを作成する</li></ul></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80fa-b71c-f5dc392a6c71" class="">流れを繰り返します</p></div><div style="display:contents" dir="auto"><h1 id="3586daa5-6d0a-8075-8334-cf697a9aef8b" class="">アイテムの種類</h1></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8004-979d-ef70080e0558" class="">アイテムには、主に以下のような種類があります</p></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-8056-9cdf-e41535db8ff4" class="bulleted-list"><li style="list-style-type:disc"><strong>素材</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-80ae-a756-c8b6397dcdc9" class="bulleted-list"><li style="list-style-type:disc"><strong>消耗品</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-800f-b74a-c26fdaa3b24f" class="bulleted-list"><li style="list-style-type:disc"><strong>装備品</strong></li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-8014-b8ef-fe4e68d477c5" class="bulleted-list"><li style="list-style-type:disc">納品物</li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-80e6-9dc8-eb81bc65c203" class="bulleted-list"><li style="list-style-type:disc">設置物(未実装)</li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-8059-8aac-eb7635b01efe" class="bulleted-list"><li style="list-style-type:disc">その他(特殊アイテム)</li></ul></div><div style="display:contents" dir="auto"><h2 id="3586daa5-6d0a-8094-b10f-eeaee929f60e" class="">素材</h2></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-803c-9440-ff49e2a8ba85" class="">素材は、探索中に手に入るアイテムです</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8011-8c53-eac3d3b9b36c" class="">錬金の材料にしたり、分解してマナを得たりするために使います</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8028-8b55-f924270c8343" class="">素材に付いているタグは、それ自体では効果を発揮しません</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80d0-8b5d-ed1e7b7227c8" class="">錬金、分解、レシピ条件などで参照されます</p></div><div style="display:contents" dir="auto"><h2 id="3586daa5-6d0a-80d2-a174-e3c5695f21ad" class="">消耗品</h2></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-802c-aa65-e5716f862d2c" class="">消耗品は、使うとなくなるアイテムです</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80ed-a082-f4ba319e87c5" class="">回復薬、爆弾、香料、札などがこれにあたります</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80d0-845e-c300d08011ca" class="">戦闘中に消耗品を使う場合は、基本的に<strong>実体使用</strong>として扱います</p></div><div style="display:contents" dir="auto"><h2 id="3586daa5-6d0a-80c2-8810-d628a1a901ae" class="">装備品</h2></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8018-ab4f-dd6ed83b7626" class="">装備品は、キャラクターが身につけたり、手に持ったりして使うアイテムです</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8097-a380-c99c3cc46038" class="">武器や防具などがこれにあたります</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8040-800d-f554d60d2635" class="">(別ページを後で追加)</p></div><div style="display:contents" dir="auto"><h1 id="3586daa5-6d0a-8029-a665-fb1b799f1206" class="">タグ</h1></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-805c-91d7-f2a1dac0cdf0" class="">タグは、アイテムの性質を示す情報です</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80d2-8b44-db093b86e156" class="">例えば、素材であれば何からできているか、どのような性質を持つかを表します</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-805e-8f0f-f4f75c502753" class="">タグは<code>[タグ名]</code>で表記します</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8076-960c-c11188574d38" class="">例：</p></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-8013-a629-e5b1aa8975cb" class="bulleted-list"><li style="list-style-type:disc"><code>[鉱石]</code></li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-8044-9646-efa114797387" class="bulleted-list"><li style="list-style-type:disc"><code>[薬草]</code></li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-80f8-9273-cfffff164c9e" class="bulleted-list"><li style="list-style-type:disc"><code>[獣素材]</code></li></ul></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80f0-a869-cc3754627596" class="">タグそのものを単独で持つことはできません</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80c0-93f3-e707f4cdefa1" class="">タグは必ずアイテムに付属します</p></div><div style="display:contents" dir="auto"><h1 id="3586daa5-6d0a-801f-b04a-f783a8b1017f" class="">分解</h1></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8051-bdee-fa5b7cb2ea26" class="">分解は、アイテムを砕いてマナに変える処理です</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8087-8d4f-faed7763315f" class="">分解したアイテムは失われます</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80c7-93d2-c9f4bf3c3ff5" class="">分解で得られるマナは、そのアイテムが持つタグや効果によって決まります</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80a3-8a04-f6138552ae51" class="">素材や不要になったアイテムを分解して、マナを得ることで、別の錬金に利用できます</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8025-94c5-f74a629239ef" class="">分解できるかどうかは、アイテムの種類や個別の記述に従います</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8054-9866-e5c877d2927c" class="">進行に関わる特殊なアイテムなどは分解できません</p></div><div style="display:contents" dir="auto"><h1 id="3586daa5-6d0a-8099-bd7c-e7ab73e76f5a" class="">品質</h1></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80dc-89da-c4f7568827d6" class="">品質は、そのアイテムそのものの出来を表す数値です</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80fd-976b-ea9ea0275667" class="">素材の良さ、成型の精度、錬成結果の良さなどを表します</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-802b-9a95-c6f4b304bc6c" class="">品質の値は大きいほど、そのアイテムの効果が高く、強くなります</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80d0-a88b-f2238fb2451e" class="">装備品では、品質がダメージや防御値などに関わります</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80b5-bf21-ea0e88046120" class="">消耗品では、品質が効果量などに関わります</p></div><div style="display:contents" dir="auto"><h1 id="3586daa5-6d0a-804a-86a1-df233f0f160e" class="">等級</h1></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-802d-bf01-e47e31c1e9d9" class="">等級は、そのアイテムの格や仕様段階を表す数値です</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80c5-8685-eaf56918e9bc" class="">品質が「その個体の出来」を表すのに対して、等級は「その仕組みや設計の段階」を表します</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8010-8d11-c299e0c6c2f7" class="">等級は小さいほど強い値です</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-809b-8874-db06d5fcf279" class="">例えば同じ品質の装備でも、等級が低いものほど高性能なアイテムとして扱います</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-806c-8ae8-e8c31f245f4f" class="">主に装備品に付与されます</p></div><div style="display:contents" dir="auto"><h1 id="3586daa5-6d0a-8009-b447-d4ea11bcfbce" class="">重量</h1></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8079-8804-e98459d443da" class="">全てのアイテムには、重量が設定されています</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80e6-94a8-c5754386955c" class="">重量は三段階で分類され、戦闘中にアイテムを使う場合、重量によって待機値が変化します</p></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-800b-b200-e9487cc2bc8a" class="bulleted-list"><li style="list-style-type:disc"><strong>軽量</strong>：待機値－1</li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-805a-bd6c-d46c95497132" class="bulleted-list"><li style="list-style-type:disc"><strong>中量</strong>：補正なし</li></ul></div><div style="display:contents" dir="auto"><ul id="3586daa5-6d0a-8012-9310-f16be416c7af" class="bulleted-list"><li style="list-style-type:disc"><strong>重量</strong>：待機値＋1</li></ul></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80c8-bf80-ef04f5407a88" class="">戦闘中にアイテムを使う場合、進むカウント数は以下で決まります</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3586daa5-6d0a-80eb-bd46-fd231d3f111c"><div style="width:100%"><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8053-8ec0-f0bb91019e04" class=""><strong>待機値 = 行動段階の待機値 + 使用したアイテムの重量補正</strong></p></div></div></figure></div><div style="display:contents" dir="auto"><h1 id="3586daa5-6d0a-80b0-bba7-dad40676c15f" class="">実体使用</h1></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80e7-a23d-da79b09f24eb" class="">実体使用は、手元にあるアイテムを実際に使うことです</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-806b-9351-d44a32b2c7bf" class="">消耗品を使った場合、そのアイテムは消費されます</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-806c-96b2-d06fa8ae2253" class="">使用したアイテムは、効果が打ち消された場合でも戻りません</p></div><div style="display:contents" dir="auto"><h1 id="3586daa5-6d0a-8064-8407-c702ed5b6c26" class="">想成使用</h1></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8019-855e-c1a3fd4ea601" class="">想成使用は、手元の実物を使うのではなく、覚えているレシピをマナで再現して使うことです</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8045-b2ef-dd8ded607a21" class="">想成使用では、指定されたマナを支払って効果を発動します</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80bf-bb62-fdb96e253a98" class="">実体と想成は、同じアイテムを使用する場合でも効果が異なる場合があります</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80e9-a46a-e46955439e04" class="">使用したマナは、効果が打ち消された場合でも戻りません</p></div><div style="display:contents" dir="auto"><h1 id="3586daa5-6d0a-8078-a35a-d43328a5a2fc" class="">所持と倉庫</h1></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-8094-840c-e3008f2a7a01" class="">アイテムには、個人で持つものと、工房や倉庫で共有するものがあります</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-800b-989b-c6c8e416bcc4" class="">装備品や消耗品は、基本的にキャラクターが個人で所持します</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80ab-b9ca-d53dab0324b2" class="">素材は、基本的に素材カゴや倉庫で管理します</p></div><div style="display:contents" dir="auto"><p id="3586daa5-6d0a-80ab-bded-ec7ea64b5ffa" class="">探索中に得た素材は素材カゴに入り、帰還後に倉庫へ移すことができます</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

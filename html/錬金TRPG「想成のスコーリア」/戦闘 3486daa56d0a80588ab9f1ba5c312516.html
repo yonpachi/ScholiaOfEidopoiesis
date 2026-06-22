@@ -1,0 +1,743 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>戦闘</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3486daa5-6d0a-8058-8ab9-f1ba5c312516" class="page sans"><header><h1 class="page-title" dir="auto">戦闘</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/list_gray.svg" style="width:14px;height:14px;display:block"/></span>タグ</th><td><span class="selected-value select-value-color-blue">ルール</span></td></tr></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><p id="3486daa5-6d0a-80fc-9911-d2b882ff9cb6" class="">戦闘は探索中に発生する処理です</p></div><div style="display:contents" dir="auto"><p id="3486daa5-6d0a-808a-bbdb-cfaf4acf883e" class="">選んだイベントが戦闘だった場合、その瞬間に戦闘が始まります</p></div><div style="display:contents" dir="auto"><p id="3486daa5-6d0a-80c4-9556-cbca62dfd0bb" class="">戦闘が終わったら、特記がない限り探索へ戻ります</p></div><div style="display:contents" dir="auto"><h1 id="3486daa5-6d0a-8036-8c9e-fbd71b918bf9" class="">タイムライン方式</h1></div><div style="display:contents" dir="auto"><p id="3486daa5-6d0a-80c6-87f4-f085f2909931" class="">戦闘は、<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E3%82%BF%E3%82%A4%E3%83%A0%E3%83%A9%E3%82%A4%E3%83%B3%2035e6daa56d0a8008ade0d7aa076194f5.html">タイムライン</a>上を<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%2035e6daa56d0a805b9b2dfdcce0a1ead9.html">カウント</a>が進んでいく形で進行します</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-80bc-b245-f02e91cc8d69" class="">タイムラインは<strong>０～１１</strong>の<strong>１２</strong>カウントで構成されています</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-808a-8e80-f2fb105c1bc6" class="">0から始まり、1、2、3……と1カウントずつ進みます</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8082-969b-defc3dd1fe5f" class="">現在のカウントに<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E3%82%B3%E3%83%9E%2035e6daa56d0a809bb518dfd3168ebe35.html">コマ</a>が置かれているキャラクターは、順に<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E6%89%8B%E7%95%AA%2035e6daa56d0a80b5bfa5da1c6099cdc6.html">手番</a>を行います</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-80b1-8c12-e3dc3bfcd132" class="">手番を終えたキャラクターは、行動によって算出された<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E5%BE%85%E6%A9%9F%E5%80%A4%2035e6daa56d0a80cf9870efa6071be08d.html">待機値</a>ぶん、コマを後方へ進めます</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8004-be4f-c48dfd92d05f" class="">コマを後方へ進めた結果、11を超える場合、次の<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E3%83%A9%E3%82%A6%E3%83%B3%E3%83%89%2035e6daa56d0a8014bebbc1f13fea4098.html">ラウンド</a>の対応するカウントにコマを置きます</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8054-a4f5-cbf6c284c97c" class="">現在のカウントにあるすべてのコマが手番を終えたら、次のカウントに進みます</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8029-a3f9-ff520d1af8a6" class="">カウントが11から0に戻った時、ラウンドが1進みます</p></div><div style="display:contents" dir="auto"><h2 id="3486daa5-6d0a-806a-ab9f-ee9ed955b1e1" class="">同カウント内の処理</h2></div><div style="display:contents" dir="auto"><p id="3486daa5-6d0a-8074-82d0-cb7861c39e76" class=""><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E5%90%8C%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%2035e6daa56d0a80edb9a0d3673681635b.html">同カウント</a>に複数のキャラがいる場合、<strong>PCから</strong><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E8%A1%8C%E5%8B%95%203606daa56d0a80e7aa52f633a844414c.html">行動</a>を処理していきます</p></div><div style="display:contents" dir="auto"><p id="3486daa5-6d0a-808b-98bd-d7bfb9f543a6" class="">PC同士の順番は、PL側で任意に決めることができます</p></div><div style="display:contents" dir="auto"><p id="3486daa5-6d0a-809b-9a2d-c53ac8b0a98d" class="">敵同士の順番は、GMが決定します</p></div><div style="display:contents" dir="auto"><h1 id="3496daa5-6d0a-8007-83df-fe572349a65b" class="">戦闘の開始</h1></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-80b0-af7d-e77792c2c5ff" class="">戦闘が始まったら、以下の順に処理します</p></div><div style="display:contents" dir="auto"><ol type="1" id="35e6daa5-6d0a-80c7-ad45-d854cbbf4fe6" class="numbered-list" start="1"><li>初期カウント決定</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35e6daa5-6d0a-801f-95cf-d4b8ecdd6700" class="numbered-list" start="2"><li>手札の準備</li></ol></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-8086-8ce6-da993b58d0a6" class="">１．初期カウント決定</h2></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-801e-80fc-f47793a238fe" class="">各PCと敵は、戦闘開始時にそれぞれ1d10を振ります</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-809f-bedc-f6422d1c20e6" class="">その出目の半分(端数切り捨て)の値を、そのキャラクターの初期カウントとします</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8058-876b-f53d88c611ff" class="">各キャラクターのコマを決定した初期カウントに配置します</p></div><div style="display:contents" dir="auto"><h2 id="35e6daa5-6d0a-807a-bbad-cd8e1e4736af" class="">２．手札の準備</h2></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8000-91f1-d0205cd26a5d" class="">戦闘では、探索中に使っていたトランプの<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E5%B1%B1%E6%9C%AD%203606daa56d0a8074b67bf2db61c41118.html">山札</a>をそのまま使います</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8021-918e-f3c774ce426c" class="">盤面に配置された札は、戦闘には使用しません</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8020-ac2f-dd52b1628730" class="">各PCとGMは、それぞれ山札から<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E6%89%8B%E6%9C%AD%203606daa56d0a806bac02f52bdba78760.html">手札</a>を<strong>３枚</strong>引きます</p></div><div style="display:contents" dir="auto"><p id="35e6daa5-6d0a-8082-9812-ec12bbc521f8" class="">山札が尽きた場合は、<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E6%8D%A8%E3%81%A6%E6%9C%AD%203606daa56d0a801f827cd2873f0c332c.html">捨て札</a>をシャッフルして新しい山札を作ります</p></div><div style="display:contents" dir="auto"><h1 id="3496daa5-6d0a-802d-8857-fb2777b7b54d" class="">手番でやること</h1></div><div style="display:contents" dir="auto"><p id="34a6daa5-6d0a-8014-a61e-d81058a29e7b" class="">自身の手番では、以下の順に処理を行います</p></div><div style="display:contents" dir="auto"><ol type="1" id="35f6daa5-6d0a-8049-8e04-fd4d907b9372" class="numbered-list" start="1"><li>行動宣言</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35f6daa5-6d0a-8019-b422-d91fe12eb0b7" class="numbered-list" start="2"><li>カードプレイ</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35f6daa5-6d0a-80a1-847c-d23fac4bba20" class="numbered-list" start="3"><li>行動段階決定</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35f6daa5-6d0a-80c2-951b-f1a81d19685e" class="numbered-list" start="4"><li>行動解決</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35f6daa5-6d0a-80e5-943c-f25e1b62d512" class="numbered-list" start="5"><li>カウント変更</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35f6daa5-6d0a-80d7-ae28-dab7ef8c6bca" class="numbered-list" start="6"><li>手番終了</li></ol></div><div style="display:contents" dir="auto"><h2 id="35f6daa5-6d0a-800b-a0bd-fe1853a69b22" class="">１．行動宣言</h2></div><div style="display:contents" dir="auto"><p id="35f6daa5-6d0a-8018-86dc-cd06185b4c19" class="">この手番で行う行動を１つ宣言します</p></div><div style="display:contents" dir="auto"><h2 id="35f6daa5-6d0a-80fe-ae13-f8527ed30a86" class="">２．カードプレイ</h2></div><div style="display:contents" dir="auto"><p id="35f6daa5-6d0a-802a-8a1c-f9cbf72c6a5e" class="">宣言した行動に対して、手札を<strong>１枚</strong>プレイします</p></div><div style="display:contents" dir="auto"><p id="35f6daa5-6d0a-80e6-897c-ca21301c956a" class="">手番が来たら、必ず手札を１枚使わなければなりません</p></div><div style="display:contents" dir="auto"><p id="35f6daa5-6d0a-8000-8e8d-d6e57296a343" class="">手札をプレイせずに行動することはできません</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-801f-aa8d-c3ff70d18087" class="">手札が<strong>０枚</strong>になった場合、即座に山札から手札を<strong>３枚</strong>補充します</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-80a7-8c57-dc9df1cd3420" class="">山札が尽きた場合は、捨て札をシャッフルして新しい山札を作ります</p></div><div style="display:contents" dir="auto"><h2 id="3606daa5-6d0a-80b3-bdae-f714ff8a71ca" class="">３．行動段階決定</h2></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-801c-ab09-e814202e3cfc" class="">プレイしたカードの数字から、この手番の<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E8%A1%8C%E5%8B%95%E6%AE%B5%E9%9A%8E%203606daa56d0a8018984bca655e6faf6b.html">行動段階</a>を決定します</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-80e6-b425-dfbdc0bad23f" class="">行動段階については「カードの見方」を参照してください</p></div><div style="display:contents" dir="auto"><h2 id="35f6daa5-6d0a-8096-9317-f16881557700" class="">４．行動解決</h2></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-80ad-9bb3-ee033886af46" class="">宣言した行動の処理を行います</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8016-a91f-c6afe25d80ad" class="">対象、コスト、スート、効果、待機値の扱いは、各行動の項目に従います</p></div><div style="display:contents" dir="auto"><h2 id="3606daa5-6d0a-8024-be55-f99af2029737" class="">５．カウント変更</h2></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-80d1-b34c-e45032e0fbe8" class="">行動によって決定した待機値ぶん、自分のコマを後方へ進めます</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-804e-97dc-c248d5f98ede" class="">コマを後方へ進めた結果、11を超える場合、次のラウンドの対応するカウントにコマを置きます</p></div><div style="display:contents" dir="auto"><h2 id="3606daa5-6d0a-8084-956f-d18e3652884f" class="">６．手番終了</h2></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8087-96c4-eeccea325624" class="">自分の手番終了時に発生する効果を処理します</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8079-a187-f78038c5537a" class="">手番終了処理が終わったら、そのキャラクターの手番は終了します</p></div><div style="display:contents" dir="auto"><h1 id="3606daa5-6d0a-80c5-8645-e79e9a189e54" class="">カードの見方</h1></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-806e-9148-c3e31b3ab88a" class="">戦闘中にプレイしたカードは、<strong>数字</strong>と<strong>スート</strong>を参照します</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8073-81b5-d8ec79b628a2" class="">カードの数字は、行動段階を決めるために使用します</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8079-b5cf-ec4d5241451c" class="">カードのスートは、各行動の処理で参照します</p></div><div style="display:contents" dir="auto"><h2 id="3606daa5-6d0a-80f1-866c-c8098d3f8de0" class="">数字と行動段階</h2></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-809b-b1eb-dbefaf91f718" class="">プレイしたカードの数字によって、その手番の<strong>行動段階</strong>が決まります</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-809d-9c13-e4901e9e956e" class="">行動段階は、待機値や効果量を決めるために使用します</p></div><div style="display:contents" dir="ltr"><table id="3606daa5-6d0a-80dc-9db4-ff41843fd930" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-8084-95d1-ee3b3f2ee712"><th id="f~lh" class="simple-table-header-color simple-table-header" style="width:141.4px">カードの数字</th><td id="MhCZ" class="" style="width:141.4px">Ａ～３</td><td id="Ulpf" class="" style="width:141.4px">４～７</td><td id="AUUS" class="" style="width:141.4px">８～１０</td><td id="Dpj~" class="" style="width:141.4px">Ｊ～Ｋ</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-805a-b4d3-c1a671b30e49"><th id="f~lh" class="simple-table-header-color simple-table-header" style="width:141.4px">行動段階</th><td id="MhCZ" class="" style="width:141.4px">軽行動</td><td id="Ulpf" class="" style="width:141.4px">中行動</td><td id="AUUS" class="" style="width:141.4px">重行動</td><td id="Dpj~" class="" style="width:141.4px">特行動</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-80ab-a094-c00cc26bab2e" class="">どの数字のカードでも、任意の行動を宣言できます</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8025-9725-f9cf474c229e" class="">効果側で指定がない限り、カードの数字は、行動の種類を制限しません</p></div><div style="display:contents" dir="auto"><h2 id="3606daa5-6d0a-80aa-b02b-dc593fda206f" class="">スート</h2></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-80cd-9bb5-e747473af036" class="">スートは、以下のマナ属性に対応します</p></div><div style="display:contents" dir="ltr"><table id="3606daa5-6d0a-80dd-b0f3-f18bb50d9613" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-8090-b1e6-d979abd583f6"><th id="SRNC" class="simple-table-header-color simple-table-header" style="width:141.4px">スート</th><td id="VvP;" class="" style="width:141.4px">スペード</td><td id="[B_k" class="" style="width:141.4px">ハート</td><td id="F|ZL" class="" style="width:141.4px">ダイヤ</td><td id="J[mH" class="" style="width:141.4px">クラブ</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-8030-a925-f8eabc2fe373"><th id="SRNC" class="simple-table-header-color simple-table-header" style="width:141.4px">対応属性</th><td id="VvP;" class="" style="width:141.4px">火</td><td id="[B_k" class="" style="width:141.4px">水</td><td id="F|ZL" class="" style="width:141.4px">土</td><td id="J[mH" class="" style="width:141.4px">風</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8013-84b3-ebc832f80c67" class="">スートの使い方は、各行動の項目に従います</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8037-9dcd-d39ea0022ff3" class="">効果側で指定がない限り、スートが一致していなくても、行動自体は可能です</p></div><div style="display:contents" dir="auto"><h1 id="3606daa5-6d0a-80bb-b1ca-fd2af1c697b0" class="">行動段階と待機値</h1></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8057-929f-f691c6c82b39" class="">行動段階は、行動後に進むカウント数を決めるために使用します</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-80a8-8b1d-f2cde25f8cac" class="">各行動段階の基本待機値は、以下のとおりです</p></div><div style="display:contents" dir="ltr"><table id="3606daa5-6d0a-80aa-b441-fdfbf39c1fe2" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-801e-9f9a-cdd847b15ea4"><th id="NkOn" class="simple-table-header-color simple-table-header" style="width:141.4px">行動段階</th><td id="WDJw" class="" style="width:141.4px">軽行動</td><td id="U={Q" class="" style="width:141.4px">中行動</td><td id="zgIA" class="" style="width:141.4px">重行動</td><td id="yd|&lt;" class="" style="width:141.4px">特行動</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-808f-9c7c-cbc0398a9421"><th id="NkOn" class="simple-table-header-color simple-table-header" style="width:141.4px">基本待機値</th><td id="WDJw" class="" style="width:141.4px">３</td><td id="U={Q" class="" style="width:141.4px">４</td><td id="zgIA" class="" style="width:141.4px">５</td><td id="yd|&lt;" class="" style="width:141.4px">６</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-804e-911c-eb2c58653188" class="">また、アイテムには重量が設定されており、使用したアイテムの重量によって待機値が変化します</p></div><div style="display:contents" dir="ltr"><table id="3606daa5-6d0a-802e-b964-ecbc49f46f04" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-803b-a76e-fbb5c2d4d612"><th id="lJeq" class="simple-table-header-color simple-table-header" style="width:176.75px">重量</th><td id="zg=G" class="" style="width:176.75px">軽量</td><td id="n~:M" class="" style="width:176.75px">中量</td><td id="HLNu" class="" style="width:176.75px">重量</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-8029-ae42-c85a4860f6ad"><th id="lJeq" class="simple-table-header-color simple-table-header" style="width:176.75px">重量補正</th><td id="zg=G" class="" style="width:176.75px">－１</td><td id="n~:M" class="" style="width:176.75px">±０</td><td id="HLNu" class="" style="width:176.75px">＋１</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8010-b975-febd64fcc85e" class="">行動後に適用する待機値は、以下で決まります</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3606daa5-6d0a-80d3-9859-e3c36bc6c8b0"><div style="width:100%"><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8047-9c02-d7f2bcffff94" class=""><strong>待機値 ＝ 行動段階の基本待機値 ＋ 使用したアイテムの重量補正</strong></p></div></div></figure></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-80fa-8f7a-d9d3672f842a" class="">アイテム・レシピを使用する場合、そのデータに設定された重量補正を用います</p></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-8013-8444-c394d00710e7" class="">使用するアイテムがない行動では、重量補正はありません</p></div><div style="display:contents" dir="auto"><h1 id="3606daa5-6d0a-80d3-939f-f775bcb70a9f" class="">行動</h1></div><div style="display:contents" dir="auto"><p id="3606daa5-6d0a-808c-bf89-fa0f18c0fe44" class="">自身の手番では、以下の<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E8%A1%8C%E5%8B%95%203606daa56d0a80e7aa52f633a844414c.html">行動</a>から１つを選んで宣言します</p></div><div style="display:contents" dir="ltr"><table id="3606daa5-6d0a-8078-9bd7-f27e7aae70fe" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-8077-afe8-c96d7b4f545c"><th id="_&gt;^u" class="simple-table-header-color simple-table-header" style="width:84.65625px">行動</th><th id="W`{C" class="simple-table-header-color simple-table-header" style="width:606.65625px">概要</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-802d-ad47-fd839c499b23"><td id="_&gt;^u" class="" style="width:84.65625px">攻撃</td><td id="W`{C" class="" style="width:606.65625px">武器または素手を用いて、対象にダメージを与える</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-8086-96ac-c7e085d3b1b1"><td id="_&gt;^u" class="" style="width:84.65625px">防御</td><td id="W`{C" class="" style="width:606.65625px">防具を用いて、ダメージに備える</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-8053-9b2b-e1d9a39f86f6"><td id="_&gt;^u" class="" style="width:84.65625px">回避</td><td id="W`{C" class="" style="width:606.65625px">攻撃や効果によるダメージを避ける準備をする</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-80f8-8c6e-cba205555544"><td id="_&gt;^u" class="" style="width:84.65625px">分解</td><td id="W`{C" class="" style="width:606.65625px">アイテムや素材を分解し、マナを得る</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-8080-9dfe-cffde1584582"><td id="_&gt;^u" class="" style="width:84.65625px">使用</td><td id="W`{C" class="" style="width:606.65625px">所持しているアイテムを消費して、その効果を発動する</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-80e6-b2dc-cbb3f475cc16"><td id="_&gt;^u" class="" style="width:84.65625px">想成</td><td id="W`{C" class="" style="width:606.65625px">レシピを参照し、マナを支払って効果を発動する</td></tr></div><div style="display:contents" dir="ltr"><tr id="3606daa5-6d0a-8014-bf56-e2e1ccc1646e"><td id="_&gt;^u" class="" style="width:84.65625px">離脱</td><td id="W`{C" class="" style="width:606.65625px">戦闘から離れる準備をする</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="3616daa5-6d0a-806a-85ab-c91b0ec04417" class="">攻撃</h1></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-80e5-9e0e-dde2dd356de2" class="">攻撃は、武器または素手を用いて対象にダメージを与える行動です</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8003-9389-d08e33e79200" class="">レシピやアイテムでダメージを与えたとしても、それは攻撃として扱いません</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8086-ae99-e5a6c51ff52c" class="">攻撃の待機値は、行動段階と武器の重量を用いて決定します</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-806a-90ee-d07d66f76f8c" class="">攻撃を行う場合、以下の順に処理します</p></div><div style="display:contents" dir="auto"><ol type="1" id="3616daa5-6d0a-8015-aedb-c8fde998a5e3" class="numbered-list" start="1"><li>攻撃指定</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3616daa5-6d0a-80b3-b9f6-ea0a61d71fc6" class="numbered-list" start="2"><li>属性確認</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3616daa5-6d0a-8052-9c12-f9ba5ba939bc" class="numbered-list" start="3"><li>ダメージ算出</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3616daa5-6d0a-80ee-b3af-f0bed1fa5cae" class="numbered-list" start="4"><li>攻撃効果適用</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3616daa5-6d0a-806a-8acb-d5651ccbaa50" class="numbered-list" start="5"><li>ダメージ処理</li></ol></div><div style="display:contents" dir="auto"><h2 id="3616daa5-6d0a-8044-9b98-cd4d3ba52edb" class="">１．攻撃指定</h2></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-80bf-b167-ec0de27eabb4" class="">攻撃に使用する武器を１つ選び、攻撃対象を指定します</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8004-becd-e6d861a7ad70" class="">素手で攻撃できる場合は、素手を武器として扱います</p></div><div style="display:contents" dir="auto"><h2 id="3616daa5-6d0a-800d-909a-e3c8c077bbe7" class="">２．属性確認</h2></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-802d-8f54-e44e62af9326" class="">使用する武器の武器属性を確認します</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8022-b418-e93792bde3f6" class="">武器にマナ属性が設定されている場合は、そのマナ属性も確認します</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8048-8b14-c5474f80a034" class="">武器にマナ属性が設定されていない場合、その攻撃は無属性として扱います</p></div><div style="display:contents" dir="auto"><h2 id="3616daa5-6d0a-8098-b708-d876113a88be" class="">３．ダメージ算出</h2></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80dc-b7d2-f93579f19ecd" class="">使用武器の品質、等級、攻撃係数を確認します</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-804c-ad56-c939b727ac67" class="">攻撃係数は、行動段階と武器重量で決まります</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-808f-8e73-e6f1cba487e7" class="">ダメージの算出は、装備品の「<a href="%E8%A3%85%E5%82%99%E5%93%81%203586daa56d0a80ad804cd7d1b854f094.html">武器</a>」に従います</p></div><div style="display:contents" dir="auto"><h2 id="3616daa5-6d0a-8029-874c-f789a174913a" class="">４．攻撃効果適用</h2></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8058-b850-de39cee66a1c" class="">武器効果、印記、その他の攻撃側の効果を適用します</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-80fa-94e6-f6c9da48f061" class="">この段階で、対象に適用するダメージの値、属性、追加効果を確定します</p></div><div style="display:contents" dir="auto"><h2 id="3616daa5-6d0a-8097-9365-e8dd8fae742c" class="">５．ダメージ処理</h2></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-806d-864b-ef81986117ce" class="">攻撃効果適用で確定したダメージを、対象に適用します</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80d2-90ab-e4b1b1dac273" class="">追加効果などがある場合、それらもあわせて適用します</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8006-afc2-c4cf7a353f18" class="">以降の処理は、「<a href="%E6%88%A6%E9%97%98%203486daa56d0a80588ab9f1ba5c312516.html">ダメージ処理</a>」の項目に従います</p></div><div style="display:contents" dir="auto"><h1 id="3616daa5-6d0a-809d-9e2d-e2061498e404" class="">ダメージ処理</h1></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8011-ae4a-e6fcd55a9dbb" class=""><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E3%83%80%E3%83%A1%E3%83%BC%E3%82%B8%E5%87%A6%E7%90%86%203666daa56d0a8081b056f76721d42290.html">ダメージ処理</a>は、確定したダメージを対象に適用する処理です</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8039-aeea-fb8c45ee9dca" class="">ダメージの値、属性、追加効果は、発生元で確定します</p></div><div style="display:contents" dir="auto"><p id="3616daa5-6d0a-8003-a0a6-cdded90d7c42" class="">ここでは、<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E8%80%90%E6%80%A7%203666daa56d0a8071849dd01957d47b72.html">耐性</a>、回避、<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E9%98%B2%E8%AD%B7%203646daa56d0a803b811cc46545e628d2.html">防護</a>など、受ける側の処理を扱います</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80dc-8ec8-e4e422ed58fc" class="">防護は<code>&lt;装甲&gt;</code>、<code>&lt;障壁&gt;</code>、防御値などの、ダメージの値を軽減するものの総称です</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80d3-85d0-cb521aa1d78c" class="">ダメージ処理を行う場合、以下の順に処理します</p></div><div style="display:contents" dir="auto"><ol type="1" id="3616daa5-6d0a-80e7-b54f-e097a2a0c2c9" class="numbered-list" start="1"><li>耐性適用</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3646daa5-6d0a-8085-aeac-db9f7439fb3f" class="numbered-list" start="2"><li>回避処理</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3646daa5-6d0a-8085-8d34-efdf35a7d7d9" class="numbered-list" start="3"><li>防護処理</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3646daa5-6d0a-80c3-8c32-fb28b18613df" class="numbered-list" start="4"><li>ダメージ適用</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3646daa5-6d0a-8094-a3fc-fe6773278e4b" class="numbered-list" start="5"><li>ダメージ後効果</li></ol></div><div style="display:contents" dir="auto"><h2 id="3616daa5-6d0a-807f-8ad6-f62ed73c7188" class="">１．耐性適用</h2></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8065-80ad-dea7298538f7" class="">対象がダメージの属性に対応する耐性を持つ場合、その耐性を適用します</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80b0-8e78-eb93d1f82500" class="">ダメージが複数の属性を持つ場合、「属性」の項目に従い、弱点効果と耐性効果を確認します</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-808e-aa32-f629f2e06d3d" class="">各キャラクターや敵は、属性ごとに耐性を持ちます</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8074-82d5-df946027b241" class="">記述されていない耐性は<strong>通常</strong>として扱い、特別な処理は発生しません</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-806a-a82e-f43d0abda529" class="">同じ属性に対して、複数の耐性を同時に持つことはありません</p></div><div style="display:contents" dir="auto"><h3 id="3646daa5-6d0a-8058-8541-ef96f47b10a4" class="">弱点</h3></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-8022-b56d-e88c8827a00b" class="">弱点の場合、そのダメージの追加効果として、ノックバック１とスタン値１を追加します</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-806f-b36e-ee866510150f" class="">ただし、反射が適用される場合、弱点による追加効果は発生しません</p></div><div style="display:contents" dir="auto"><h3 id="3646daa5-6d0a-80f4-b278-e3a6c718bdb3" class="">半減</h3></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-801a-b3bd-f154656beb60" class="">半減の場合、受けるダメージは半分(端数切り捨て)に減少します</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8039-b29f-e6f4379ca576" class="">それ以外に追加の処理は存在しません</p></div><div style="display:contents" dir="auto"><h3 id="3646daa5-6d0a-80e0-bc6c-f8c7eed8bee2" class="">無効</h3></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8034-b0f8-c88be8549cce" class="">無効の場合、受けるダメージが０になります</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-802a-b67b-fe35b85f345a" class="">ただし、ダメージ以外の追加効果は発生します</p></div><div style="display:contents" dir="auto"><h3 id="3646daa5-6d0a-8070-94fa-fc8749cda6d5" class="">反射</h3></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8023-b38b-ccda883d77ad" class="">反射の場合、そのダメージは対象ではなく、発生元に適用されます</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8053-a94e-f862ae3704d2" class="">反射されたダメージには、回避、防護、追加効果を適用しません</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-804f-8b02-f2610a255294" class="">発生元のHPを、反射されたダメージ分減少させます</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80e6-8cbf-fd1c4b73dc2a" class="">反射が発生した場合、この対象へのダメージ処理は終了します</p></div><div style="display:contents" dir="auto"><h2 id="3646daa5-6d0a-8034-b9f1-e327a4f3ad46" class="">２．回避処理</h2></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8030-b952-db06a2aa6437" class="">対象が回避値を持つ場合、以下の回避処理を行います</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8002-82c7-d5d314a00904" class="">対象は1d10を振り、出目が現在の回避値以下なら、回避に成功します</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8087-9547-f9322edb1dd7" class="">成功した場合、受けるダメージは０になり、そのダメージに付随する追加効果も発生しません</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-803f-bb4e-e9178cb2783f" class="">その後の処理は行わず、ダメージ処理を終了します</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80b9-8ebc-cc532968b3c5" class="">回避に失敗した場合、次の処理へ進みます</p></div><div style="display:contents" dir="auto"><h2 id="3646daa5-6d0a-8003-9cc9-e6854b733bd0" class="">３．防護処理</h2></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80a8-8ec6-eccb28d1a475" class="">対象が防護を持つ場合、以下の順に適用します</p></div><div style="display:contents" dir="auto"><ol type="1" id="3646daa5-6d0a-8086-aade-c449860d1df3" class="numbered-list" start="1"><li><code>&lt;装甲&gt;</code></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3646daa5-6d0a-80a9-b58e-e1ceef85ecfe" class="numbered-list" start="2"><li><code>&lt;障壁&gt;</code></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3646daa5-6d0a-807f-9c06-e7eb31cb02cb" class="numbered-list" start="3"><li>防御値</li></ol></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8086-b4be-c0e1c4e4c0de" class="">それぞれの防護は、現在のダメージをその値分軽減します</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8008-afbc-c7c4a4819c64" class="">防護によって受けるダメージが０になった場合、以降の防護を適用しません</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80ab-8207-f8b47774b6a4" class=""><code>&lt;装甲&gt;</code>でダメージを軽減した場合、軽減した値だけ強度を減らします</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80cf-b81e-c6055df508c7" class=""><code>&lt;障壁&gt;</code>の減衰処理は、<code>&lt;障壁&gt;</code>の効果に従います</p></div><div style="display:contents" dir="auto"><h2 id="3646daa5-6d0a-80eb-82e1-f8cdd70fbaeb" class="">４．ダメージ適用</h2></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-804e-b359-c440070d8fa5" class="">全ての軽減処理を終えた後、残った値を最終的に受けるダメージとします</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80e0-a9a6-eabfe41a28a6" class="">対象のHPを、ダメージ分減少させます</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8043-9750-c1c41dbc98ef" class="">HPが１点以上減少した場合、その対象にダメージを与えたものとして扱います</p></div><div style="display:contents" dir="auto"><h2 id="3646daa5-6d0a-80db-9395-dac86b7a74dc" class="">５．ダメージ後効果</h2></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80ef-a432-cda8c7254398" class="">ダメージ処理の後に発生する効果を処理します</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80e6-9006-cf1f0c481938" class="">ノックバック、スタン値増加などは、この段階で処理します</p></div><div style="display:contents" dir="auto"><h1 id="34d6daa5-6d0a-80d6-8d1d-e3bfc1291ad2" class="">ノックバック</h1></div><div style="display:contents" dir="auto"><p id="34d6daa5-6d0a-803c-96bc-d768658a7788" class=""><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E3%83%8E%E3%83%83%E3%82%AF%E3%83%90%E3%83%83%E3%82%AF%203666daa56d0a80de8708f680272d8ac4.html">ノックバック</a>Xは、その対象のコマをXカウント分後方へ進める効果です</p></div><div style="display:contents" dir="auto"><p id="34d6daa5-6d0a-80bc-b5db-e219c0694f01" class="">カウントがタイムラインを周回する場合は、次のラウンドの対応する位置へ移ります</p></div><div style="display:contents" dir="auto"><h1 id="34d6daa5-6d0a-80dd-b555-f4f3adfca7d7" class=""><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E3%82%B9%E3%82%BF%E3%83%B3%203666daa56d0a8046bbd3dad6a75470b6.html">スタン</a></h1></div><div style="display:contents" dir="auto"><p id="34d6daa5-6d0a-803a-89d1-f499232e5da8" class="">各キャラクターは<strong>スタン値</strong>と<strong>スタン最大値</strong>を持ちます</p></div><div style="display:contents" dir="auto"><p id="34d6daa5-6d0a-8072-ae85-ea9f707d7f2d" class="">PCのスタン最大値は５です</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80c7-b8b4-ecfb28874b84" class="">敵のスタン最大値は、敵データに従います</p></div><div style="display:contents" dir="auto"><p id="34d6daa5-6d0a-80a4-9246-d9c60e7932da" class="">スタン値がスタン最大値以上になった場合、以下の処理を行います</p></div><div style="display:contents" dir="auto"><ol type="1" id="34d6daa5-6d0a-80fb-8c43-e4a78e3ede9d" class="numbered-list" start="1"><li>スタン値を０に戻す。この時、超過したスタン値は持ち越しません</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="34d6daa5-6d0a-80a0-96da-ea0bdaea0fda" class="numbered-list" start="2"><li>手札からランダムに１枚選ぶ</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="34d6daa5-6d0a-801a-bde0-c4f18106a4e1" class="numbered-list" start="3"><li>選ばれたカードの数字に対応する行動段階の基本待機値分、ノックバックを受ける</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="34d6daa5-6d0a-8021-a539-cd0159f0860d" class="numbered-list" start="4"><li>選ばれた手札を捨てる</li></ol></div><div style="display:contents" dir="auto"><p id="34d6daa5-6d0a-804f-8b4c-fb8254feb905" class="">スタン値は戦闘中に蓄積し、戦闘終了時に０へ戻ります</p></div><div style="display:contents" dir="auto"><h1 id="34d6daa5-6d0a-8064-8df8-ced8682212bd" class="">属性</h1></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-80a8-bc97-f6731c1333af" class="">戦闘では、ダメージに設定された属性を参照します</p></div><div style="display:contents" dir="auto"><p id="3646daa5-6d0a-8091-a9d5-f3ab541664c6" class="">属性には、<strong>マナ属性</strong>と<strong>武器属性</strong>があります</p></div><div style="display:contents" dir="auto"><h2 id="34d6daa5-6d0a-8008-9169-c90b453d1c26" class="">マナ属性</h2></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-80e2-beda-ea0860a956b0" class="">マナ属性は、<strong>火・土・風・水・闇・光</strong>と<strong>無</strong>の７種類です</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-80a7-9ea8-dc37380ae64b" class="">マナ属性が設定されていないダメージは、<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E7%84%A1%E5%B1%9E%E6%80%A7%203666daa56d0a80948652c98d692f98bb.html">無属性</a>として扱います</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-8087-b901-e14824c0cadf" class="">無属性は、マナ属性を持たないダメージを扱うための属性です</p></div><div style="display:contents" dir="auto"><h2 id="34d6daa5-6d0a-8031-a613-e4decad91bee" class="">武器属性</h2></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-802c-9a8e-f29f21aacb6a" class="">武器属性は、<strong>斬・打・突</strong>の３種類です</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-8082-81b6-fc32b9954b88" class="">攻撃によるダメージは、使用した武器に設定された武器属性を持ちます</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-8017-82b0-eefc40896d77" class="">レシピやアイテムによるダメージは、武器属性が指定されていない限り、武器属性を持ちません</p></div><div style="display:contents" dir="auto"><h2 id="3656daa5-6d0a-8035-ad06-c10f1a67cbcd" class="">複数属性を持つダメージ</h2></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-80de-afc9-ed31ee19b2f5" class="">ダメージが複数の属性を持つ場合、対象がそれぞれの属性に対して持つ耐性を確認します</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-8079-b3b4-efdb571780f2" class="">弱点に該当する属性がある場合、弱点１つにつき、ノックバック１とスタン値１を追加します</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-80f7-8903-cd16d14ee221" class="">複数の属性が弱点に該当する場合、弱点による追加効果は累積します</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80ff-87c6-ce7493f4d527" class="">半減、無効、反射に該当する属性を確認します</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8064-9def-e79c4386c166" class="">最も優先度の高いものを１つだけ適用します</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-8032-8847-e3a4d56d70ea" class="">耐性の優先度は、低い順に<strong>半減 → 無効 → 反射</strong>となります</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-80eb-a815-c93d3237ca8d" class="">反射を適用する場合、弱点による追加効果は発生しません</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-80c1-b743-d378b2f660d4" class="">該当する耐性がない場合、そのダメージには耐性による処理は発生しません</p></div><div style="display:contents" dir="auto"><h1 id="3656daa5-6d0a-801a-bac0-de2c07585d34" class="">防御</h1></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-8084-b663-ca0170a7f7da" class="">防御には、<strong><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E9%98%B2%E5%BE%A1%E5%80%A4%203666daa56d0a80e18d28e91a39872e55.html">防御値</a></strong>と<strong>防御行動</strong>があります</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-80bc-854a-c43eb387261a" class="">防御値は、ダメージを受けた時に常に参照される防護です</p></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-80f6-9eaa-fdd19f17ea9a" class="">防御行動は、自分が受けるダメージに備えて<code>&lt;装甲&gt;</code>を得る行動です</p></div><div style="display:contents" dir="auto"><h2 id="3656daa5-6d0a-80b1-8115-e3397bc832ab" class="">防御値</h2></div><div style="display:contents" dir="auto"><p id="3656daa5-6d0a-807b-beff-fc0a072af2a7" class="">防具を装備しているキャラクターは、防御値を持ちます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8082-975d-d7a8c4e196d3" class="">防御値の算出は、装備品の「<a href="%E8%A3%85%E5%82%99%E5%93%81%203586daa56d0a80ad804cd7d1b854f094.html">防具</a>」に従います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-803c-aa30-d656f0f55ce1" class="">防御値は、ダメージ処理の防護処理で使用します</p></div><div style="display:contents" dir="auto"><h2 id="3656daa5-6d0a-8002-b5f1-e5f157521a4d" class="">防御行動</h2></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8064-973e-d721fb006f44" class="">防御行動は、防具を用いて<code>&lt;装甲&gt;</code>を得る行動です</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80d8-aac2-ea9983fd04ea" class="">使用する防具を１つ選び、その防具の品質、等級、防御係数から<code>&lt;装甲&gt;</code>の強度を算出し、得ます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-806c-af67-cb67aa6967f4" class="">防御係数と待機値は、行動段階と防具の重量によって決まります</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8023-895d-f16ff7d589c6" class=""><code>&lt;装甲&gt;</code>は、ダメージ処理の防護処理で使用します</p></div><div style="display:contents" dir="auto"><h1 id="3506daa5-6d0a-808a-9ae5-cab7901dcb7c" class="">回避</h1></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80f2-9d8e-c441378f5d8e" class="">回避は、攻撃や効果によるダメージを避けるために<code>&lt;回避&gt;</code>を得る行動です</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8094-a712-e6aaf556896e" class="">回避行動を行う場合、使用する防具を１つ選びます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80d4-a766-fc75decba083" class="">その防具の<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E5%9B%9E%E9%81%BF%E5%80%A4%203666daa56d0a80069911cacdaf52531d.html">回避値</a>を持つ<code>&lt;回避&gt;</code>を得ます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80e6-967a-e61c780d7e7e" class="">回避値と待機値は、装備品の「<a href="%E8%A3%85%E5%82%99%E5%93%81%203586daa56d0a80ad804cd7d1b854f094.html">防具</a>」に従います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8077-bcac-f8103d82d393" class=""><code>&lt;機敏&gt;</code>などによって追加で得られる回避値は、最大５までです</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8042-a8ec-f528cafb782a" class="">回避値の合計は、９を上限とします</p></div><div style="display:contents" dir="auto"><h1 id="34d6daa5-6d0a-8080-a66a-d2519487fddd" class="">分解</h1></div><div style="display:contents" dir="auto"><p id="34d6daa5-6d0a-8065-9030-eb819e2a4a64" class="">分解は、アイテムや素材を消費してマナを得る行動です</p></div><div style="display:contents" dir="auto"><p id="34d6daa5-6d0a-8052-900a-d69326ea7013" class="">分解を行う場合、分解するアイテムまたは素材を１つ選びます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8059-96c5-ff83d3cf4f72" class="">選んだアイテムまたは素材を消費し、そのタグに対応するマナを得ます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-803a-a1a8-d1c6df0f2d33" class="">さらに、プレイしたカードのスートに対応するマナを１つ得ます</p></div><div style="display:contents" dir="auto"><p id="34d6daa5-6d0a-80f6-8ff4-d421173ab3d2" class="">分解の待機値は、行動段階の基本待機値で決定します</p></div><div style="display:contents" dir="auto"><h1 id="3666daa5-6d0a-808b-b355-de5630f332f0" class="">使用</h1></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8064-9d5f-e7a3c6d50368" class="">使用は、所持しているアイテムを消費して、その効果を発動する行動です</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80b7-91f2-dadce438462b" class="">使用するアイテムを１つ選び、消費します</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-808b-bb81-ee10fede1e32" class="">その後、アイテムの効果を処理します</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8027-8e1a-c1f9388654f4" class="">ダメージが発生する場合、値・属性・追加効果を確定し、ダメージ処理を行います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-805e-b8ba-cc658ce2b9c9" class="">使用の待機値は、行動段階とアイテムの重量で決まります</p></div><div style="display:contents" dir="auto"><h1 id="3666daa5-6d0a-80c2-bcfd-f309e0fa6b4f" class="">想成</h1></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-809f-beaf-c3d9d12da981" class="">想成は、レシピを参照して効果を発動する行動です</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80c0-b3a8-ec29f71e816c" class="">想成するレシピを１つ選び、レシピに書かれたマナを支払います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8033-994d-d27b492b93f3" class="">このときカードのスートと同じマナが含まれている場合、そのうち１つを無料にできます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8025-80a4-e332817a51bd" class="">その後、レシピの効果を処理します</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80c8-9530-f96f579a6fb0" class="">ダメージが発生する場合、値・属性・追加効果を確定し、ダメージ処理を行います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8066-bc5b-dda30977b1d9" class="">想成の待機値は、行動段階とレシピの重量で決まります</p></div><div style="display:contents" dir="auto"><h1 id="3666daa5-6d0a-8024-bed1-ce62d3910a07" class="">離脱</h1></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80a3-ba63-fdbbe0b0f388" class=""><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E9%9B%A2%E8%84%B1%203666daa56d0a80a6a9b9d420096cf855.html">離脱</a>は、戦闘をやめてその場を離れる行動です</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-808f-8b5c-d58fa91a4165" class="">離脱を宣言したキャラクターは、次の自身の手番まで、回避処理や防護処理は行えません</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8007-8b21-c208dbb7d673" class="">次に自分の手番が来た時、戦闘から離脱します</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-802a-b2d2-c0225ae959b9" class="">離脱したキャラクターのコマをタイムラインから取り除きます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-809d-b770-c2f17e31204b" class="">一度離脱したキャラクターは、その戦闘に再参加できません</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-805e-aae1-de988d79dcbf" class="">ボス戦などの特殊な状況では、離脱を宣言することができない可能性があります</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80bf-b8fd-cebb4573d903" class="">離脱の待機値は、行動段階と防具の重量によって求めた後に、＋２します</p></div><div style="display:contents" dir="auto"><h1 id="3666daa5-6d0a-801e-bd3e-e21f68c11756" class="">戦闘不能</h1></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-803e-a57b-cfde4b7719fd" class="">HPが０以下になったキャラクターは、<a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E6%88%A6%E9%97%98%E4%B8%8D%E8%83%BD%203666daa56d0a80a4b239cbed874c260d.html">戦闘不能</a>になります</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80fd-952c-d2cccebccc85" class="">戦闘不能になったキャラクターのコマは、タイムラインから取り除きます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8010-af94-c968f31325f6" class="">戦闘不能の間、そのキャラクターは戦闘に参加できません</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80f8-9a4c-e9798b35c181" class="">戦闘不能は、使用または想成などによって解除できます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80cd-897e-d0f96008664d" class="">解除されたキャラクターは、解除した味方の次の手番開始時から行動できます</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80cd-938b-cd9daae19f5e" class="">戦闘不能になっても、所持しているマナは失われません</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8049-94b2-e7aae334ac8d" class="">HPが０の状態で戦闘に入る場合、最初から戦闘不能として扱います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8091-8876-f53705ce9792" class="">この場合、コマの配置と手札の準備は行いません</p></div><div style="display:contents" dir="auto"><h1 id="3666daa5-6d0a-80ff-a1cb-c580945cec86" class="">戦闘終了</h1></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-800a-8941-cc4b052bd8e5" class="">以下のいずれかを満たした場合、戦闘は終了します</p></div><div style="display:contents" dir="auto"><ul id="3666daa5-6d0a-806f-b42a-c732c4897359" class="bulleted-list"><li style="list-style-type:disc">敵のコマがタイムラインから全て取り除かれる</li></ul></div><div style="display:contents" dir="auto"><ul id="3666daa5-6d0a-80c2-9989-fa967e167943" class="bulleted-list"><li style="list-style-type:disc">PCのコマがタイムラインから全て取り除かれる</li></ul></div><div style="display:contents" dir="auto"><ul id="3666daa5-6d0a-807b-9b2b-e5cdadc98db5" class="bulleted-list"><li style="list-style-type:disc">簡易戦闘のラウンド上限に達した</li></ul></div><div style="display:contents" dir="auto"><ul id="3666daa5-6d0a-8052-8952-c358d4039f7c" class="bulleted-list"><li style="list-style-type:disc">効果やイベントが戦闘終了を指定した</li></ul></div><div style="display:contents" dir="auto"><h2 id="3666daa5-6d0a-80ae-984f-ddf1f57d8121" class="">全滅</h2></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8088-b9a6-f32a779aa0f9" class="">PC全員が戦闘不能になった場合、<strong><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E5%85%A8%E6%BB%85%203666daa56d0a808f993fd32b6f5e0a84.html">全滅</a></strong>として扱います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8053-b8de-f29d22f2b6fb" class="">全滅した場合、以下の処理を行います</p></div><div style="display:contents" dir="auto"><ol type="1" id="3666daa5-6d0a-808a-a1ee-c706ce8e21c9" class="numbered-list" start="1"><li>戦闘中なら、即座に戦闘を終了する</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3666daa5-6d0a-80f1-98b2-e7a2fabd5052" class="numbered-list" start="2"><li>素材カゴの素材を半分以上ランダムに失う</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3666daa5-6d0a-8044-a691-e321126751e7" class="numbered-list" start="3"><li>探索に参加していたPC全員のHPを１にする</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="3666daa5-6d0a-80de-b360-daa9852543c7" class="numbered-list" start="4"><li>その時間の行動を終了し、街に帰還する</li></ol></div><div style="display:contents" dir="auto"><h2 id="3666daa5-6d0a-806a-8404-f7070dbeee5a" class="">撤退</h2></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80b2-ba27-c848b8301332" class="">全滅ではなく、PCのコマがタイムラインから全て取り除かれた場合、<strong><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E6%92%A4%E9%80%80%203666daa56d0a80a7b200fc7bdd0af3bb.html">撤退</a></strong>として扱います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8076-80fa-e85eee0d615b" class="">撤退した場合、その戦闘には勝利しません</p></div><div style="display:contents" dir="auto"><h2 id="3666daa5-6d0a-803a-afd7-ca55766454b5" class="">勝利</h2></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8093-92d2-d674577cdb71" class="">敵のコマがすべて取り除かれた場合、<strong>勝利</strong>として扱います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8068-853d-ef849d99c6bd" class="">簡易戦闘では、ラウンド上限まで生存した場合も勝利として扱います</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80c7-9f20-dee70d57ff90" class="">その他の勝利条件は、効果やイベントの記述に従います</p></div><div style="display:contents" dir="auto"><h2 id="3666daa5-6d0a-80a6-a453-e62084ba476c" class="">終了処理</h2></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8019-87c4-d5d28a4c0e32" class="">残りの手札を捨て札に送ります</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8071-992a-f484e02f194a" class="">特記がない限り、戦闘終了後は探索に戻ります</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80ed-84d6-fa3246d74db8" class="">探索と戦闘は、ひとつながりの流れとして扱います</p></div><div style="display:contents" dir="auto"><h1 id="3666daa5-6d0a-800f-ba62-d78d9a852fb0" class="">簡易戦闘</h1></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8057-acd7-f9d906c588ca" class="">探索中のイベントとして発生する戦闘は、常に<strong><a href="%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7/%E7%94%A8%E8%AA%9E%E4%B8%80%E8%A6%A7DB/%E7%B0%A1%E6%98%93%E6%88%A6%E9%97%98%203666daa56d0a80f180d3c5cb853ef4dd.html">簡易戦闘</a></strong>です</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-80f5-a0ea-e95a093816b7" class="">簡易戦闘には、ラウンド数の上限があります</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8099-a32f-c877fa2bed43" class="">特に指定がなければ、２ラウンド終了時に戦闘終了となります</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-8087-ae2e-c98ceb27bfbf" class="">敵を全滅させるか、ラウンド上限まで生存すれば勝利となります</p></div><div style="display:contents" dir="auto"><p id="3666daa5-6d0a-801c-985a-e35cf10f5c95" class="">戦果は、倒した敵に応じて決定します</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

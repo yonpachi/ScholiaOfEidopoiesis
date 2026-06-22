@@ -1,0 +1,750 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>武器の強さ調整</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="35a6daa5-6d0a-8016-a8d4-c17f91490bc5" class="page sans"><header><h1 class="page-title" dir="auto">武器の強さ調整</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-806b-a392-d3717c2ec2ad" class="">このページは、初期武器9種を作成するための管理者用メモです。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80c8-b232-e124b59a6831" class="">PL向けルール本文ではなく、武器データ作成時の基準として扱います。</p></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-8014-bc28-dbe76ebbdea8" class="">目的</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8070-88ea-e75643ff2264" class="">初期テストプレイで使用する武器を、以下の9種類分用意します。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80e4-b295-ce430a966a69" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8079-ba6e-d379d8ad69cc"><th id="bvXU" class="simple-table-header-color simple-table-header">攻撃種別</th><th id="?GzM" class="simple-table-header-color simple-table-header">軽量</th><th id="^~=|" class="simple-table-header-color simple-table-header">中量</th><th id="x@Ku" class="simple-table-header-color simple-table-header">重量</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8035-8e1d-d50f4790a450"><td id="bvXU" class="">斬</td><td id="?GzM" class="">斬・軽量</td><td id="^~=|" class="">斬・中量</td><td id="x@Ku" class="">斬・重量</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8065-88c1-dd4e193a41a0"><td id="bvXU" class="">打</td><td id="?GzM" class="">打・軽量</td><td id="^~=|" class="">打・中量</td><td id="x@Ku" class="">打・重量</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80da-a06d-f88ae1542a2e"><td id="bvXU" class="">突</td><td id="?GzM" class="">突・軽量</td><td id="^~=|" class="">突・中量</td><td id="x@Ku" class="">突・重量</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-807b-bf1e-d8c939298d1b" class="">初期武器では、あくまで <strong>斬・打・突 × 軽量・中量・重量の雛形</strong> を用意します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8061-8f31-f4099a8c03c2" class="">ただし、今後の錬金や武器作成の自由度を保つため、</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80d5-95c8-d35eadf8f33d" class="">「この攻撃種別・重量なら必ずこの武器種でなければならない」という強い縛りは設けません。</p></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-80af-bcfa-c2211a8361f9" class="">ダメージ式</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80df-a0bb-edf29a226a5e" class="">武器による攻撃ダメージは以下で算出します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8026-b71b-c6bafca40c17" class=""><strong>ダメージ = 品質 ÷ 等級 × 攻撃係数（端数切り捨て）</strong></p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80d4-a0ec-f81ab4bb5774" class="">端数処理は、計算の最後に行います。</p></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-800d-958b-f566b3506a7e" class="bulleted-list"><li style="list-style-type:disc">品質：作成された武器個体の出来</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80bf-9c23-d44efd573bc5" class="bulleted-list"><li style="list-style-type:disc">等級：装備そのものの格。小さいほど強い</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8093-b666-efc40866618f" class="bulleted-list"><li style="list-style-type:disc">攻撃係数：重量と行動段階によって決まる火力係数</li></ul></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-80c3-b65b-f25aa1a0768f" class="">品質</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-804f-a1a2-d73c00b036d3" class="">品質は、以下で決定します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80ac-b297-d9f25a96ec3b" class=""><strong>品質 = 熟練度 + 錬金値</strong></p></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80ec-a250-f339c969d730" class="bulleted-list"><li style="list-style-type:disc">熟練度：同じアイテムを作り続けることで上昇する値</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-801b-90ce-e27cd2acdf5f" class="bulleted-list"><li style="list-style-type:disc">錬金値：錬金判定で算出した達成値</li></ul></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80aa-aad0-e7b8079524ef" class="">初期作成時の熟練度は <strong>3</strong> とします。</p></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-80e8-af1b-f797b914848a" class="">初期武器の作成基準</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8083-b20c-d2610acb29fc" class="">初期武器のマナコストは、原則として以下を基準にします。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8065-a6fa-d624feaf1db8" class=""><strong>初期武器：</strong><code><strong>&lt;土&gt;1 / &lt;火&gt;1</strong></code></p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-805e-a186-d5dec1749dd3" class="">これは、錬金時に必要なマナであり、錬金値を算出するためのダイス数でもあります。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-801e-abc5-d4588d2cc623" class="">初期武器を作成する場合、以下のダイスを使います。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80c9-8bbf-f9aa9add396f" class=""><strong>1d10 + 土d6 + 火d4</strong></p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8018-be15-f45031af546a" class="">初期作成時は、この錬金判定を <strong>3回</strong> 行い、最も高い錬金値を採用します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-800a-8897-cabfff57ae39" class="">このため、初期武器の品質はおおむね <strong>15前後</strong> を基準に考えます。</p></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-80de-b160-fc694e1cba4d" class="">初期防具の作成基準</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8088-a490-e0091ac6dda0" class="">初期防具のマナコストは、原則として以下を基準にします。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8053-82cd-ed421616def7" class=""><strong>初期防具：</strong><code><strong>&lt;土&gt;1 / &lt;水&gt;1</strong></code></p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8060-abc9-e90989817ec5" class="">初期防具を作成する場合、以下のダイスを使います。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-801b-b104-e6e8efe5b566" class=""><strong>1d10 + 土d6 + 水d20</strong></p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80ed-997d-e952ae91a125" class="">初期作成時は、武器と同じく錬金判定を <strong>3回</strong> 行い、最も高い錬金値を採用します。</p></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-80a5-a3ad-e0a259e1bba6" class="">待機値</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80f7-bf92-f09326ec8ecc" class="">行動段階ごとの基本待機値は以下です。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80a3-ad9c-f818bc3b0f44" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-804a-9b4b-f5685202a2e4"><th id="lZpW" class="simple-table-header-color simple-table-header">行動段階</th><th id="Z[]U" class="simple-table-header-color simple-table-header">基本待機値</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-802d-a812-c253a2ede655"><td id="lZpW" class="">軽行動</td><td id="Z[]U" class="">3</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80cd-85be-eda08cf6c8ce"><td id="lZpW" class="">中行動</td><td id="Z[]U" class="">4</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-809e-bf93-c2f6d1fc1b89"><td id="lZpW" class="">重行動</td><td id="Z[]U" class="">5</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8048-b637-f97944975560"><td id="lZpW" class="">特行動</td><td id="Z[]U" class="">6</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-805b-8f34-d1c960966a56" class="">重量補正は以下です。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80ee-9e5e-c50bce05b4cf" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8080-8635-f531ab498ca6"><th id="YB|K" class="simple-table-header-color simple-table-header">重量</th><th id="Gu~_" class="simple-table-header-color simple-table-header">補正</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-809a-b957-d07959d41089"><td id="YB|K" class="">軽量</td><td id="Gu~_" class="">-1</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80f0-8545-fb8ee8ecde60"><td id="YB|K" class="">中量</td><td id="Gu~_" class="">0</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80e9-a3b8-da51386a9b90"><td id="YB|K" class="">重量</td><td id="Gu~_" class="">+1</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80af-8bdb-c346b3599182" class="">実際の待機値は以下です。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-8029-b39d-ff3fefe38b88" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-803d-83b6-deed3a487728"><th id="uElh" class="simple-table-header-color simple-table-header">重量</th><th id="@TMe" class="simple-table-header-color simple-table-header">軽行動</th><th id="h\K=" class="simple-table-header-color simple-table-header">中行動</th><th id="R~wd" class="simple-table-header-color simple-table-header">重行動</th><th id="zVmJ" class="simple-table-header-color simple-table-header">特行動</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-803a-b7d2-c04c17961d50"><td id="uElh" class="">軽量</td><td id="@TMe" class="">2</td><td id="h\K=" class="">3</td><td id="R~wd" class="">4</td><td id="zVmJ" class="">5</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8083-9487-c8e60a1d1dc9"><td id="uElh" class="">中量</td><td id="@TMe" class="">3</td><td id="h\K=" class="">4</td><td id="R~wd" class="">5</td><td id="zVmJ" class="">6</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80d8-84c5-daaf713ea276"><td id="uElh" class="">重量</td><td id="@TMe" class="">4</td><td id="h\K=" class="">5</td><td id="R~wd" class="">6</td><td id="zVmJ" class="">7</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-808f-b6e5-f6ae4d169dab" class="">攻撃係数</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80a6-bf4e-d25edad5dfee" class="">武器の攻撃係数は、基本的に以下の共通表を使用します。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-8039-9355-ccf30d7401b1" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8036-8ae8-d94b22f7416f"><th id="I=yk" class="simple-table-header-color simple-table-header">重量</th><th id="zXsE" class="simple-table-header-color simple-table-header">軽行動</th><th id=";NpD" class="simple-table-header-color simple-table-header">中行動</th><th id="v?MM" class="simple-table-header-color simple-table-header">重行動</th><th id="s?HM" class="simple-table-header-color simple-table-header">特行動</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-808a-905f-f2915be8179b"><td id="I=yk" class="">軽量</td><td id="zXsE" class="">3</td><td id=";NpD" class="">4</td><td id="v?MM" class="">4</td><td id="s?HM" class="">5</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8056-9ff0-eeb1a06dac93"><td id="I=yk" class="">中量</td><td id="zXsE" class="">3</td><td id=";NpD" class="">6</td><td id="v?MM" class="">6</td><td id="s?HM" class="">7</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80d4-86f5-ded8c55f261c"><td id="I=yk" class="">重量</td><td id="zXsE" class="">4</td><td id=";NpD" class="">5</td><td id="v?MM" class="">8</td><td id="s?HM" class="">11</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-801c-bcae-deb9e4108a19" class="">武器ごとに攻撃係数を変えたい場合は、個別データの攻撃係数欄を変更するのではなく、<strong>効果欄にその旨を記述</strong>します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80e2-8a70-f4c06a75bfed" class="">例：</p></div><div style="display:contents" dir="auto"><blockquote id="35c6daa5-6d0a-80b4-8e1b-e52912874a10" class=""><code>&lt;臨界&gt;</code>：この攻撃の攻撃係数+1。</blockquote></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-8099-9d81-f6903d96cdc2" class="">効率表</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8056-ac36-c0643ba9fa51" class="">攻撃係数を待機値で割った効率は以下です。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80d8-bc37-fe20b2e9a231" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8055-bb2d-c942463ca196"><th id="&gt;CAR" class="simple-table-header-color simple-table-header">重量</th><th id="|]lX" class="simple-table-header-color simple-table-header">軽行動</th><th id="&gt;N_y" class="simple-table-header-color simple-table-header">中行動</th><th id="c`Fh" class="simple-table-header-color simple-table-header">重行動</th><th id="l@m?" class="simple-table-header-color simple-table-header">特行動</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80cf-bd31-fbc261d55ab3"><td id="&gt;CAR" class="">軽量</td><td id="|]lX" class="">1.50</td><td id="&gt;N_y" class="">1.33</td><td id="c`Fh" class="">1.00</td><td id="l@m?" class="">1.00</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8033-b8e5-fdaa335edf01"><td id="&gt;CAR" class="">中量</td><td id="|]lX" class="">1.00</td><td id="&gt;N_y" class="">1.50</td><td id="c`Fh" class="">1.20</td><td id="l@m?" class="">1.17</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-805e-a15f-f735ec5cf0fb"><td id="&gt;CAR" class="">重量</td><td id="|]lX" class="">1.00</td><td id="&gt;N_y" class="">1.00</td><td id="c`Fh" class="">1.33</td><td id="l@m?" class="">1.57</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8062-a705-f364e8243a60" class="">各重量ごとの得意行動は以下です。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80d6-8e20-d17c51033ba3" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8020-bcf9-cef0115657ac"><th id="owqP" class="simple-table-header-color simple-table-header">重量</th><th id="F^[j" class="simple-table-header-color simple-table-header">得意な行動</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-808f-a243-cc23daab5764"><td id="owqP" class="">軽量</td><td id="F^[j" class="">軽行動・中行動</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8015-8ce5-c58f7319a68c"><td id="owqP" class="">中量</td><td id="F^[j" class="">中行動・重行動</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8037-b97e-f3efd0a60b7c"><td id="owqP" class="">重量</td><td id="F^[j" class="">重行動・特行動</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-80b6-bf4b-c50431f79617" class="">札割合込みの平均効率</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-807b-95f8-fe4f7c163d3e" class="">Jokerを除く52枚を基準にすると、カード帯の枚数は以下です。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80c9-826e-e839745c883e" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80c5-a51b-f0e53ab012f3"><th id="hF}I" class="simple-table-header-color simple-table-header">カード帯</th><th id="cbEA" class="simple-table-header-color simple-table-header">数字範囲</th><th id="oMQ:" class="simple-table-header-color simple-table-header">枚数</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8091-b00a-d68b6c5786e7"><td id="hF}I" class="">軽行動帯</td><td id="cbEA" class="">A〜3</td><td id="oMQ:" class="">12枚</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80d2-8cb6-c048759fcc87"><td id="hF}I" class="">中行動帯</td><td id="cbEA" class="">4〜7</td><td id="oMQ:" class="">16枚</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8006-943e-e3a49327ad29"><td id="hF}I" class="">重行動帯</td><td id="cbEA" class="">8〜10</td><td id="oMQ:" class="">12枚</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8067-876a-ddb3addcb0fd"><td id="hF}I" class="">特行動帯</td><td id="cbEA" class="">J〜K</td><td id="oMQ:" class="">12枚</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-804d-bf9e-e491ee12fb33" class="">この割合で加重平均した場合、効率はおおよそ以下です。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80e4-8e52-df599181e75e" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8031-93e4-c079a0ac214f"><th id="h&gt;ii" class="simple-table-header-color simple-table-header">重量</th><th id="~GWZ" class="simple-table-header-color simple-table-header">加重平均効率</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8006-a4c2-dab4dbc501bf"><td id="h&gt;ii" class="">軽量</td><td id="~GWZ" class="">約1.22</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80df-ba6e-e59713a0864d"><td id="h&gt;ii" class="">中量</td><td id="~GWZ" class="">約1.24</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-802a-b326-ef32ff97f818"><td id="h&gt;ii" class="">重量</td><td id="~GWZ" class="">約1.21</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-803c-a357-ee561e3ce0f9" class="">ダメージ感の目安</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-806d-9aea-fd09311b4a83" class="">初期武器の基準を以下で見ます。</p></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8092-9594-fce05ddaeb71" class="bulleted-list"><li style="list-style-type:disc">品質：15</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-801c-96ec-d1d884e0b1b4" class="bulleted-list"><li style="list-style-type:disc">等級：4</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80eb-9921-f82641d3aa1c" class="bulleted-list"><li style="list-style-type:disc">基礎値：品質 ÷ 等級 = 3.75</li></ul></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8066-86cd-d8191d57728a" class="">この場合、計算の最後に端数を切り捨てるため、ダメージは以下になります。</p></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-80c1-a586-d6cfac604f41" class="">軽量武器</h2></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-8090-b56a-df15d3832f7b" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8018-9524-c2ccc7075f20"><th id="zdL\" class="simple-table-header-color simple-table-header">行動段階</th><th id="WfxA" class="simple-table-header-color simple-table-header">攻撃係数</th><th id="CDnN" class="simple-table-header-color simple-table-header">ダメージ</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80a3-96de-d8b7f4780e3e"><td id="zdL\" class="">軽行動</td><td id="WfxA" class="">3</td><td id="CDnN" class="">11</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80d5-8a64-cb44b0600aa2"><td id="zdL\" class="">中行動</td><td id="WfxA" class="">4</td><td id="CDnN" class="">15</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80ee-abbd-c36a452e12a2"><td id="zdL\" class="">重行動</td><td id="WfxA" class="">4</td><td id="CDnN" class="">15</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-805c-8939-f2cbf1bfac33"><td id="zdL\" class="">特行動</td><td id="WfxA" class="">5</td><td id="CDnN" class="">18</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-80c9-9d32-ca21e7c76b3c" class="">中量武器</h2></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80ab-938f-f0905789a77f" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80e8-93ab-f62fa02a2a84"><th id="kzab" class="simple-table-header-color simple-table-header">行動段階</th><th id="DWjQ" class="simple-table-header-color simple-table-header">攻撃係数</th><th id="m}VQ" class="simple-table-header-color simple-table-header">ダメージ</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80f5-9729-fab672a93bf1"><td id="kzab" class="">軽行動</td><td id="DWjQ" class="">3</td><td id="m}VQ" class="">11</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8079-be2b-f8345eb8a3aa"><td id="kzab" class="">中行動</td><td id="DWjQ" class="">6</td><td id="m}VQ" class="">22</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-800b-b96a-cb084008ce31"><td id="kzab" class="">重行動</td><td id="DWjQ" class="">6</td><td id="m}VQ" class="">22</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8053-9f36-d2e3daa739df"><td id="kzab" class="">特行動</td><td id="DWjQ" class="">7</td><td id="m}VQ" class="">26</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-80b3-9895-cd3b46e67c8e" class="">重量武器</h2></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-8054-bbfd-de54e8029c36" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80b2-9223-e6fa0e1ab71b"><th id=";]|H" class="simple-table-header-color simple-table-header">行動段階</th><th id="r\CI" class="simple-table-header-color simple-table-header">攻撃係数</th><th id=":l[x" class="simple-table-header-color simple-table-header">ダメージ</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80fb-9c17-d63a254a1d93"><td id=";]|H" class="">軽行動</td><td id="r\CI" class="">4</td><td id=":l[x" class="">15</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8078-a8f6-e54f9631e4b9"><td id=";]|H" class="">中行動</td><td id="r\CI" class="">5</td><td id=":l[x" class="">18</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-800f-b866-dba5ebf2bfb3"><td id=";]|H" class="">重行動</td><td id="r\CI" class="">8</td><td id=":l[x" class="">30</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80e3-83e2-f38263410f12"><td id=";]|H" class="">特行動</td><td id="r\CI" class="">11</td><td id=":l[x" class="">41</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-8057-8acd-cb637be187df" class="">敵の耐久基準</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-801e-a8de-f52ee21ab2d4" class="">標準敵の耐久は、ひとまず <strong>HP70〜75相当</strong> を基準に考えます。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80c1-9eb3-e2027cd4fc49" class="">ここでいうHP相当は、単純なHPだけではなく、以下を含めた <strong>実質耐久</strong> として扱います。</p></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8026-bcf1-c795768488e3" class="bulleted-list"><li style="list-style-type:disc">HP</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-809f-b585-c91b5efda873" class="bulleted-list"><li style="list-style-type:disc">防御値</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8046-a5fb-e57ff4e5d2b2" class="bulleted-list"><li style="list-style-type:disc">回避値</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8070-aa36-cf0837113570" class="bulleted-list"><li style="list-style-type:disc">耐性</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8030-8e18-ce6b7d74c702" class="bulleted-list"><li style="list-style-type:disc">弱点</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-804e-94bf-fa0c5dce37bc" class="bulleted-list"><li style="list-style-type:disc">その他の軽減要素</li></ul></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8065-96a5-e6dee41b2446" class="">敵の実データとしては、以下のように調整してよいです。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80b7-9e81-fb81148ab8a2" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80c4-8b01-ef5288f6c952"><th id="MUB`" class="simple-table-header-color simple-table-header">敵の種類</th><th id="yu\U" class="simple-table-header-color simple-table-header">耐久目安</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8095-949f-d7febeb63c02"><td id="MUB`" class="">雑魚敵</td><td id="yu\U" class="">HP35〜50相当</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80f6-934c-cd63b8244998"><td id="MUB`" class="">通常敵</td><td id="yu\U" class="">HP70〜75相当</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8017-ab01-ff056aff42b4"><td id="MUB`" class="">手強い敵</td><td id="yu\U" class="">HP80〜100相当</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80ec-abca-c80499fd3ecf"><td id="MUB`" class="">強敵</td><td id="yu\U" class="">HP120〜160相当</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8027-94df-ce045e53da13" class="">通常敵は、<strong>中量武器の中〜重行動による攻撃3発前後で倒せる</strong>程度を目安にします。</p></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-80a5-a793-da513dd6bed1" class="">武器データ形式</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-800c-bfef-f057bfa311b6" class="">初期武器のデータは、以下の形式で作成します。</p></div><div style="display:contents" dir="auto"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="35c6daa5-6d0a-8086-a37a-cb59cf669451" class="code code-wrap"><code class="language-markdown" style="white-space:pre-wrap;word-break:break-all">名前：
+種別：
+重量：
+等級：
+マナ属性：
+マナコスト：
+効果：
+タグ：</code></pre></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-80d6-8147-d6fa5b000f69" class="">名前</h2></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-808e-b621-fa035d21188b" class="">武器の名称です。</p></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-8096-bf49-e378f2f3f922" class="">種別</h2></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80f6-b137-cf1754856a0c" class="">武器の攻撃種別を指定します。</p></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8049-a226-f8feb9348191" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;斬&gt;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8069-95ac-ceed7479649f" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;打&gt;</code></li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8063-b4d6-d7e3db7eba08" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;突&gt;</code></li></ul></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-8070-b1b4-c59128bf35da" class="">重量</h2></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80e8-8ee4-ffc3827daf40" class="">武器の重量を指定します。</p></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8013-8731-cb4273239b55" class="bulleted-list"><li style="list-style-type:disc">軽量</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8069-ba07-f9c76e70e59f" class="bulleted-list"><li style="list-style-type:disc">中量</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-801a-8790-c00cf80b34fe" class="bulleted-list"><li style="list-style-type:disc">重量</li></ul></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-8050-94b4-dc92f14e0264" class="">等級</h2></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-803e-8e47-e4daa8f839b9" class="">武器の等級を指定します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8048-b53e-ff56ac62c7ed" class="">等級は小さいほど強い値です。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8000-93a7-e4a89f0c2ff1" class="">初期武器は、ひとまず <strong>等級4</strong> を基準にします。</p></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-8048-9f10-e2a8a28b783e" class="">マナ属性</h2></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80e5-ade8-deb49908bc49" class="">武器そのもののマナ属性を指定します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8033-9797-e742d0181d0a" class="">通常の初期武器は、原則として <code>&lt;無&gt;</code> を基準にします。</p></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-801b-81dc-d1f67232309e" class="">マナコスト</h2></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8045-914d-d6ccde23afe0" class="">この武器を錬金する時に必要なマナです。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8025-b725-d52197d3aa07" class="">また、錬金値を算出するために追加する属性ダイスの数としても扱います。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8068-b937-db82b0d06afe" class="">想成で呼び出す場合も、原則としてこのマナコストを使用します。</p></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-80b2-b329-c03c83b10b81" class="">効果</h2></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8095-8e61-ef35d714a661" class="">武器に付与された追加効果を記述します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8051-89b1-dcf41c56f875" class="">カード帯トリガーを用いる場合は、以下のように記述します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-801d-ad03-d1a9b6b086eb" class="">例：</p></div><div style="display:contents" dir="auto"><blockquote id="35c6daa5-6d0a-80c7-a148-c670a90b6658" class=""><code>&lt;軌転&gt;</code>：この攻撃で1点以上ダメージを与えた場合、対象の <code>&lt;出血&gt;</code> の強度を1増加させる。</blockquote></div><div style="display:contents" dir="auto"><h2 id="35c6daa5-6d0a-801d-8021-e0c98fcc898b" class="">タグ</h2></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80fd-bf36-d4a61f3a95fb" class="">その武器を構成するタグです。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8024-a496-f5ffe6aaa503" class="">アイテムを錬金する際は、レシピに記載されたタグを満たすように素材を選ぶ必要があります。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80f0-b44e-ca7eb9df9e1e" class="">完成したアイテムは、原則としてレシピに記載されたタグをそのまま持ちます。</p></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-807a-b03c-e16f37bfd0d2" class="">タグ構成とレシピの管理原則</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80ea-a051-c2ceb66d8f06" class="">この項目は管理者用のデータ作成指針です。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80c5-abbb-e0520d2918c0" class="">通常のレシピでは、錬金によってタグが追加で発生することはありません。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80bc-9966-c06879a45669" class="">アイテムを作る時に必要なタグは、そのまま完成したアイテムが持つタグになります。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80c6-8b50-e3228d645bd5" class="">つまり、<strong>タグの組み合わせがアイテムをアイテムたらしめる要素</strong>です。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8058-9422-fcbf50e6c9f9" class="">そのため、レシピを追加する際は、以下を守ります。</p></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-804b-b583-f186207931f4" class="bulleted-list"><li style="list-style-type:disc">同じタグ構成からなるアイテムレシピを複数作らない</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-803f-a92d-e808c41072e7" class="bulleted-list"><li style="list-style-type:disc">同じタグ構成のレシピがある場合、それらは原則として同一アイテムとして扱う</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80d4-a8f4-f6f243181377" class="bulleted-list"><li style="list-style-type:disc">自由タグは、この重複判定には含めない</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8095-be9f-da24a4f26a2c" class="bulleted-list"><li style="list-style-type:disc">上位レシピや特殊レシピでは、例外的に追加タグや変化タグを扱ってよい</li></ul></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8022-afde-eba6e332c477" class="">この管理原則はPL向けに明示する必要はありません。</p></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-801b-b5ce-db7359e81b1f" class="">9武器の方向性</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8024-8088-e6e4cb45ac13" class="">初期武器9種は、以下の方向で作成します。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-8019-acb2-fb7947cf6e6e" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8090-ac2a-eada7b92ce3d"><th id="]_PU" class="simple-table-header-color simple-table-header">攻撃種別</th><th id="doXx" class="simple-table-header-color simple-table-header">方向性</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8056-8c5f-de47f36150b8"><td id="]_PU" class="">斬</td><td id="doXx" class="">ダメージ、傷、継続ダメージ寄り</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8000-8564-f2e51ddc6ed2"><td id="]_PU" class="">打</td><td id="doXx" class="">ノックバック、スタン、装甲破壊寄り</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-806d-bb33-fc7c545b12df"><td id="]_PU" class="">突</td><td id="doXx" class="">妨害、デバフ、制御寄り</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80c1-b8c9-d594a2f86c6d" class="">ただし、これは強い縛りではありません。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-802e-81d6-ee12bb4e8ccc" class="">あくまで初期武器データ作成時の目安とします。</p></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-8066-a643-d29d3efb3b25" class="">初期武器9種</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80ff-ad34-c6753d71effa" class="">現時点の初期武器案は以下です。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80b2-a036-dbe3b9900ccc" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-803f-ae0e-c4bd090bfad7"><th id="[Da=" class="simple-table-header-color simple-table-header">攻撃種別</th><th id="MqeD" class="simple-table-header-color simple-table-header">軽量</th><th id="`HIL" class="simple-table-header-color simple-table-header">中量</th><th id="PVts" class="simple-table-header-color simple-table-header">重量</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-802f-bd6a-d06051353f81"><td id="[Da=" class=""><code>&lt;斬&gt;</code></td><td id="MqeD" class="">ダガー</td><td id="`HIL" class="">ロングソード</td><td id="PVts" class="">グレートアクス</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80e5-b1b0-f1119b4c775b"><td id="[Da=" class=""><code>&lt;打&gt;</code></td><td id="MqeD" class="">ナックル</td><td id="`HIL" class="">メイス</td><td id="PVts" class="">ハンマー</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8081-8d63-dac9364f19f4"><td id="[Da=" class=""><code>&lt;突&gt;</code></td><td id="MqeD" class="">レイピア</td><td id="`HIL" class="">エストック</td><td id="PVts" class="">トライデント</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-80c4-b823-cfe24dbbacf5" class="">初期武器効果の方向性</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-805e-b160-c456ca371159" class="">現時点の効果案は以下です。</p></div><div style="display:contents" dir="ltr"><table id="35c6daa5-6d0a-80d8-a0d5-c94594e789a7" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-809d-b266-c9567d4625c3"><th id="T[qA" class="simple-table-header-color simple-table-header">武器</th><th id="WGOn" class="simple-table-header-color simple-table-header">トリガー</th><th id="\&lt;&lt;t" class="simple-table-header-color simple-table-header">効果の方向</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-80b5-987e-d5bd41a49a10"><td id="T[qA" class="">ダガー</td><td id="WGOn" class=""><code>&lt;軌転&gt;</code></td><td id="\&lt;&lt;t" class=""><code>&lt;出血&gt;</code> の強度を増加</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-803f-9d23-c23325341485"><td id="T[qA" class="">ロングソード</td><td id="WGOn" class=""><code>&lt;定常&gt;</code></td><td id="\&lt;&lt;t" class=""><code>&lt;攻勢&gt;</code> またはダメージ追加</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8022-9fe4-ee151b85675c"><td id="T[qA" class="">グレートアクス</td><td id="WGOn" class=""><code>&lt;臨界&gt;</code></td><td id="\&lt;&lt;t" class=""><code>&lt;裂傷&gt;</code> を付与</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-804b-93f9-d7ce506d59ac"><td id="T[qA" class="">ナックル</td><td id="WGOn" class=""><code>&lt;軌転&gt;</code></td><td id="\&lt;&lt;t" class="">スタン値を蓄積</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8072-a976-e5b39983140e"><td id="T[qA" class="">メイス</td><td id="WGOn" class=""><code>&lt;定常&gt;</code></td><td id="\&lt;&lt;t" class=""><code>&lt;装甲&gt;</code> や <code>&lt;障壁&gt;</code> を減少</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8072-824f-ce646f0e35d1"><td id="T[qA" class="">ハンマー</td><td id="WGOn" class=""><code>&lt;励起&gt;</code></td><td id="\&lt;&lt;t" class="">ノックバック</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8046-b077-d0c5386e23d5"><td id="T[qA" class="">レイピア</td><td id="WGOn" class=""><code>&lt;軌転&gt;</code></td><td id="\&lt;&lt;t" class=""><code>&lt;盲目&gt;</code> などの妨害</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-8076-9a3d-e8832deafffd"><td id="T[qA" class="">エストック</td><td id="WGOn" class=""><code>&lt;定常&gt;</code></td><td id="\&lt;&lt;t" class="">防御値・装甲無視</td></tr></div><div style="display:contents" dir="ltr"><tr id="35c6daa5-6d0a-802c-b6e7-da4383d99310"><td id="T[qA" class="">トライデント</td><td id="WGOn" class=""><code>&lt;臨界&gt;</code></td><td id="\&lt;&lt;t" class=""><code>&lt;鈍重&gt;</code> を付与</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-8021-a833-e3774b5046a9" class="">保留事項</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-807d-9beb-f796c82a528f" class="">以下はまだ未確定です。</p></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-807a-8b56-f010b7ee76a8" class="bulleted-list"><li style="list-style-type:disc">武器ごとの具体的な効果文</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8036-97c0-ce4bec51ff1b" class="bulleted-list"><li style="list-style-type:disc">初期武器のタグ構成</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80b4-984d-e891f899998f" class="bulleted-list"><li style="list-style-type:disc">初期武器の作成難易度</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-8016-b38c-cf1ea52d43aa" class="bulleted-list"><li style="list-style-type:disc">初期武器のマナ属性をすべて <code>&lt;無&gt;</code> にするか</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-808f-b3ca-daaf4fc93e22" class="bulleted-list"><li style="list-style-type:disc">斬・打・突ごとの耐性、弱点の出し方</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80c6-ad3a-f567b577efd0" class="bulleted-list"><li style="list-style-type:disc">敵のHP、防御、回避の実データ</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80b5-a31e-ee3223d39dbe" class="bulleted-list"><li style="list-style-type:disc">武器と消耗品のDPS差</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80ed-bbd2-ccb506de837e" class="bulleted-list"><li style="list-style-type:disc">想成使用時の武器・消耗品の扱い</li></ul></div><div style="display:contents" dir="auto"><h1 id="35c6daa5-6d0a-80be-aa4f-e8cb3860ef6f" class="">次に決めること</h1></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-806e-942c-fce9e4e90739" class="">次は、初期武器9種の具体データを作成します。</p></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-8095-99b0-ce494aa7bc85" class="">作成順は以下です。</p></div><div style="display:contents" dir="auto"><ol type="1" id="35c6daa5-6d0a-807e-8ff6-eda148bf7f3e" class="numbered-list" start="1"><li>ダガー</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35c6daa5-6d0a-80c8-afc1-d0d840cc1261" class="numbered-list" start="2"><li>ロングソード</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35c6daa5-6d0a-80ef-967e-ce57911fa012" class="numbered-list" start="3"><li>グレートアクス</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35c6daa5-6d0a-8089-92df-e068198c5b31" class="numbered-list" start="4"><li>ナックル</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35c6daa5-6d0a-8062-b3c1-db00d34bfebc" class="numbered-list" start="5"><li>メイス</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35c6daa5-6d0a-805d-b50f-d2ba4f61903c" class="numbered-list" start="6"><li>ハンマー</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35c6daa5-6d0a-8007-a209-f004b97069f3" class="numbered-list" start="7"><li>レイピア</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35c6daa5-6d0a-804a-ae19-c2bb5811a672" class="numbered-list" start="8"><li>エストック</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="35c6daa5-6d0a-80f9-aaa9-f34831624b2e" class="numbered-list" start="9"><li>トライデント</li></ol></div><div style="display:contents" dir="auto"><p id="35c6daa5-6d0a-80c0-adaf-e1bbfac94c96" class="">各武器には最低限、以下を設定します。</p></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80d4-81d0-c01e0c9ccea7" class="bulleted-list"><li style="list-style-type:disc">名前</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80a2-adee-fa9ed98b43b5" class="bulleted-list"><li style="list-style-type:disc">種別</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-805c-a424-e1a9e6494f8f" class="bulleted-list"><li style="list-style-type:disc">重量</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-803d-b8d8-f92b507f82cc" class="bulleted-list"><li style="list-style-type:disc">等級</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-808c-a1e9-f51f7ee8bcab" class="bulleted-list"><li style="list-style-type:disc">マナ属性</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-800c-87c6-e11969b247e8" class="bulleted-list"><li style="list-style-type:disc">マナコスト</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-80a3-964c-fae5c8b297b9" class="bulleted-list"><li style="list-style-type:disc">効果</li></ul></div><div style="display:contents" dir="auto"><ul id="35c6daa5-6d0a-801c-9ee3-dbc5e97a074c" class="bulleted-list"><li style="list-style-type:disc">タグ</li></ul></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
