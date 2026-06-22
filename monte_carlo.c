@@ -1684,7 +1684,10 @@ static void run_basic4_pool_avg(int trials, WindMode wind_mode, const char *out_
  * ================================================================ */
 int main(int argc, char *argv[])
 {
-    srand((unsigned int)time(NULL));
+    if (argc >= 3)
+        srand((unsigned int)atoi(argv[2]));
+    else
+        srand((unsigned int)time(NULL));
 
     /* 出力先ディレクトリ（末尾にパス区切りを付ける） */
     char out_dir[512] = "";

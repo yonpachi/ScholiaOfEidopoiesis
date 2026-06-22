@@ -1,0 +1,101 @@
+{
+	"[markdown]": {
+		"editor.wordWrap": "on",
+		"editor.quickSuggestions": {
+			"comments": "off",
+			"strings": "off",
+			"other": "off"
+		}
+	},
+	"[go]": {
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit"
+		}
+	},
+	"go.toolsManagement.autoUpdate": true,
+	"python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+	"python.terminal.activateEnvironment": true,
+	"files.exclude": {
+		"**/__pycache__": true,
+		"**/.venv": false
+	},
+	"commands.workspaceCommands": {
+		"シミュレータ": {
+			"nestedItems": {
+				"C: monte_carlo.c をビルド": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "C: monte_carlo.c をビルド"
+				},
+				"C: monte_carlo 全Part実行": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "C: monte_carlo 全Part実行 (data/タイムスタンプ)"
+				},
+				"Go: dice シムをビルド": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Go: dice シムをビルド"
+				},
+				"Go: Part1 単一ダイス参照表": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Go: Part1 単一ダイス参照表"
+				},
+				"Go: Part2 限界貢献度": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Go: Part2 限界貢献度 (data/タイムスタンプ)"
+				},
+				"Go: Part1+2 実行": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Go: Part1+2 実行 (data/タイムスタンプ)"
+				},
+				"Python: 全フロー (Cシム+グラフ)": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Python: 全フロー実行 (Cシム+グラフ生成)"
+				}
+			}
+		},
+		"テスト・検証": {
+			"nestedItems": {
+				"Go: テスト実行": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Go: テスト実行"
+				},
+				"Go: C版CSV比較テスト": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Go: C版CSV比較テスト (要 monte_carlo.exe)"
+				}
+			}
+		},
+		"セットアップ": {
+			"nestedItems": {
+				"Python: venv セットアップ": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Python: venv セットアップ (matplotlib/numpy)"
+				},
+				"GitHub: ラベル・マイルストーン作成": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "GitHub: ラベル・マイルストーン作成"
+				}
+			}
+		},
+		"Git": {
+			"nestedItems": {
+				"main を Pull": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "git: main を Pull"
+				},
+				"現在ブランチを Pull": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "git: 現在ブランチを Pull"
+				},
+				"commit": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "git: commit"
+				},
+				"push": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "git: push"
+				}
+			}
+		}
+	}
+}

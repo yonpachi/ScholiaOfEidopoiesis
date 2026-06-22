@@ -1,6 +1,6 @@
 ---
 description: シミュレータの設計規約（Go移植・CSV出力・並列化）
-globs: sim/**,plot/**,monte_carlo.c,plot_marginal.py
+globs: sim/**,plot/**,monte_carlo.c
 alwaysApply: false
 ---
 

@@ -1,0 +1,221 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "C: monte_carlo.c をビルド",
+			"type": "shell",
+			"command": "gcc -O2 -o monte_carlo.exe monte_carlo.c",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "C: monte_carlo 全Part実行 (data/タイムスタンプ)",
+			"type": "shell",
+			"command": "$ts = Get-Date -Format 'yyyyMMdd_HHmmss'; $dir = Join-Path 'data' $ts; New-Item -ItemType Directory -Force -Path $dir | Out-Null; Write-Host \"出力: $dir\"; .\\monte_carlo.exe $dir 42",
+			"dependsOn": ["C: monte_carlo.c をビルド"],
+			"dependsOrder": "sequence",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			}
+		},
+		{
+			"label": "Go: dice シムをビルド",
+			"type": "shell",
+			"command": "go build -o bin/dice.exe ./cmd/dice",
+			"options": {
+				"cwd": "${workspaceFolder}/sim"
+			},
+			"problemMatcher": ["$go"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Go: Part1 単一ダイス参照表",
+			"type": "shell",
+			"command": ".\\bin\\dice.exe -part 1 -seed 42",
+			"dependsOn": ["Go: dice シムをビルド"],
+			"dependsOrder": "sequence",
+			"options": {
+				"cwd": "${workspaceFolder}/sim"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			}
+		},
+		{
+			"label": "Go: Part2 限界貢献度 (data/タイムスタンプ)",
+			"type": "shell",
+			"command": "$ts = Get-Date -Format 'yyyyMMdd_HHmmss'; $dir = Join-Path (Join-Path '..' 'data') $ts; New-Item -ItemType Directory -Force -Path $dir | Out-Null; Write-Host \"出力: $dir\"; .\\bin\\dice.exe -part 2 -seed 42 -trials 10000 -out $dir",
+			"dependsOn": ["Go: dice シムをビルド"],
+			"dependsOrder": "sequence",
+			"options": {
+				"cwd": "${workspaceFolder}/sim"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			}
+		},
+		{
+			"label": "Go: Part1+2 実行 (data/タイムスタンプ)",
+			"type": "shell",
+			"command": "$ts = Get-Date -Format 'yyyyMMdd_HHmmss'; $dir = Join-Path (Join-Path '..' 'data') $ts; New-Item -ItemType Directory -Force -Path $dir | Out-Null; Write-Host \"出力: $dir\"; .\\bin\\dice.exe -part all -seed 42 -trials 10000 -out $dir",
+			"dependsOn": ["Go: dice シムをビルド"],
+			"dependsOrder": "sequence",
+			"options": {
+				"cwd": "${workspaceFolder}/sim"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			}
+		},
+		{
+			"label": "Go: テスト実行",
+			"type": "shell",
+			"command": "go test ./... -v -count=1",
+			"options": {
+				"cwd": "${workspaceFolder}/sim"
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": ["$go"],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			}
+		},
+		{
+			"label": "Go: C版CSV比較テスト (要 monte_carlo.exe)",
+			"type": "shell",
+			"command": "$env:RUN_C_COMPARE='1'; go test ./pkg/dice/ -v -run TestMarginalCSVAgainstC -count=1 -timeout 30m",
+			"dependsOn": ["C: monte_carlo.c をビルド"],
+			"dependsOrder": "sequence",
+			"options": {
+				"cwd": "${workspaceFolder}/sim"
+			},
+			"problemMatcher": ["$go"],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			}
+		},
+		{
+			"label": "Python: venv セットアップ (matplotlib/numpy)",
+			"type": "shell",
+			"command": "python -m venv .venv; .\\.venv\\Scripts\\pip.exe install matplotlib numpy",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Python: 全フロー実行 (Cシム+グラフ生成)",
+			"type": "shell",
+			"command": ".\\.venv\\Scripts\\python.exe plot/plot_marginal.py",
+			"dependsOn": ["C: monte_carlo.c をビルド"],
+			"dependsOrder": "sequence",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			}
+		},
+		{
+			"label": "GitHub: ラベル・マイルストーン作成",
+			"type": "shell",
+			"command": "powershell -ExecutionPolicy Bypass -File scripts/setup-github-labels.ps1",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "git: main を Pull",
+			"type": "shell",
+			"command": "git checkout main; git pull",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "git: 現在ブランチを Pull",
+			"type": "shell",
+			"command": "git pull",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "git: commit",
+			"type": "shell",
+			"command": "git add .; git commit -m \"${input:commitMessage}\"",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "git: push",
+			"type": "shell",
+			"command": "git push -u origin HEAD",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "commitMessage",
+			"description": "コミットメッセージを入力",
+			"default": ""
+		}
+	]
+}
