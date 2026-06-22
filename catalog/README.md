@@ -41,9 +41,9 @@
 リポジトリルートまたは `sim/` から:
 
 ```bash
-go run ./sim/cmd/validate-catalog
+go run ./sim/validate-catalog
 # または
-go test ./sim/pkg/catalog/...
+go test ./sim/catalog/...
 ```
 
 チェック内容:
@@ -56,7 +56,7 @@ go test ./sim/pkg/catalog/...
 ## sim からの参照
 
 ```go
-import "github.com/yonpachi/ScholiaOfEidopoiesis/sim/pkg/catalog"
+import "github.com/yonpachi/ScholiaOfEidopoiesis/sim/catalog"
 
 cat, err := catalog.Open("") // catalog/game.sqlite を自動解決
 defer cat.Close()

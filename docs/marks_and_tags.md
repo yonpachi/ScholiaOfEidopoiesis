@@ -131,5 +131,5 @@
 印記の一覧と効果本文は **[`catalog/game.sqlite`](../catalog/game.sqlite)** の `marks` テーブル（および一覧用 VIEW `v_marks_list`）を正本とする。
 
 - 編集: Cursor の SQLite Viewer で `catalog/game.sqlite` を開く（手順は [`catalog/README.md`](../catalog/README.md)）
-- 整合チェック: `go run ./sim/cmd/validate-catalog`
+- 整合チェック: `go run ./sim/validate-catalog`
 - 本ファイルには印記の個別本文を重複記載しない（メカニクス・記述方針のみを扱う）

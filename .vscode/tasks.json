@@ -2,28 +2,9 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "C: monte_carlo.c をビルド",
+			"label": "Python: Part1 単一ダイス参照表",
 			"type": "shell",
-			"command": "gcc -O2 -o monte_carlo.exe monte_carlo.c",
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"problemMatcher": ["$gcc"],
-			"group": {
-				"kind": "build",
-				"isDefault": false
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "shared"
-			}
-		},
-		{
-			"label": "C: monte_carlo 全Part実行 (data/タイムスタンプ)",
-			"type": "shell",
-			"command": "$ts = Get-Date -Format 'yyyyMMdd_HHmmss'; $dir = Join-Path 'data' $ts; New-Item -ItemType Directory -Force -Path $dir | Out-Null; Write-Host \"出力: $dir\"; .\\monte_carlo.exe $dir 42",
-			"dependsOn": ["C: monte_carlo.c をビルド"],
-			"dependsOrder": "sequence",
+			"command": ".\\.venv\\Scripts\\python.exe sim/part1/run.py",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
@@ -35,45 +16,11 @@
 			}
 		},
 		{
-			"label": "Go: dice シムをビルド",
+			"label": "Python: Part2 限界貢献度",
 			"type": "shell",
-			"command": "go build -o bin/dice.exe ./cmd/dice",
+			"command": ".\\.venv\\Scripts\\python.exe sim/part2/run.py",
 			"options": {
-				"cwd": "${workspaceFolder}/sim"
-			},
-			"problemMatcher": ["$go"],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "shared"
-			}
-		},
-		{
-			"label": "Go: Part1 単一ダイス参照表",
-			"type": "shell",
-			"command": ".\\bin\\dice.exe -part 1 -seed 42",
-			"dependsOn": ["Go: dice シムをビルド"],
-			"dependsOrder": "sequence",
-			"options": {
-				"cwd": "${workspaceFolder}/sim"
-			},
-			"problemMatcher": [],
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated"
-			}
-		},
-		{
-			"label": "Go: Part2 限界貢献度 (data/タイムスタンプ)",
-			"type": "shell",
-			"command": "$ts = Get-Date -Format 'yyyyMMdd_HHmmss'; $dir = Join-Path (Join-Path '..' 'data') $ts; New-Item -ItemType Directory -Force -Path $dir | Out-Null; Write-Host \"出力: $dir\"; .\\bin\\dice.exe -part 2 -seed 42 -trials 10000 -out $dir",
-			"dependsOn": ["Go: dice シムをビルド"],
-			"dependsOrder": "sequence",
-			"options": {
-				"cwd": "${workspaceFolder}/sim"
+				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
 			"presentation": {
@@ -83,13 +30,53 @@
 			}
 		},
 		{
-			"label": "Go: Part1+2 実行 (data/タイムスタンプ)",
+			"label": "Python: Part3 難易度テーブル",
 			"type": "shell",
-			"command": "$ts = Get-Date -Format 'yyyyMMdd_HHmmss'; $dir = Join-Path (Join-Path '..' 'data') $ts; New-Item -ItemType Directory -Force -Path $dir | Out-Null; Write-Host \"出力: $dir\"; .\\bin\\dice.exe -part all -seed 42 -trials 10000 -out $dir",
-			"dependsOn": ["Go: dice シムをビルド"],
-			"dependsOrder": "sequence",
+			"command": ".\\.venv\\Scripts\\python.exe sim/part3/run.py",
 			"options": {
-				"cwd": "${workspaceFolder}/sim"
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			}
+		},
+		{
+			"label": "Python: Part4 種族効果比較",
+			"type": "shell",
+			"command": ".\\.venv\\Scripts\\python.exe sim/part4/run.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			}
+		},
+		{
+			"label": "Python: Part5 basic4プール",
+			"type": "shell",
+			"command": ".\\.venv\\Scripts\\python.exe sim/part5/run.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"focus": true
+			}
+		},
+		{
+			"label": "Python: 全Part実行",
+			"type": "shell",
+			"command": ".\\.venv\\Scripts\\python.exe sim/run_all.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [],
 			"presentation": {
@@ -101,7 +88,7 @@
 		{
 			"label": "Go: テスト実行",
 			"type": "shell",
-			"command": "go test ./... -v -count=1",
+			"command": "go test ./... ./dice/__tests__/ ./part2/__tests__/ ./part3/__tests__/ ./part4/__tests__/ ./part5/__tests__/ -count=1",
 			"options": {
 				"cwd": "${workspaceFolder}/sim"
 			},
@@ -118,11 +105,14 @@
 		{
 			"label": "Go: C版CSV比較テスト (要 monte_carlo.exe)",
 			"type": "shell",
-			"command": "$env:RUN_C_COMPARE='1'; go test ./pkg/dice/ -v -run TestMarginalCSVAgainstC -count=1 -timeout 30m",
-			"dependsOn": ["C: monte_carlo.c をビルド"],
-			"dependsOrder": "sequence",
+			"command": "$env:RUN_C_COMPARE='1'; go test ./... -v -run TestMarginalCSVAgainstC -count=1 -timeout 30m",
+			"dependsOn": [],
 			"options": {
-				"cwd": "${workspaceFolder}/sim"
+				"cwd": "${workspaceFolder}/sim",
+				"shell": {
+					"executable": "powershell.exe",
+					"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
+				}
 			},
 			"problemMatcher": ["$go"],
 			"presentation": {
@@ -142,22 +132,6 @@
 			"presentation": {
 				"reveal": "always",
 				"panel": "shared"
-			}
-		},
-		{
-			"label": "Python: 全フロー実行 (Cシム+グラフ生成)",
-			"type": "shell",
-			"command": ".\\.venv\\Scripts\\python.exe plot/plot_marginal.py",
-			"dependsOn": ["C: monte_carlo.c をビルド"],
-			"dependsOrder": "sequence",
-			"options": {
-				"cwd": "${workspaceFolder}"
-			},
-			"problemMatcher": [],
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"focus": true
 			}
 		},
 		{

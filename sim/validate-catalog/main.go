@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/yonpachi/ScholiaOfEidopoiesis/sim/pkg/catalog"
+	"github.com/yonpachi/ScholiaOfEidopoiesis/sim/catalog"
 )
 
 func main() {

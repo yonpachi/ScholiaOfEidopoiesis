@@ -1,6 +1,6 @@
 ---
 description: シミュレータの設計規約（Go移植・CSV出力・並列化）
-globs: sim/**,plot/**,monte_carlo.c
+globs: sim/**,monte_carlo.c
 alwaysApply: false
 ---
 
@@ -8,75 +8,51 @@ alwaysApply: false
 
 > 参照実装: [monte_carlo.c](monte_carlo.c)（C版・移植完了まで正本）
 
-## アーキテクチャ
+## アーキテクチャ（コロケーション）
 
 ```
-sim/pkg/dice/     ダイスロール・反応・達成値の共通ロジック
-sim/pkg/catalog/  ゲームカタログ（catalog/game.sqlite）の読み取り
-sim/pkg/race/     種族能力（Part4以降）
-sim/cmd/dice/     CLI（限界貢献度・難易度テーブル等）
-sim/cmd/validate-catalog/  カタログ整合チェック
-plot/             Python 可視化（CSV → PNG）
-data/             実行出力（タイムスタンプ付き）
-catalog/          ゲームデータ正本（SQLite）
+sim/dice/              共有エンジン（反応・達成値・種族スコア）
+sim/catalog/           ゲームカタログ（catalog/game.sqlite）
+sim/validate-catalog/  カタログ整合チェック CLI
+sim/partN/
+  main.go              CLI エントリ（package main）
+  partN.go             Part ロジック（package main）
+  run.py               Go ビルド + シム + グラフ
+  __tests__/           Go テスト
+sim/_common.py         Python 共通（ビルド・進捗・出力先）
+sim/run_all.py         全 Part オーケストレーション
+data/                  実行出力（タイムスタンプ付き）
 ```
-
-C版の処理フロー: `simulate_pool` → 各 Part が列挙/モンテカルロで呼び出し → CSV 出力
 
 ## Part 構成（monte_carlo.c）
 
-| Part | 関数 | 内容 | 出力 |
-|------|------|------|------|
-| 1 | main内 | 単一ダイス×5 参照表（コンソールのみ） | — |
-| 2 | `run_full_enumeration` | 全プール列挙・限界貢献度 | `marginal_by_n.csv` |
-| 3 | `run_difficulty_table` | 1d10+属性1個の成功率 | `difficulty_table.csv` |
-| 4 | `run_race_ability_comparison` | 六種族効果比較 | `race_ability_by_n.csv` 等 |
-| 5 | `run_basic4_pool_avg` | 1d10+N×ランダム基本4 | `basic4_pool_avg.csv` |
+| Part | 内容 | 出力 |
+|------|------|------|
+| 1 | 単一ダイス×5 参照表 | `part1_reference.csv` |
+| 2 | 全プール列挙・限界貢献度 | `marginal_by_n.csv` |
+| 3 | 1d10+属性1個の成功率 | `difficulty_table.csv` |
+| 4 | 六種族効果比較 | `race_ability_by_n.csv` 等 |
+| 5 | 1d10+N×ランダム基本4 | `basic4_pool_avg.csv` |
 
 ## コアパラメータ
 
 - `MAX_N = 10`（プール上限）
-- `MAX_DICE = 256`（d4連鎖用バッファ）
-- `WIND_HALFTURN` が現行デフォルト
-- Part2 trials: 10000/composition（main内）
-- 列挙: d4,d6,d8,d10,d20 の counts[5] + d12(0|1)
-
-## 限界貢献度アルゴリズム
-
-1. **パス1**: 全有効構成の `avg(S)` をキャッシュ（11^5×2 エントリ）
-2. **パス2**: 各 S について各ダイス種を1個追加し `avg(S∪{d})-avg(S)` を `n_others` 別に集計
-3. CSV: 行=`n_others`(0..MAX_N-1)、列=d4,d6,d8,d10,d20,d12
-
-## CSV 命名規則
-
-`{subject}_{metric}_by_{variable}.csv`
-
-例: `race_ability_by_n.csv`, `race_use_rate_by_n.csv`, `homunculus_option_by_n.csv`
+- Part2 trials: 5000/composition（デフォルト）
+- Part3 trials: 100000/target×combo（デフォルト）
+- Part4 trials: 10000/pool（デフォルト）
+- Part5 trials: 50000/n_extra（デフォルト）
 
 ## 実行・出力規約
 
-- CLI 引数: `[出力ディレクトリ]`（末尾スラッシュ付与）
-- 各実行フォルダに `rules.txt`（Python が生成、パラメータスナップショット）
-- 進捗: `PROGRESS1:` / `PROGRESS2:` プレフィックスで stdout 出力（plot スクリプトが監視）
-- 再現性: **固定シード**を推奨（Go: `-seed` フラグ、デフォルト 42）
+- **エントリポイントは Python のみ**（`sim/partN/run.py` / `sim/run_all.py`）
+- 出力先: `data/<YYYYMMDD_HHMMSS>/`
+- CSV: `data/<ts>/csv/`、PNG: `data/<ts>/` 直下
+- 進捗: `PROGRESS1`〜`PROGRESS5`（Python が表示）
+- グラフ日本語: `sim/_common.py` が `Noto Sans JP` 等の CJK フォントを自動選択（`sim/fonts/` に同梱可）
 
-## Go 移植規約
+## Go 規約
 
-- `sim/go.mod` モジュール: `github.com/yonpachi/ScholiaOfEidopoiesis/sim`
-- 並列化: パス1の構成計算を goroutine + worker pool で分散
-- 乱数: `math/rand/v2` または `rand.NewSource(seed)` で再現可能に
-- C版との検証: 同一シード・同一 trials で `marginal_by_n.csv` を比較（許容誤差 1e-3）
-
-## Python 可視化
-
-- `plot/plot_marginal.py` がオーケストレーション
-- ダークテーマ matplotlib PNG を同一フォルダに出力
-- `RULES` 文字列は `monte_carlo.c` / `docs/` と同期を維持（手動更新）
-
-## 新シム追加時
-
-1. 分析計画を Issue またはチャットで整理する（必要なら `drafts/` を再作成）
-2. `sim/cmd/<name>/` に CLI を追加
-3. 出力 CSV 命名規則に従う
-4. `plot/` にグラフ生成を追加（必要なら）
-5. GitHub Issue ラベル `simulator` / `balance` を付与
+- モジュール: `github.com/yonpachi/ScholiaOfEidopoiesis/sim`
+- 各 Part は `package main`（`main.go` + `partN.go` を同居）
+- 共有ロジックは `sim/dice/` のみ
+- ビルド: `go build -o bin/partN.exe ./partN`

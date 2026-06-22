@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/yonpachi/ScholiaOfEidopoiesis/sim/pkg/catalog"
+	"github.com/yonpachi/ScholiaOfEidopoiesis/sim/catalog"
 )
 
 func repoCatalogPath(t *testing.T) string {

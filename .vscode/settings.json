@@ -23,33 +23,29 @@
 	"commands.workspaceCommands": {
 		"シミュレータ": {
 			"nestedItems": {
-				"C: monte_carlo.c をビルド": {
+				"Part1: 単一ダイス参照表": {
 					"command": "workbench.action.tasks.runTask",
-					"args": "C: monte_carlo.c をビルド"
+					"args": "Python: Part1 単一ダイス参照表"
 				},
-				"C: monte_carlo 全Part実行": {
+				"Part2: 限界貢献度": {
 					"command": "workbench.action.tasks.runTask",
-					"args": "C: monte_carlo 全Part実行 (data/タイムスタンプ)"
+					"args": "Python: Part2 限界貢献度"
 				},
-				"Go: dice シムをビルド": {
+				"Part3: 難易度テーブル": {
 					"command": "workbench.action.tasks.runTask",
-					"args": "Go: dice シムをビルド"
+					"args": "Python: Part3 難易度テーブル"
 				},
-				"Go: Part1 単一ダイス参照表": {
+				"Part4: 種族効果比較": {
 					"command": "workbench.action.tasks.runTask",
-					"args": "Go: Part1 単一ダイス参照表"
+					"args": "Python: Part4 種族効果比較"
 				},
-				"Go: Part2 限界貢献度": {
+				"Part5: basic4プール": {
 					"command": "workbench.action.tasks.runTask",
-					"args": "Go: Part2 限界貢献度 (data/タイムスタンプ)"
+					"args": "Python: Part5 basic4プール"
 				},
-				"Go: Part1+2 実行": {
+				"全Part実行": {
 					"command": "workbench.action.tasks.runTask",
-					"args": "Go: Part1+2 実行 (data/タイムスタンプ)"
-				},
-				"Python: 全フロー (Cシム+グラフ)": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Python: 全フロー実行 (Cシム+グラフ生成)"
+					"args": "Python: 全Part実行"
 				}
 			}
 		},
