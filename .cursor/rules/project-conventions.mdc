@@ -15,7 +15,8 @@ alwaysApply: true
 
 | 場所 | 役割 |
 |------|------|
-| `docs/` | 開発時の正本（GM・制作者向け） |
+| `docs/` | 開発時のルール正本（GM・制作者向け） |
+| `catalog/` | 開発時のゲームデータ正本（SQLite） |
 | `html/` / Notion | PL提示用（Notionで確定した内容を `docs/` に反映） |
 
 検討中・WIP の草案は、必要になったとき `drafts/` を再作成して置く（現時点では未使用）。
@@ -28,7 +29,8 @@ alwaysApply: true
 
 ```
 docs/       ルール正本
-sim/        Go シミュレータ（今後の主戦場）
+catalog/    ゲームデータ正本（SQLite）
+sim/        Go シミュレータ（catalog 参照可）
 plot/       Python 可視化
 data/       シム出力（タイムスタンプ付きサブフォルダ）
 marginal/   旧シム出力（参照用・gitignore）

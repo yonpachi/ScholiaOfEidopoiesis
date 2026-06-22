@@ -12,10 +12,13 @@ alwaysApply: false
 
 ```
 sim/pkg/dice/     ダイスロール・反応・達成値の共通ロジック
+sim/pkg/catalog/  ゲームカタログ（catalog/game.sqlite）の読み取り
 sim/pkg/race/     種族能力（Part4以降）
 sim/cmd/dice/     CLI（限界貢献度・難易度テーブル等）
+sim/cmd/validate-catalog/  カタログ整合チェック
 plot/             Python 可視化（CSV → PNG）
 data/             実行出力（タイムスタンプ付き）
+catalog/          ゲームデータ正本（SQLite）
 ```
 
 C版の処理フロー: `simulate_pool` → 各 Part が列挙/モンテカルロで呼び出し → CSV 出力
