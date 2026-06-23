@@ -8,6 +8,19 @@ validation:
 theme:
   name: material
   language: ja
+  palette:
+    - scheme: default
+      primary: indigo # ヘッダー色
+      accent: amber # リンク・ボタンのアクセント
+      toggle:
+        icon: material/brightness-7
+        name: ダークモード
+    - scheme: slate
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: ライトモード
   features:
     - navigation.tabs
     - navigation.sections
