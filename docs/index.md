@@ -3,21 +3,21 @@
 最終更新: 2026-06-22  
 位置づけ: この文書群は、現在の決定事項をカテゴリごとに分割して管理するための**継続更新前提の正本群**である。
 
-## `docs` / `catalog` / Notion / `html` の位置づけ
+## `docs` / `catalog` / GitHub Pages / `html` の位置づけ
 
 | 場所 | 正本の性格 | 対象読者 | 作成・更新場所 |
 | --- | --- | --- | --- |
-| `docs/`（この文書群） | **ルールの開発正本** | GM・制作者 | 直接編集（Markdown） |
-| `catalog/` | **ゲームデータの開発正本** | GM・制作者・シム | SQLite（[`catalog/README.md`](../catalog/README.md)） |
-| Notion（Web公開） | **PL提示用の正本** | プレイヤー（PL） | Notionで作成・更新（手動ミラー） |
-| `html/` | PL提示用のエクスポート置き場 | 参照用スナップショット | Notionからエクスポート |
+| `docs/`（この文書群） | **ルールの正本** | GM・制作者・PL | 直接編集（Markdown） |
+| `catalog/` | **ゲームデータの正本** | GM・制作者・シム | SQLite（[`catalog/README.md`](../catalog/README.md)） |
+| GitHub Pages（MkDocs） | **PL提示用の公開サイト** | プレイヤー（PL） | `main` push で自動デプロイ |
+| `html/` | Notion エクスポートの参照用 | 移行・差分確認 | Notion からエクスポート（手動） |
 
 - `docs/` はルール検討・改訂・シミュレータ整合の基盤となる文書群である
 - `catalog/` は印記・タグ・アイテム・武器・防具・用語・スコーリオンなどの一覧データを SQLite で管理する（`sim/catalog` から参照可能）
-- PLが実際に参照するルールは Notion 上で公開している（[想成のスコーリア ルール一覧](https://ring-biology-eee.notion.site/e816daa56d0a8380801f81bc72f76ed3?v=08b6daa56d0a83be8a3e08af0367880e)）
-- `html/` は Notion ページの HTML エクスポートであり、リポジトリ内での参照・差分確認用とする（カタログ初回移行の入力源にも使える）
-- ルールが Notion 側で確定したら、**`docs/` に反映して開発正本を最新に保つ**（2026-06 時点で戦闘・錬金・一日の流れ・種族・印記などを同期済み）
-- ゲームデータは **`catalog/` を編集の正本**とし、PL 向けには Notion を手動でミラーする
+- PL が参照するルールブックは **MkDocs で `docs/` をそのまま公開**する（[GitHub Pages](https://yonpachi.github.io/ScholiaOfEidopoiesis/)）
+- カタログデータは `python scripts/export_catalog_md.py` で `docs/catalog/*.md` に変換され、サイトビルド時に組み込まれる
+- `html/` は Notion ページの HTML エクスポートであり、カタログ初回移行の入力源として参照できる
+- ルール・データの編集は **`docs/` と `catalog/` が正本**。Notion への手動ミラーは不要
 
 
 ## この文書群の運用方針

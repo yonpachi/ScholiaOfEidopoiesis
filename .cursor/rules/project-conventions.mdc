@@ -15,9 +15,10 @@ alwaysApply: true
 
 | 場所 | 役割 |
 |------|------|
-| `docs/` | 開発時のルール正本（GM・制作者向け） |
-| `catalog/` | 開発時のゲームデータ正本（SQLite） |
-| `html/` / Notion | PL提示用（Notionで確定した内容を `docs/` に反映） |
+| `docs/` | ルール正本（GM・制作者向け。MkDocs で PL 向けサイトにも公開） |
+| `catalog/` | ゲームデータ正本（SQLite） |
+| GitHub Pages（MkDocs） | PL提示用公開サイト（`main` push で自動デプロイ） |
+| `html/` | Notion エクスポートの参照用スナップショット（移行入力源） |
 
 検討中・WIP の草案は、必要になったとき `drafts/` を再作成して置く（現時点では未使用）。
 
