@@ -29,6 +29,9 @@ theme:
     - search.highlight
     - content.code.copy
 
+logo: assets/logo.png
+icon: assets/icon.png
+
 markdown_extensions:
   - admonition
   - pymdownx.details
