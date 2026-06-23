@@ -22,15 +22,16 @@ theme:
         icon: material/brightness-4
         name: ライトモード
   features:
-    - navigation.tabs
     - navigation.sections
     - navigation.top
     - search.suggest
     - search.highlight
     - content.code.copy
-
-logo: assets/logo.png
-icon: assets/icon.png
+  font:
+    text: Noto Sans JP
+    code: Inconsolata
+  logo: assets/logo.png
+  favicon: assets/icon.png
 
 markdown_extensions:
   - admonition
