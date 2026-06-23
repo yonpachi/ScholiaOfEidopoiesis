@@ -30,10 +30,3 @@ markdown_extensions:
 
 nav:
   - ホーム: index.md
-  - カタログ:
-      - 印記一覧: catalog/marks.md
-      - タグ一覧: catalog/tags.md
-      - アイテム: catalog/items.md
-      - 武器・防具: catalog/weapons_armor.md
-      - スコーリオン: catalog/scorions.md
-      - 用語集: catalog/terms.md
