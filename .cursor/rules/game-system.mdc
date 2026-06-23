@@ -1,15 +1,15 @@
 ---
 description: 錬金術TRPGの核心ルール要約（ダイス・限界貢献度・種族能力）
-globs: docs/**,sim/**
+globs: docs/**,legacy/**,sim/**
 alwaysApply: false
 ---
 
 # 錬金術TRPG ゲームシステム要約
 
 > 詳細は正本を参照すること。この要約は AI の判断補助用。
-> - ダイス・判定: `docs/dice_and_checks.md`
-> - 種族: `docs/races.md`
-> - 戦闘: `docs/combat.md`
+> - ダイス・判定: `legacy/dice_and_checks.md`（移行中。正本は `docs/`）
+> - 種族: `legacy/races.md`
+> - 戦闘: `legacy/combat.md`
 
 ## ゲーム概要
 
@@ -57,7 +57,7 @@ marginal(d) = avg(プール ∪ {d}) - avg(プール)
 - d10 >= 1（固定前提）
 - d4/d6/d8/d10/d20 各0〜MAX_N個、合計 <= MAX_N（現在 MAX_N=10）
 - d12 は 0 or 1（別枠）
-- 普段使いはダイス総数5個前後、本気は8個以上（`docs/races.md`）
+- 普段使いはダイス総数5個前後、本気は8個以上（`legacy/races.md`）
 
 ## 六種族・判定時能力（確定）
 
@@ -70,9 +70,9 @@ marginal(d) = avg(プール ∪ {d}) - avg(プール)
 | 付喪 | 手馴 | 振り直し（下振れなし）、反応済み化、最終+1 |
 | 半霊 | 越境 | 反応済みトリガー済み1個を未反応に戻し反応ループ再開 |
 
-戦闘時追加効果は確定（`docs/races.md` §2 各種族の戦闘時能力を参照）。
+戦闘時追加効果は確定（`legacy/races.md` §2 各種族の戦闘時能力を参照）。
 
-## 戦闘の要点（`docs/combat.md`）
+## 戦闘の要点（`legacy/combat.md`）
 
 - カード数字が行動段階（軽/中/重/特）を直接決定する
 - 待機値 = 基本待機値 + 重量補正
@@ -84,4 +84,4 @@ marginal(d) = avg(プール ∪ {d}) - avg(プール)
 
 - **数値的強弱**: シミュレータ（限界貢献度・種族比較）で決定
 - **手触り**: テストプレイで調整
-- ルール変更時は `docs/` 正本 → シム → `sim/partN/run.py` グラフの順で整合確認
+- ルール変更時は `docs/` 正本 → `legacy/` 参照整合 → シム → `sim/partN/run.py` グラフの順で確認

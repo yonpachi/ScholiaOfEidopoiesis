@@ -18,7 +18,7 @@ func (v ValidationIssue) Error() string {
 	return fmt.Sprintf("[%s] %s", v.Rule, v.Message)
 }
 
-// Validate checks catalog invariants documented in docs/marks_and_tags.md.
+// Validate checks catalog invariants documented in legacy/marks_and_tags.md.
 func (c *Catalog) Validate() []ValidationIssue {
 	var issues []ValidationIssue
 	issues = append(issues, c.validateUniqueNames()...)

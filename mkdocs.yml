@@ -1,4 +1,4 @@
-site_name: 想成のスコーリア ルールブック
+site_name: 想成のスコーリア
 site_url: https://yonpachi.github.io/ScholiaOfEidopoiesis/
 repo_url: https://github.com/yonpachi/ScholiaOfEidopoiesis
 repo_name: yonpachi/ScholiaOfEidopoiesis
@@ -30,21 +30,6 @@ markdown_extensions:
 
 nav:
   - ホーム: index.md
-  - コアルール: core.md
-  - 世界観・用語: world_and_terms.md
-  - 一日の流れ: day_cycle.md
-  - 町・成長: town_and_progression.md
-  - マップ・地景: map_and_landscapes.md
-  - 探索: exploration.md
-  - 戦闘: combat.md
-  - タグ・印記: marks_and_tags.md
-  - 錬金・アイテム: alchemy_and_items.md
-  - 判定（ダイス）: dice_and_checks.md
-  - 種族: races.md
-  - キャラクター作成: character_creation.md
-  - 経済・倉庫: economy_and_storage.md
-  - 運営・キャラ運用: operations_and_characters.md
-  - 更新手順: update_guide.md
   - カタログ:
       - 印記一覧: catalog/marks.md
       - タグ一覧: catalog/tags.md

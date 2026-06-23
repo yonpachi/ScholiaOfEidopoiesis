@@ -8,28 +8,30 @@ alwaysApply: true
 ## 言語の使い分け
 
 - **コード**（`sim/`, `monte_carlo.c`）: 識別子・コメントは英語
-- **ルール文書**（`docs/`, `html/`）: 日本語
+- **ルール文書**（`docs/`, `legacy/`, `html/`）: 日本語
 - **コミットメッセージ**: 日本語可（例: `feat: 限界貢献度シムをGoに移植`）
 
 ## ドキュメントの正本
 
 | 場所 | 役割 |
 |------|------|
-| `docs/` | ルール正本（GM・制作者向け。MkDocs で PL 向けサイトにも公開） |
+| `docs/` | PL 向けルール正本（MkDocs / GitHub Pages で公開） |
+| `legacy/` | 開発用旧文書（非公開・移行参照用） |
 | `catalog/` | ゲームデータ正本（SQLite） |
-| GitHub Pages（MkDocs） | PL提示用公開サイト（`main` push で自動デプロイ） |
+| GitHub Pages（MkDocs） | PL 提示用公開サイト（`main` push で自動デプロイ） |
 | `html/` | Notion エクスポートの参照用スナップショット（移行入力源） |
 
 検討中・WIP の草案は、必要になったとき `drafts/` を再作成して置く（現時点では未使用）。
 
 - 同一ルールを複数ファイルに書かない。担当ファイルだけに本文を書き、他は参照のみ
-- 更新手順は `docs/update_guide.md` に従う
-- 文書索引は `docs/index.md`
+- PL 向けルールは `docs/` に整備し、`legacy/` は公開・編集の正本にしない
+- 文書索引は `docs/index.md`（公開）、旧文書索引は `legacy/index.md`
 
 ## ディレクトリ構成
 
 ```
-docs/       ルール正本
+docs/       PL 向けルール正本（公開）
+legacy/     開発用旧文書（非公開）
 catalog/    ゲームデータ正本（SQLite）
 sim/        シミュレータ + 可視化（Part ごとにコロケーション）
   dice/     共有ダイスエンジン
