@@ -28,3 +28,6 @@ markdown_extensions:
 
 nav:
   - ホーム: index.md
+
+extra:
+  generator: false
