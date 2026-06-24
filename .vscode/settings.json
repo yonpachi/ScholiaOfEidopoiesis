@@ -1,97 +1,101 @@
 {
-	"[markdown]": {
-		"editor.wordWrap": "on",
-		"editor.quickSuggestions": {
-			"comments": "off",
-			"strings": "off",
-			"other": "off"
-		}
-	},
-	"[go]": {
-		"editor.formatOnSave": true,
-		"editor.codeActionsOnSave": {
-			"source.organizeImports": "explicit"
-		}
-	},
-	"go.toolsManagement.autoUpdate": true,
-	"python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
-	"python.terminal.activateEnvironment": true,
-	"files.exclude": {
-		"**/__pycache__": true,
-		"**/.venv": false
-	},
-	"commands.workspaceCommands": {
-		"シミュレータ": {
-			"nestedItems": {
-				"Part1: 単一ダイス参照表": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Python: Part1 単一ダイス参照表"
-				},
-				"Part2: 限界貢献度": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Python: Part2 限界貢献度"
-				},
-				"Part3: 難易度テーブル": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Python: Part3 難易度テーブル"
-				},
-				"Part4: 種族効果比較": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Python: Part4 種族効果比較"
-				},
-				"Part5: basic4プール": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Python: Part5 basic4プール"
-				},
-				"全Part実行": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Python: 全Part実行"
-				}
-			}
-		},
-		"テスト・検証": {
-			"nestedItems": {
-				"Go: テスト実行": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Go: テスト実行"
-				},
-				"Go: C版CSV比較テスト": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Go: C版CSV比較テスト (要 monte_carlo.exe)"
-				}
-			}
-		},
-		"セットアップ": {
-			"nestedItems": {
-				"Python: venv セットアップ": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "Python: venv セットアップ (matplotlib/numpy)"
-				},
-				"GitHub: ラベル・マイルストーン作成": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "GitHub: ラベル・マイルストーン作成"
-				}
-			}
-		},
-		"Git": {
-			"nestedItems": {
-				"main を Pull": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "git: main を Pull"
-				},
-				"現在ブランチを Pull": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "git: 現在ブランチを Pull"
-				},
-				"commit": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "git: commit"
-				},
-				"push": {
-					"command": "workbench.action.tasks.runTask",
-					"args": "git: push"
-				}
-			}
-		}
-	}
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+  "[go]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+  "python.terminal.activateEnvironment": true,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.venv": false
+  },
+  "commands.workspaceCommands": {
+    "シミュレータ": {
+      "nestedItems": {
+        "Part1: 単一ダイス参照表": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: Part1 単一ダイス参照表"
+        },
+        "Part2: 限界貢献度": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: Part2 限界貢献度"
+        },
+        "Part3: 難易度テーブル": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: Part3 難易度テーブル"
+        },
+        "Part4: 種族効果比較": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: Part4 種族効果比較"
+        },
+        "Part5: basic4プール": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: Part5 basic4プール"
+        },
+        "全Part実行": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: 全Part実行"
+        }
+      }
+    },
+    "テスト・検証": {
+      "nestedItems": {
+        "Python: プレビュー": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: プレビュー"
+        },
+        "Go: テスト実行": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Go: テスト実行"
+        },
+        "Go: C版CSV比較テスト": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Go: C版CSV比較テスト (要 monte_carlo.exe)"
+        }
+      }
+    },
+    "セットアップ": {
+      "nestedItems": {
+        "Python: venv セットアップ": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: venv セットアップ (matplotlib/numpy)"
+        },
+        "GitHub: ラベル・マイルストーン作成": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "GitHub: ラベル・マイルストーン作成"
+        }
+      }
+    },
+    "Git": {
+      "nestedItems": {
+        "main を Pull": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "git: main を Pull"
+        },
+        "現在ブランチを Pull": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "git: 現在ブランチを Pull"
+        },
+        "commit": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "git: commit"
+        },
+        "push": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "git: push"
+        }
+      }
+    }
+  }
 }

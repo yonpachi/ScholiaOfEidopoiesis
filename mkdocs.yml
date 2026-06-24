@@ -39,12 +39,23 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.highlight:
+      pygments_style: monokai
   - tables
   - toc:
       permalink: true
+  - def_list
 
 nav:
   - ホーム: index.md
+  - はじめに: about.md
+  - ルール:
+      - セッションの流れ: session.md
+      - 判定: checks.md
+      - 種族: ancestry.md
 
 extra:
   generator: false
+
+extra_css:
+  - stylesheets/extra.css
