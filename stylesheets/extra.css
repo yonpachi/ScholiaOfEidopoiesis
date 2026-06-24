@@ -1,0 +1,7 @@
+.md-sidebar--primary .md-nav__title {
+  display: none;
+}
+
+.md-main__inner {
+  margin-top: 0.3333333rem; /* デフォルト 1.5rem → 好みで調整 */
+}
