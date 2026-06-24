@@ -10,6 +10,12 @@
   max-width: 1600px;
 }
 
+/* Material 既定の左揃え（table:not([class]) td:not([align])）を上書き */
+.md-typeset table:not([class]) th:not([align]),
+.md-typeset table:not([class]) td:not([align]) {
+  text-align: center;
+}
+
 .balance-side-by-side {
   display: flex;
   flex-direction: row;

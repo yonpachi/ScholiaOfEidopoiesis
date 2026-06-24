@@ -1,4 +1,5 @@
 site_name: 想成のスコーリア
+
 site_url: https://yonpachi.github.io/ScholiaOfEidopoiesis/
 
 validation:
@@ -27,6 +28,7 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
+
   font:
     text: Noto Sans JP
     code: Inconsolata
@@ -50,10 +52,19 @@ nav:
   - ホーム: index.md
   - はじめに: about.md
   - ルール:
+      - キャラクター作成(工事中): character.md
       - セッションの流れ: session.md
       - 判定: checks.md
       - 種族: ancestry.md
-      - 探索: exploration.md
+      - 探索(工事中): exploration.md
+      - 戦闘(工事中): combat.md
+      - 印記とタグ(工事中): marksTags.md
+      - 錬金とアイテム(工事中): alchemy.md
+      - 町と工房(工事中): town.md
+      - 倉庫と経済(工事中): economy.md
+      - 世界と用語(工事中): world.md
+      - マップと地景(工事中): map.md
+      - 運営(工事中): operations.md
   - 作成中メモ:
       - バランス調整: balance.md
 
@@ -64,5 +75,5 @@ extra_css:
   - stylesheets/extra.css
 
 plugins:
-  - search # plugins を書くと search が消えるので明示が必要
+  - search
   - glightbox
