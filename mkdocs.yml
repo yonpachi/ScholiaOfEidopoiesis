@@ -53,9 +53,16 @@ nav:
       - セッションの流れ: session.md
       - 判定: checks.md
       - 種族: ancestry.md
+      - 探索: exploration.md
+  - 作成中メモ:
+      - バランス調整: balance.md
 
 extra:
   generator: false
 
 extra_css:
   - stylesheets/extra.css
+
+plugins:
+  - search # plugins を書くと search が消えるので明示が必要
+  - glightbox

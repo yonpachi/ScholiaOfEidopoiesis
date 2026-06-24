@@ -5,3 +5,47 @@
 .md-main__inner {
   margin-top: 0.3333333rem; /* デフォルト 1.5rem → 好みで調整 */
 }
+
+.md-grid {
+  max-width: 1600px;
+}
+
+.balance-side-by-side {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.balance-side-by-side__table {
+  flex: 0 0 auto;
+}
+
+.balance-side-by-side__chart {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Material の table { width: 100% } を上書き */
+.md-typeset .balance-side-by-side table {
+  display: table;
+  width: auto;
+  margin: 0;
+}
+
+.md-typeset .balance-side-by-side__chart img {
+  display: block;
+  width: 100%;
+  max-width: 36rem;
+  height: auto;
+  margin: 0;
+}
+
+@media (max-width: 960px) {
+  .balance-side-by-side {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
