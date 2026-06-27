@@ -72,6 +72,20 @@
       }
     },
     {
+      "label": "Python: Part6 品質成長",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe sim/part6/run.py",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
       "label": "Python: 全Part実行",
       "type": "shell",
       "command": ".\\.venv\\Scripts\\python.exe sim/run_all.py",
@@ -93,7 +107,7 @@
     {
       "label": "Go: テスト実行",
       "type": "shell",
-      "command": "go test ./... ./dice/__tests__/ ./part2/__tests__/ ./part3/__tests__/ ./part4/__tests__/ ./part5/__tests__/ -count=1",
+      "command": "go test ./... ./dice/__tests__/ ./part2/__tests__/ ./part3/__tests__/ ./part4/__tests__/ ./part5/__tests__/ ./part6/__tests__/ -count=1",
       "options": {
         "cwd": "${workspaceFolder}/sim"
       },
@@ -129,7 +143,7 @@
     {
       "label": "Python: venv セットアップ (matplotlib/numpy)",
       "type": "shell",
-      "command": "python -m venv .venv; .\\.venv\\Scripts\\pip.exe install matplotlib numpy",
+      "command": "python -m venv .venv; .\\.venv\\Scripts\\pip.exe install -r requirements.txt matplotlib numpy",
       "options": {
         "cwd": "${workspaceFolder}"
       },

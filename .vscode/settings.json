@@ -1,6 +1,7 @@
 {
   "[markdown]": {
     "editor.wordWrap": "on",
+    "editor.formatOnSave": false,
     "editor.quickSuggestions": {
       "comments": "off",
       "strings": "off",
@@ -42,6 +43,10 @@
         "Part5: basic4プール": {
           "command": "workbench.action.tasks.runTask",
           "args": "Python: Part5 basic4プール"
+        },
+        "Part6: 品質成長": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: Part6 品質成長"
         },
         "全Part実行": {
           "command": "workbench.action.tasks.runTask",

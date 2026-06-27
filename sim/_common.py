@@ -68,7 +68,7 @@ def resolve_out_dir(out_dir: Path | None, *, create: bool) -> Path:
     return latest
 
 
-def build_go(parts: tuple[str, ...] = ("part1", "part2", "part3", "part4", "part5")) -> None:
+def build_go(parts: tuple[str, ...] = ("part1", "part2", "part3", "part4", "part5", "part6")) -> None:
     for part in parts:
         cmd = ["go", "build", "-o", f"bin/{part}.exe", f"./{part}"]
         print(f"[build] {' '.join(cmd)}")
@@ -97,7 +97,7 @@ def run_go(exe: str, args: list[str], *, stream_progress: bool = False) -> None:
     prev_progress = False
     for raw in proc.stdout:
         line = raw.rstrip("\n").rstrip("\r")
-        if stream_progress and line.startswith(("PROGRESS1:", "PROGRESS2:", "PROGRESS3:", "PROGRESS4:", "PROGRESS5:")):
+        if stream_progress and line.startswith(("PROGRESS1:", "PROGRESS2:", "PROGRESS3:", "PROGRESS4:", "PROGRESS5:", "PROGRESS6:")):
             if line.startswith("PROGRESS1:"):
                 tag = "[パス1]"
             elif line.startswith("PROGRESS2:"):
@@ -106,8 +106,10 @@ def run_go(exe: str, args: list[str], *, stream_progress: bool = False) -> None:
                 tag = "[Part3]"
             elif line.startswith("PROGRESS4:"):
                 tag = "[Part4]"
-            else:
+            elif line.startswith("PROGRESS5:"):
                 tag = "[Part5]"
+            else:
+                tag = "[Part6]"
             body = line.split(":", 1)[1].strip()
             print(f"\r    {tag} {body}    ", end="", flush=True)
             prev_progress = True

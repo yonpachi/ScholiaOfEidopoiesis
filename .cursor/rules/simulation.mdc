@@ -34,6 +34,7 @@ data/                  実行出力（タイムスタンプ付き）
 | 3 | 1d10+属性1個の成功率 | `difficulty_table.csv` |
 | 4 | 六種族効果比較 | `race_ability_by_n.csv` 等 |
 | 5 | 1d10+N×ランダム基本4 | `basic4_pool_avg.csv` |
+| 6 | 10回連続錬金の品質成長 | `quality_progression.csv` |
 
 ## コアパラメータ
 
@@ -42,13 +43,14 @@ data/                  実行出力（タイムスタンプ付き）
 - Part3 trials: 100000/target×combo（デフォルト）
 - Part4 trials: 10000/pool（デフォルト）
 - Part5 trials: 50000/n_extra（デフォルト）
+- Part6 trials: 50000/n_extra（デフォルト）
 
 ## 実行・出力規約
 
 - **エントリポイントは Python のみ**（`sim/partN/run.py` / `sim/run_all.py`）
 - 出力先: `data/<YYYYMMDD_HHMMSS>/`
 - CSV: `data/<ts>/csv/`、PNG: `data/<ts>/` 直下
-- 進捗: `PROGRESS1`〜`PROGRESS5`（Python が表示）
+- 進捗: `PROGRESS1`〜`PROGRESS6`（Python が表示）
 - グラフ日本語: [`sim/plotting.py`](sim/plotting.py) が CJK フォントを自動選択（`sim/fonts/` に同梱可）
 
 ## Go 規約

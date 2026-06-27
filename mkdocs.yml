@@ -36,6 +36,9 @@ theme:
   favicon: assets/icon.png
 
 markdown_extensions:
+  - mdx_truly_sane_lists:
+      nested_indent: 2
+      truly_sane: true
   - admonition
   - pymdownx.details
   - pymdownx.superfences
@@ -43,10 +46,13 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.highlight:
       pygments_style: monokai
+  - pymdownx.arithmatex:
+      generic: true
   - tables
   - toc:
       permalink: true
   - def_list
+  - attr_list
 
 nav:
   - ホーム: index.md
@@ -65,14 +71,16 @@ nav:
       - 世界と用語(工事中): world.md
       - マップと地景(工事中): map.md
       - 運営(工事中): operations.md
-  - 作成中メモ:
-      - バランス調整: balance.md
 
 extra:
   generator: false
 
 extra_css:
   - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js
 
 plugins:
   - search
