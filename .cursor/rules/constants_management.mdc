@@ -27,7 +27,7 @@ alwaysApply: false
 
 機能名を docs / data と共有する。
 
-例: `combat.json` ↔ `docs/rules/combat.md`
+例: `combat.json` ↔ `draft/rules/combat.md` ↔ `docs/rules/combat.md`
 
 ## コメント
 

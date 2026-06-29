@@ -12,6 +12,8 @@ alwaysApply: true
 ```
 錬金術TRPG/
 ├── .cursor/rules/
+├── draft/          # 下書き（git 管理、MkDocs 非掲載）
+│   └── rules/
 ├── docs/           # MkDocs（GitHub Pages）
 ├── data/
 │   ├── schema/     # テーブル定義 SQL
@@ -24,11 +26,17 @@ alwaysApply: true
 └── requirements.txt
 ```
 
+## ドキュメントの流れ
+
+```
+temp/（議論ログ） → draft/（下書き） → docs/（公開）
+```
+
 ## コロケーション原則
 
 ツール軸（docs / constants / data）を基本とし、同一機能のファイルは同名で対応付ける。
 
-例: `constants/combat.json` ↔ `docs/rules/combat.md` ↔ `data/seeds/combat_seeds.csv`
+例: `constants/combat.json` ↔ `draft/rules/combat.md` ↔ `docs/rules/combat.md` ↔ `data/seeds/combat_seeds.csv`
 
 ## 技術スタック
 

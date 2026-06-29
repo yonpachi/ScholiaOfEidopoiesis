@@ -46,3 +46,9 @@ alwaysApply: true
 
 - 議論ファイル（`{番号}_{テーマ}.md`）と索引（`discussion_log.md`）を置く
 - `.gitignore` 管理外（ローカル作業用）
+
+## draft/
+
+- 議論ログから `docs/` へ移す前の下書き置き場
+- git 管理対象。MkDocs には掲載しない
+- 詳細は `draft_writing.mdc`

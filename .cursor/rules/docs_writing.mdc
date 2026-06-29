@@ -35,4 +35,9 @@ alwaysApply: false
 
 ## 正式化フロー
 
-ゲームルールは `temp/` で話し合ってから `docs/rules/` に移す。
+```
+temp/（議論） → draft/（下書き） → docs/（公開）
+```
+
+- 下書き: `draft/rules/`（詳細は `draft_writing.mdc`）
+- 公開: `docs/rules/`（確定後に移行）
