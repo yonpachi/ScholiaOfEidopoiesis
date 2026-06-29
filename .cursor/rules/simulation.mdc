@@ -35,6 +35,7 @@ data/                  実行出力（タイムスタンプ付き）
 | 4 | 六種族効果比較 | `race_ability_by_n.csv` 等 |
 | 5 | 1d10+N×ランダム基本4 | `basic4_pool_avg.csv` |
 | 6 | 10回連続錬金の品質成長 | `quality_progression.csv` |
+| 7 | Part6品質→実効戦闘値（B/ダメージ/DPC/防御/装甲） | `effective_stats_summary.csv`, `effective_stats_oneshot.csv`, `effective_stats_optimal_oneshot.csv`, `part7-1_dpc_comparison.png`, `part7-4_oneshot_comparison.png` |
 
 ## コアパラメータ
 
@@ -44,6 +45,7 @@ data/                  実行出力（タイムスタンプ付き）
 - Part4 trials: 10000/pool（デフォルト）
 - Part5 trials: 50000/n_extra（デフォルト）
 - Part6 trials: 50000/n_extra（デフォルト）
+- Part7: Part6 を実行後、決定論的換算（Go 不要）
 
 ## 実行・出力規約
 

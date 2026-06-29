@@ -1,0 +1,145 @@
+# Balance constants — canonical numeric source.
+# Docs: use {dotted.key} in docs/balance.md (expanded at MkDocs build).
+# Code: import via balance/loader.py (get_constants).
+
+meta:
+  version: 1
+
+# --- Combat timeline ---
+timeline:
+  counts: 12
+  count_max: 11
+  simple_combat_rounds: 2
+
+# --- Action tiers (52-card deck) ---
+deck:
+  tier_counts:
+    light: 12   # A-3
+    mid: 16     # 4-7
+    heavy: 12   # 8-10
+    special: 12 # J-K
+
+base_action_wait:
+  light: 3
+  mid: 4
+  heavy: 5
+  special: 6
+
+item_weight_correction:
+  light: -1
+  mid: "±0"
+  heavy: 1
+
+# --- Consumables ---
+consumable:
+  grade: 3
+  default_weight: 中量
+
+# --- Equipment grade by recipe mana band (n_extra from Part5/6) ---
+equipment:
+  grade_by_n_extra:
+    - n_extra_max: 3
+      band: early
+      mana_range: "2〜4"
+      grade: 7
+    - n_extra_max: 6
+      band: mid
+      mana_range: "5〜7"
+      grade: 6
+    - n_extra_max: 9
+      band: late
+      mana_range: "8〜"
+      grade: 5
+    - n_extra_max: 999
+      band: tier10
+      mana_range: "—"
+      grade: 4
+  broken_grade: 1
+
+# wait / coef per weight × action (English keys → 軽量/中量/重量 × 軽/中/重/特行動)
+weapon:
+  light:
+    light: { wait: 2, coef: 3 }
+    mid: { wait: 3, coef: 4 }
+    heavy: { wait: 4, coef: 4 }
+    special: { wait: 5, coef: 5 }
+  mid:
+    light: { wait: 3, coef: 3 }
+    mid: { wait: 4, coef: 6 }
+    heavy: { wait: 5, coef: 6 }
+    special: { wait: 6, coef: 7 }
+  heavy:
+    light: { wait: 4, coef: 4 }
+    mid: { wait: 5, coef: 6 }
+    heavy: { wait: 6, coef: 8 }
+    special: { wait: 7, coef: 11 }
+
+# Armor `<装甲>` uses the same wait/coef table as weapons.
+armor:
+  evasion:
+    light: 4
+    mid: 3
+    heavy: 2
+
+# Optimal action tier per weapon weight (for DPC design notes)
+dpc_optimal:
+  light:
+    action: 軽行動
+    ratio: 1.5
+  mid:
+    action: 中行動
+    ratio: 1.5
+  heavy:
+    action: 特行動
+    ratio: 1.57
+
+# --- Phase 1 pacing (draft anchors) ---
+phase1:
+  sub_quest_days_min: 2
+  sub_quest_days_max: 3
+  main_quest_days: 7
+  session_hours: 1.5
+  alchemy_per_day_avg: 1
+  town_actions_per_phase: 2
+  tag_use_ratio: 0.6
+  tag_stock_ratio: 0.4
+  part7_reference_attempt: 5
+  test_play_n_extra_max: 9
+
+# --- Part7 reference (attempt=5 p50); update when sim is re-run ---
+part7_ref:
+  attempt: 5
+  percentile: p50
+  rows:
+    - n_extra: 1
+      equip_grade: 7
+      quality: 21
+      consumable_dpc: 7.0
+      weapon_dpc: 4.5
+      defense: 3
+      consumable_oneshot: 28
+      weapon_oneshot: 18
+    - n_extra: 3
+      equip_grade: 7
+      quality: 36
+      consumable_dpc: 12.0
+      weapon_dpc: 7.5
+      defense: 5
+      consumable_oneshot: 48
+      weapon_oneshot: 30
+    - n_extra: 6
+      equip_grade: 6
+      quality: 58
+      consumable_dpc: 19.0
+      weapon_dpc: 13.5
+      defense: 9
+      consumable_oneshot: 76
+      weapon_oneshot: 54
+    - n_extra: 9
+      equip_grade: 5
+      quality: 78
+      consumable_dpc: 26.0
+      weapon_dpc: 22.5
+      defense: 15
+      consumable_oneshot: 104
+      weapon_oneshot: 90

@@ -59,7 +59,7 @@ nav:
   - はじめに: about.md
   - ルール:
       - キャラクター作成(工事中): character.md
-      - セッションの流れ: session.md
+      - セッションの流れ(工事中): session.md
       - 判定: checks.md
       - 種族: ancestry.md
       - 探索(工事中): exploration.md
@@ -85,3 +85,6 @@ extra_javascript:
 plugins:
   - search
   - glightbox
+
+hooks:
+  - hooks/balance_tokens.py

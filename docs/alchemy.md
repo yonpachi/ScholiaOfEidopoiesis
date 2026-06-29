@@ -195,6 +195,8 @@
 
 **所持しているだけでは効果は発揮されません。** 装備している時だけ有効です。
 
+数値表の正本は [`balance/constants.yaml`](../balance/constants.yaml) です（MkDocs ビルド時に本文へ展開）。
+
 ### 武器
 
 武器は攻撃に使用します。武器属性（`<斬>` / `<打>` / `<突>`）と攻撃係数を持ちます。マナ属性がある場合はそれも持ちます。
@@ -207,9 +209,9 @@
 
 | 重量／行動段階 | 軽行動 | 中行動 | 重行動 | 特行動 |
 | -------------- | ------ | ------ | ------ | ------ |
-| 軽量           | 2 / 3  | 3 / 4  | 4 / 4  | 5 / 5  |
-| 中量           | 3 / 3  | 4 / 6  | 5 / 6  | 6 / 7  |
-| 重量           | 4 / 4  | 5 / 5  | 6 / 8  | 7 / 11 |
+| 軽量           | {weapon.light.light.pair}  | {weapon.light.mid.pair}  | {weapon.light.heavy.pair}  | {weapon.light.special.pair}  |
+| 中量           | {weapon.mid.light.pair}  | {weapon.mid.mid.pair}  | {weapon.mid.heavy.pair}  | {weapon.mid.special.pair}  |
+| 重量           | {weapon.heavy.light.pair}  | {weapon.heavy.mid.pair}  | {weapon.heavy.heavy.pair}  | {weapon.heavy.special.pair}  |
 
 ### 防具
 
@@ -223,13 +225,15 @@
 
 | 防具重量 | 軽量 | 中量 | 重量 |
 | -------- | ---- | ---- | ---- |
-| 回避値   | 4    | 3    | 2    |
+| 回避値   | {armor.evasion.light}    | {armor.evasion.mid}    | {armor.evasion.heavy}    |
+
+`<装甲>` の待機値・係数は **武器と同じ表** を用います（[バランス](balance.md) 参照）。
 
 | 重量／行動段階 | 軽行動 | 中行動 | 重行動 | 特行動 |
 | -------------- | ------ | ------ | ------ | ------ |
-| 軽量           | 2 / 2  | 3 / 3  | 4 / 4  | 5 / 5  |
-| 中量           | 3 / 3  | 4 / 4  | 5 / 5  | 6 / 7  |
-| 重量           | 4 / 4  | 5 / 5  | 6 / 7  | 7 / 9  |
+| 軽量           | {weapon.light.light.pair}  | {weapon.light.mid.pair}  | {weapon.light.heavy.pair}  | {weapon.light.special.pair}  |
+| 中量           | {weapon.mid.light.pair}  | {weapon.mid.mid.pair}  | {weapon.mid.heavy.pair}  | {weapon.mid.special.pair}  |
+| 重量           | {weapon.heavy.light.pair}  | {weapon.heavy.mid.pair}  | {weapon.heavy.heavy.pair}  | {weapon.heavy.special.pair}  |
 
 ---
 

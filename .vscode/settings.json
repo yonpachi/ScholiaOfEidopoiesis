@@ -48,6 +48,10 @@
           "command": "workbench.action.tasks.runTask",
           "args": "Python: Part6 品質成長"
         },
+        "Part7: 実効戦闘値": {
+          "command": "workbench.action.tasks.runTask",
+          "args": "Python: Part7 実効戦闘値"
+        },
         "全Part実行": {
           "command": "workbench.action.tasks.runTask",
           "args": "Python: 全Part実行"

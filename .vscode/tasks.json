@@ -86,6 +86,20 @@
       }
     },
     {
+      "label": "Python: Part7 実効戦闘値",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe sim/part7/run.py",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
       "label": "Python: 全Part実行",
       "type": "shell",
       "command": ".\\.venv\\Scripts\\python.exe sim/run_all.py",

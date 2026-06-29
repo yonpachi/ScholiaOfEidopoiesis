@@ -20,7 +20,7 @@ sys.path.insert(0, str(SIM_DIR))
 
 from _common import resolve_out_dir  # noqa: E402
 
-SIM_PARTS = (1, 2, 3, 4, 5, 6)
+SIM_PARTS = (1, 2, 3, 4, 5, 6, 7)
 
 
 def run_part_script(
@@ -34,6 +34,7 @@ def run_part_script(
     trials_p4: int,
     trials_p5: int,
     trials_p6: int,
+    trials_p7: int,
     plot_only: bool,
 ) -> None:
     script = SIM_DIR / f"part{part}" / "run.py"
@@ -58,6 +59,8 @@ def run_part_script(
                 cmd.extend(["--trials", str(trials_p5)])
             elif part == 6:
                 cmd.extend(["--trials", str(trials_p6)])
+            elif part == 7:
+                cmd.extend(["--trials", str(trials_p7)])
     print(f"\n--- Part{part} ---")
     proc = subprocess.run(cmd, cwd=str(ROOT_DIR))
     if proc.returncode != 0:
@@ -67,7 +70,7 @@ def run_part_script(
 def main() -> None:
     p = argparse.ArgumentParser(description="Run all sim parts + plots")
     p.add_argument("--out-dir", type=Path, default=None, help="output directory (default: data/<timestamp>)")
-    p.add_argument("--parts", type=str, default="1,2,3,4,5,6", help="comma-separated part numbers")
+    p.add_argument("--parts", type=str, default="1,2,3,4,5,6,7", help="comma-separated part numbers")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--trials-p1", type=int, default=20000)
     p.add_argument("--trials-p2", type=int, default=5000)
@@ -75,6 +78,7 @@ def main() -> None:
     p.add_argument("--trials-p4", type=int, default=10000)
     p.add_argument("--trials-p5", type=int, default=50000)
     p.add_argument("--trials-p6", type=int, default=50000)
+    p.add_argument("--trials-p7", type=int, default=50000, help="Part6 trials when running Part7")
     p.add_argument("--plot-only", action="store_true", help="skip Go sim, plot existing CSV only")
     args = p.parse_args()
 
@@ -101,6 +105,7 @@ def main() -> None:
             trials_p4=args.trials_p4,
             trials_p5=args.trials_p5,
             trials_p6=args.trials_p6,
+            trials_p7=args.trials_p7,
             plot_only=args.plot_only or part not in SIM_PARTS,
         )
 
