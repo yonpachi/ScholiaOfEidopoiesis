@@ -7,6 +7,12 @@
 .venv/
 __pycache__/
 
+# SQLite 生成物（正は data/schema/, data/seeds/ の SQL/CSV）
+data/*.db
+
+# 作業用（話し合いログ・計画書）
+temp/
+
 # OS
 .DS_Store
 Thumbs.db

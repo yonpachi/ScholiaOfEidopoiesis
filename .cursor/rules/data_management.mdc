@@ -1,0 +1,45 @@
+---
+description: SQLite スキーマ・マイグレーション・シードデータの管理規則
+globs: data/**
+alwaysApply: false
+---
+
+# データ管理
+
+## 正（Source of Truth）
+
+**SQL / CSV ファイルが正。`.db` はそこから生成・更新する成果物。**
+
+| 正 | 生成物 |
+|----|--------|
+| `data/schema/` | テーブル定義 |
+| `data/migrations/` | スキーマ変更履歴 |
+| `data/seeds/` | マスターデータ（CSV 等） |
+| ↑ 上記を適用 | `data/*.db`（SQLite ファイル） |
+
+- `.db` を直接編集しない（Viewer で見る・確認する用途は可）
+- 変更は必ず SQL / CSV に書き、適用して `.db` を再生成する
+- AI もユーザーと同様、SQL / CSV を編集してから DB に反映する
+
+## 構成
+
+- `data/schema/` — 現行スキーマの正
+- `data/migrations/` — 変更履歴 SQL
+- `data/seeds/` — 初期・マスターデータ
+
+## 方針
+
+- SQLite + 生 SQL（ORM 不使用）
+- テーブル名・カラム名: 英語 snake_case
+- SQLite Viewer: `.db` の内容確認・デバッグ用（編集は SQL / CSV 経由）
+
+## コロケーション
+
+機能ごとにシードファイル名を constants / docs と揃える。
+
+例: `combat_seeds.csv` ↔ `constants/combat.json` ↔ `docs/rules/combat.md`
+
+## マイグレーション
+
+- 命名規則は未決定。決まるまで schema/ を直接更新し、ログに記録する
+- スキーマ変更時は該当する `temp/` 議論ファイルに理由を残す

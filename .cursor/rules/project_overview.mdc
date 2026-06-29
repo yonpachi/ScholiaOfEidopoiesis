@@ -1,0 +1,47 @@
+---
+description: 錬金術TRPG プロジェクトの概要・構成・技術スタック
+alwaysApply: true
+---
+
+# プロジェクト概要
+
+錬金術テーマの TRPG システム。ルール設定、定数管理、バランス検証用エミュレーター、GitHub Pages ルールページ、DB 管理アイテムデータを行う。
+
+## ディレクトリ構成
+
+```
+錬金術TRPG/
+├── .cursor/rules/
+├── docs/           # MkDocs（GitHub Pages）
+├── data/
+│   ├── schema/     # テーブル定義 SQL
+│   ├── migrations/ # マイグレーション SQL
+│   └── seeds/      # シードデータ
+├── constants/      # 定数（JSON）
+├── sim/            # Go エミュレーター
+├── temp/           # 議論ログ（gitignore、議題ごとに個別ファイル）
+├── mkdocs.yml
+└── requirements.txt
+```
+
+## コロケーション原則
+
+ツール軸（docs / constants / data）を基本とし、同一機能のファイルは同名で対応付ける。
+
+例: `constants/combat.json` ↔ `docs/rules/combat.md` ↔ `data/seeds/combat_seeds.csv`
+
+## 技術スタック
+
+| 用途 | 技術 |
+|------|------|
+| ルールページ | MkDocs + Material（Python） |
+| 定数 | JSON（Go と MkDocs から参照） |
+| DB | SQLite + 生 SQL（正: SQL/CSV、`.db` は生成物） |
+| エミュレーター | Go |
+
+## 命名規則
+
+- クラス名: PascalCase（`ItemData`）
+- 変数・関数名: camelCase（`itemName`）
+- ファイル名: snake_case（`item_data.go`）
+- ドキュメント・コメント: 日本語

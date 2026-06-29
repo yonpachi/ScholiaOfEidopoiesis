@@ -1,0 +1,34 @@
+---
+description: ゲーム定数（JSON）の管理・参照方法
+globs: constants/**
+alwaysApply: false
+---
+
+# 定数管理
+
+## 形式
+
+- ファイル形式: JSON
+- ファイル名: snake_case、機能名ベース（例: `combat.json`）
+- JSON キー: camelCase（例: `baseDamage`）
+
+## 単一ソース
+
+定数は `constants/` のみが正。docs や sim に同じ数値をハードコードしない。
+
+## 参照方法
+
+| 参照元 | 方法 |
+|--------|------|
+| MkDocs | `docs/macros.py` + mkdocs-macros-plugin でビルド時展開 |
+| Go sim | 実行時に JSON を読み込む |
+
+## コロケーション
+
+機能名を docs / data と共有する。
+
+例: `combat.json` ↔ `docs/rules/combat.md`
+
+## コメント
+
+JSON にはコメント不可。意味が分かりにくい値は `_comment` キーか docs 側で説明する。

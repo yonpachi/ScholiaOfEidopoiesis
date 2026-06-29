@@ -1,0 +1,38 @@
+---
+description: ルール文書・用語集の書き方
+globs: docs/**
+alwaysApply: false
+---
+
+# ドキュメント執筆
+
+## 言語
+
+- 本文・見出し: 日本語
+- ファイル名: snake_case（例: `combat.md`）
+
+## 構成
+
+- ルール文書: `docs/rules/`
+- 用語集: `docs/glossary.md`（用語の揺れ防止のため必須）
+
+## 章立て（推奨）
+
+1. 概要・目的
+2. 手順・ルール
+3. 例外・特殊ケース
+4. 関連定数（macros 展開で自動反映）
+
+## 定数の記載
+
+数値は `constants/*.json` を正とし、Markdown 内では macros で展開する。
+
+```markdown
+基本攻撃力は **{{ combat.baseDamage }}** です。
+```
+
+手入力の数値は避ける（定数と乖離するため）。
+
+## 正式化フロー
+
+ゲームルールは `temp/` で話し合ってから `docs/rules/` に移す。
