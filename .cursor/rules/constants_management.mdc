@@ -20,7 +20,7 @@ alwaysApply: false
 
 | 参照元 | 方法 |
 |--------|------|
-| MkDocs | `docs/macros.py` + mkdocs-macros-plugin でビルド時展開 |
+| MkDocs | ルートの `macros.py` + mkdocs-macros-plugin でビルド時展開 |
 | Go sim | 実行時に JSON を読み込む |
 
 ## コロケーション

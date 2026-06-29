@@ -3,6 +3,9 @@
 *.o
 /sim/bin/
 
+# MkDocs ビルド成果物
+site/
+
 # Python 仮想環境
 .venv/
 __pycache__/
