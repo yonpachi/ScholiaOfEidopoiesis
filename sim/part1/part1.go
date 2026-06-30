@@ -38,7 +38,7 @@ func collectPass1Jobs() []pass1Job {
 							jobs = append(jobs, pass1Job{
 								counts: counts,
 								d12:    d12,
-								idx:    dice.CacheIdx(counts, d12),
+								idx:    dice.PoolCacheIdx(counts, d12),
 							})
 						}
 					}
@@ -78,7 +78,7 @@ func printProgress(prefix string, done, total int64) {
 
 // RunFullEnumeration computes marginal contributions and writes marginal_by_n.csv.
 func RunFullEnumeration(trialsEnum int, outDir string, baseSeed int64) error {
-	cache := make([]float64, dice.CacheSize())
+	cache := make([]float64, dice.PoolCacheSize())
 	for i := range cache {
 		cache[i] = math.NaN()
 	}
@@ -136,12 +136,12 @@ func RunFullEnumeration(trialsEnum int, outDir string, baseSeed int64) error {
 							if total > dice.MaxN-1 {
 								continue
 							}
-							avgBase := cache[dice.CacheIdx(counts, d12)]
+							avgBase := cache[dice.PoolCacheIdx(counts, d12)]
 							nOthers := total
 
 							for t := 0; t < 5; t++ {
 								counts[t]++
-								avgPlus := cache[dice.CacheIdx(counts, d12)]
+								avgPlus := cache[dice.PoolCacheIdx(counts, d12)]
 								counts[t]--
 								if math.IsNaN(avgPlus) {
 									continue
@@ -151,7 +151,7 @@ func RunFullEnumeration(trialsEnum int, outDir string, baseSeed int64) error {
 								table.Cnt[t][nOthers]++
 							}
 							if d12 == 0 {
-								avgPlus := cache[dice.CacheIdx(counts, 1)]
+								avgPlus := cache[dice.PoolCacheIdx(counts, 1)]
 								if !math.IsNaN(avgPlus) {
 									diff := avgPlus - avgBase
 									table.Sum[5][nOthers] += diff

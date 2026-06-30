@@ -65,6 +65,21 @@ func TestBuildPoolIncludesD12(t *testing.T) {
 	}
 }
 
+func TestBuildRecipePool(t *testing.T) {
+	pool := make([]int, 4)
+	counts := [4]int{1, 0, 1, 1} // d4×1, d8×1, d20×1
+	n := dice.BuildRecipePool(counts, pool)
+	if n != 4 {
+		t.Fatalf("BuildRecipePool n = %d, want 4", n)
+	}
+	want := []int{10, 4, 8, 20}
+	for i, w := range want {
+		if pool[i] != w {
+			t.Errorf("pool[%d] = %d, want %d", i, pool[i], w)
+		}
+	}
+}
+
 func TestEffectD12TargetsReactedDie(t *testing.T) {
 	rng := rand.New(rand.NewSource(0))
 	var diceArr [dice.MaxDice]dice.Die

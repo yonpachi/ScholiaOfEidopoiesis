@@ -85,13 +85,18 @@ def run_go(exe: str, args: list[str], *, stream_progress: bool = False) -> None:
     for raw in proc.stdout:
         line = raw.rstrip("\n").rstrip("\r")
         if stream_progress and (
-            line.startswith("PROGRESS1:") or line.startswith("PROGRESS2")
+            line.startswith("PROGRESS1:")
+            or line.startswith("PROGRESS2")
+            or line.startswith("PROGRESS3:")
         ):
             if line.startswith("PROGRESS1:"):
                 tag = "[パス1]"
                 body = line.split(":", 1)[1].strip()
-            else:
+            elif line.startswith("PROGRESS2"):
                 tag = "[パス2]"
+                body = line.split(":", 1)[1].strip()
+            else:
+                tag = "[Part3]"
                 body = line.split(":", 1)[1].strip()
             print(f"\r    {tag} {body}    ", end="", flush=True)
             prev_progress = True

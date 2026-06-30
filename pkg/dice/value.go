@@ -7,11 +7,16 @@ const (
 	Base     = 11
 )
 
-// DiceSides lists pool-enumerable die sizes (d12 is optional, appended last by BuildPool).
+// DiceSides lists die sizes for part1 full pool enumeration (d12 appended last by BuildPool).
 var DiceSides = [5]int{4, 6, 8, 10, 20}
 
-// DiceNames column order for CSV output (d12 index 5).
+// DiceNames column order for part1 marginal CSV.
 var DiceNames = [6]string{"d4", "d6", "d8", "d10", "d20", "d12"}
+
+// AttrSides lists recipe attribute die sizes for part2 (base d10 is separate).
+var AttrSides = [4]int{4, 6, 8, 20}
+
+const BaseD10 = 10
 
 // DieValue maps a rolled face to achievement contribution (with penalty rules).
 func DieValue(sides, face int) int {

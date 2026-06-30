@@ -56,27 +56,22 @@ func (a *raceAgg) merge(b *raceAgg) {
 
 func collectPart2Jobs() []part2Job {
 	var jobs []part2Job
-	var counts [5]int
+	var counts [4]int
 	var pool [dice.MaxDice]int
-	for counts[0] = 0; counts[0] <= dice.MaxN; counts[0]++ {
-		for counts[1] = 0; counts[1] <= dice.MaxN-counts[0]; counts[1]++ {
-			for counts[2] = 0; counts[2] <= dice.MaxN-counts[0]-counts[1]; counts[2]++ {
-				for counts[3] = 1; counts[3] <= dice.MaxN-counts[0]-counts[1]-counts[2]; counts[3]++ {
-					for counts[4] = 0; counts[4] <= dice.MaxN-counts[0]-counts[1]-counts[2]-counts[3]; counts[4]++ {
-						sub := counts[0] + counts[1] + counts[2] + counts[3] + counts[4]
-						for d12 := 0; d12 <= 1; d12++ {
-							nPoolTotal := sub + d12
-							if nPoolTotal < 2 || nPoolTotal > dice.MaxN {
-								continue
-							}
-							np := dice.BuildPool(counts, d12 == 1, pool[:])
-							var job part2Job
-							job.nPool = np
-							job.nPoolTotal = nPoolTotal
-							copy(job.pool[:np], pool[:np])
-							jobs = append(jobs, job)
-						}
+	for counts[0] = 0; counts[0] <= dice.MaxN-1; counts[0]++ {
+		for counts[1] = 0; counts[1] <= dice.MaxN-1-counts[0]; counts[1]++ {
+			for counts[2] = 0; counts[2] <= dice.MaxN-1-counts[0]-counts[1]; counts[2]++ {
+				for counts[3] = 0; counts[3] <= dice.MaxN-1-counts[0]-counts[1]-counts[2]; counts[3]++ {
+					nAttr := counts[0] + counts[1] + counts[2] + counts[3]
+					if nAttr < 1 || 1+nAttr > dice.MaxN {
+						continue
 					}
+					np := dice.BuildRecipePool(counts, pool[:])
+					var job part2Job
+					job.nPool = np
+					job.nPoolTotal = np
+					copy(job.pool[:np], pool[:np])
+					jobs = append(jobs, job)
 				}
 			}
 		}
@@ -167,7 +162,7 @@ func printSummary(agg *raceAgg, trialsPerPool int) {
 	fmt.Println("============================================================")
 	fmt.Println("  Part2: 六種族 判定時効果 強さ比較（全構成列挙）")
 	fmt.Printf("  trials/pool=%d, max_pool=%d\n", trialsPerPool, dice.MaxN)
-	fmt.Println("  ※ d10>=1固定、d12は0-1個、全有効構成の平均を表示")
+	fmt.Println("  ※ ベースd10固定、レシピはd4/d6/d8/d20のみ、全有効構成の平均を表示")
 	fmt.Println("============================================================")
 	fmt.Printf("%-14s  avg_delta  use_rate  delta|use   sample_count\n", "種族")
 	fmt.Println("--------------  ---------  --------  ----------  ------------")

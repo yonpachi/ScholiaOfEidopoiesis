@@ -35,7 +35,7 @@ func (q *Queue) pop() int {
 	return v
 }
 
-// BuildPool fills pool: d4,d6,d8,d10,d20 counts then optional single d12 at end.
+// BuildPool fills pool for part1: d4,d6,d8,d10,d20 counts then optional single d12 at end.
 func BuildPool(counts [5]int, hasD12 bool, pool []int) int {
 	np := 0
 	for t := 0; t < 5; t++ {
@@ -47,6 +47,19 @@ func BuildPool(counts [5]int, hasD12 bool, pool []int) int {
 	if hasD12 {
 		pool[np] = 12
 		np++
+	}
+	return np
+}
+
+// BuildRecipePool fills pool for part2: pool[0]=base d10, then d4/d6/d8/d20 recipe dice only.
+func BuildRecipePool(attrCounts [4]int, pool []int) int {
+	pool[0] = BaseD10
+	np := 1
+	for t := 0; t < 4; t++ {
+		for k := 0; k < attrCounts[t]; k++ {
+			pool[np] = AttrSides[t]
+			np++
+		}
 	}
 	return np
 }

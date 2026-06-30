@@ -8,6 +8,7 @@ Go 製エミュレーター。ゲームバランスの検証（モンテカル�
 sim/
 ├── part1/          # 限界貢献度シミュレーション（旧 backup part2）
 ├── part2/          # 種族判定時能力比較（旧 backup part4）
+├── part3/          # 種族別平均スコア（8本線グラフ）
 ├── _common.py      # Python 共通ヘルパー
 ├── plotting.py     # グラフ描画共通
 ├── bin/            # ビルド成果物（gitignore）
@@ -27,9 +28,10 @@ sim/
 |---------|------|
 | Go mod tidy (sim) | 依存関係を整理 |
 | Goテスト (sim) | `go test ./...` |
-| Goビルド (sim) | `bin/sim.exe` / `part1.exe` / `part2.exe` を生成 |
+| Goビルド (sim) | `bin/sim.exe` / `part1.exe` / `part2.exe` / `part3.exe` を生成 |
 | Part1限界貢献度 | 列挙シム → CSV → PNG |
 | Part2種族能力 | 種族能力比較 sim → CSV → PNG |
+| Part3種族平均スコア | 種族別平均スコア sim → CSV → PNG |
 
 ## Part1 の出力
 
@@ -37,19 +39,28 @@ sim/
 
 | ファイル | 内容 |
 |---------|------|
-| `csv/marginal_by_n.csv` | 他ダイス数別・種別の限界貢献度 |
+| `csv/marginal_by_n.csv` | 他ダイス数別・種別（d4〜d20, d12）の限界貢献度 |
 | `marginal_by_n.png` | 折れ線グラフ |
 
 ## Part2 の出力
 
 | ファイル | 内容 |
 |---------|------|
-| `csv/race_ability_by_n.csv` | n_pool × 種族 avg_delta |
+| `csv/race_ability_by_n.csv` | n_pool × 種族 avg_delta（ベースd10 + レシピd4/d6/d8/d20） |
 | `csv/race_use_rate_by_n.csv` | 能力使用率 |
 | `csv/race_delta_use_by_n.csv` | 使用時 avg_delta |
 | `csv/homunculus_option_distribution.csv` | 進化3択の選択率 |
 | `race_ability_by_n.png` | 折れ線グラフ |
 | `homunculus_options.png` | ホムンクルス棒グラフ |
+
+## Part3 の出力
+
+| ファイル | 内容 |
+|---------|------|
+| `csv/race_score_by_n.csv` | n_pool × Baseline + 6種族 + RaceMean の平均達成値 |
+| `csv/race_score_pct_by_n.csv` | 同上を 6種族平均比（%）に変換（0% = RaceMean） |
+| `race_score_by_n.png` | 8本折れ線グラフ（種族なし / 6種族 / 試行内6種族平均） |
+| `race_score_pct_by_n.png` | 7本折れ線グラフ（種族平均比、0% 基準） |
 
 ## モジュール
 

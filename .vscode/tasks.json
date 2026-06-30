@@ -85,7 +85,7 @@
 		{
 			"label": "Goビルド (sim)",
 			"type": "shell",
-			"command": "go build -o sim/bin/sim.exe ./sim/ && go build -o sim/bin/part1.exe ./sim/part1 && go build -o sim/bin/part2.exe ./sim/part2",
+			"command": "go build -o sim/bin/sim.exe ./sim/ && go build -o sim/bin/part1.exe ./sim/part1 && go build -o sim/bin/part2.exe ./sim/part2 && go build -o sim/bin/part3.exe ./sim/part3",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
@@ -104,6 +104,15 @@
 			"label": "Part2種族能力",
 			"type": "shell",
 			"command": ".venv\\Scripts\\python.exe sim/part2/run.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Part3種族平均スコア",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe sim/part3/run.py",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
@@ -166,7 +175,7 @@
 		{
 			"label": "全てをチェック(Go)",
 			"type": "shell",
-			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && ${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && go mod tidy && go test ./... && go build -o sim/bin/sim.exe ./sim/ && go build -o sim/bin/part1.exe ./sim/part1 && go build -o sim/bin/part2.exe ./sim/part2",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && ${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && go mod tidy && go test ./... && go build -o sim/bin/sim.exe ./sim/ && go build -o sim/bin/part1.exe ./sim/part1 && go build -o sim/bin/part2.exe ./sim/part2 && go build -o sim/bin/part3.exe ./sim/part3",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},

@@ -92,6 +92,10 @@
 				"Part2種族能力": {
 					"command": "workbench.action.tasks.runTask",
 					"args": "Part2種族能力"
+				},
+				"Part3種族平均スコア": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Part3種族平均スコア"
 				}
 			}
 		},

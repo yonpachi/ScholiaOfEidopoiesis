@@ -1,7 +1,7 @@
 package dice
 
-// CacheIdx maps a 5-type count vector plus optional d12 to a flat cache index.
-func CacheIdx(counts [5]int, d12 int) int {
+// PoolCacheIdx maps a full pool count vector (d4..d20) plus optional d12 to a cache index (part1).
+func PoolCacheIdx(counts [5]int, d12 int) int {
 	idx := counts[0]
 	for i := 1; i < 5; i++ {
 		idx = idx*Base + counts[i]
@@ -9,7 +9,7 @@ func CacheIdx(counts [5]int, d12 int) int {
 	return idx + d12*(Base*Base*Base*Base*Base)
 }
 
-// CacheSize returns the number of slots for the pass-1 cache (d12 present or not).
-func CacheSize() int {
+// PoolCacheSize returns pass-1 cache slots (Base^5 × 2 for optional d12).
+func PoolCacheSize() int {
 	return Base * Base * Base * Base * Base * 2
 }
