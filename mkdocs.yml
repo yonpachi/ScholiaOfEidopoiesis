@@ -37,3 +37,4 @@ nav:
   - 用語集: glossary.md
   - ルール:
     - rules/index.md
+    - ダイスシステム: rules/dice.md
