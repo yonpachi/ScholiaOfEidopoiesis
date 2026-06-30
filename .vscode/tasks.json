@@ -85,7 +85,25 @@
 		{
 			"label": "Goビルド (sim)",
 			"type": "shell",
-			"command": "go build -o sim/bin/sim.exe ./sim/",
+			"command": "go build -o sim/bin/sim.exe ./sim/ && go build -o sim/bin/part1.exe ./sim/part1",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Part1限界貢献度(sim+グラフ)",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe sim/part1/run.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Part1グラフのみ",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe sim/part1/run.py --plot-only",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
@@ -148,7 +166,7 @@
 		{
 			"label": "全てをチェック(Go)",
 			"type": "shell",
-			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && ${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && go mod tidy && go test ./... && go build -o sim/bin/sim.exe ./sim/",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && ${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && go mod tidy && go test ./... && go build -o sim/bin/sim.exe ./sim/ && go build -o sim/bin/part1.exe ./sim/part1",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},

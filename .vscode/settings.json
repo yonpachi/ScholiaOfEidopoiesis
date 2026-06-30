@@ -84,6 +84,14 @@
 				"Goビルド (sim)": {
 					"command": "workbench.action.tasks.runTask",
 					"args": "Goビルド (sim)"
+				},
+				"Part1限界貢献度(sim+グラフ)": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Part1限界貢献度(sim+グラフ)"
+				},
+				"Part1グラフのみ": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Part1グラフのみ"
 				}
 			}
 		},
