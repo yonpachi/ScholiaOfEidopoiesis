@@ -65,7 +65,7 @@
 			"type": "shell",
 			"command": "go mod tidy",
 			"options": {
-				"cwd": "${workspaceFolder}/sim"
+				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": []
 		},
@@ -74,7 +74,7 @@
 			"type": "shell",
 			"command": "go test ./...",
 			"options": {
-				"cwd": "${workspaceFolder}/sim"
+				"cwd": "${workspaceFolder}"
 			},
 			"group": {
 				"kind": "test",
@@ -85,9 +85,9 @@
 		{
 			"label": "Goビルド (sim)",
 			"type": "shell",
-			"command": "go build -o bin/sim.exe .",
+			"command": "go build -o sim/bin/sim.exe ./sim/",
 			"options": {
-				"cwd": "${workspaceFolder}/sim"
+				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": []
 		}
