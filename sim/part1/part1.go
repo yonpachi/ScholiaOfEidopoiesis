@@ -21,23 +21,24 @@ type MarginalTable struct {
 }
 
 type pass1Job struct {
-	counts [6]int
+	counts [5]int
+	d12    int
 	idx    int
 }
 
 func collectPass1Jobs() []pass1Job {
 	var jobs []pass1Job
-	var counts [6]int
+	var counts [5]int
 	for counts[0] = 0; counts[0] <= dice.MaxN; counts[0]++ {
 		for counts[1] = 0; counts[1] <= dice.MaxN-counts[0]; counts[1]++ {
 			for counts[2] = 0; counts[2] <= dice.MaxN-counts[0]-counts[1]; counts[2]++ {
 				for counts[3] = 1; counts[3] <= dice.MaxN-counts[0]-counts[1]-counts[2]; counts[3]++ {
-					rem := dice.MaxN - counts[0] - counts[1] - counts[2] - counts[3]
-					for counts[4] = 0; counts[4] <= rem; counts[4]++ {
-						for counts[5] = 0; counts[5] <= rem-counts[4]; counts[5]++ {
+					for counts[4] = 0; counts[4] <= dice.MaxN-counts[0]-counts[1]-counts[2]-counts[3]; counts[4]++ {
+						for d12 := 0; d12 <= 1; d12++ {
 							jobs = append(jobs, pass1Job{
 								counts: counts,
-								idx:    dice.CacheIdx(counts),
+								d12:    d12,
+								idx:    dice.CacheIdx(counts, d12),
 							})
 						}
 					}
@@ -50,15 +51,17 @@ func collectPass1Jobs() []pass1Job {
 
 func countPass2Steps() int64 {
 	var n int64
-	var counts [6]int
+	var counts [5]int
 	for counts[0] = 0; counts[0] <= dice.MaxN-1; counts[0]++ {
 		for counts[1] = 0; counts[1] <= dice.MaxN-1-counts[0]; counts[1]++ {
 			for counts[2] = 0; counts[2] <= dice.MaxN-1-counts[0]-counts[1]; counts[2]++ {
 				for counts[3] = 1; counts[3] <= dice.MaxN-1-counts[0]-counts[1]-counts[2]; counts[3]++ {
-					rem := dice.MaxN - 1 - counts[0] - counts[1] - counts[2] - counts[3]
-					for counts[4] = 0; counts[4] <= rem; counts[4]++ {
-						for counts[5] = 0; counts[5] <= rem-counts[4]; counts[5]++ {
-							n++
+					for counts[4] = 0; counts[4] <= dice.MaxN-1-counts[0]-counts[1]-counts[2]-counts[3]; counts[4]++ {
+						sub := counts[0] + counts[1] + counts[2] + counts[3] + counts[4]
+						for d12 := 0; d12 <= 1; d12++ {
+							if sub+d12 <= dice.MaxN-1 {
+								n++
+							}
 						}
 					}
 				}
@@ -99,7 +102,7 @@ func RunFullEnumeration(trialsEnum int, outDir string, baseSeed int64) error {
 			var pool [dice.MaxDice]int
 			for job := range jobCh {
 				subRng := rand.New(rand.NewSource(baseSeed + int64(job.idx)*9973))
-				np := dice.BuildPool(job.counts, pool[:])
+				np := dice.BuildPool(job.counts, job.d12 == 1, pool[:])
 				stats := dice.SimulatePool(pool[:np], trialsEnum, subRng)
 				cache[job.idx] = stats.Avg
 
@@ -121,28 +124,24 @@ func RunFullEnumeration(trialsEnum int, outDir string, baseSeed int64) error {
 	p2Total := countPass2Steps()
 	var p2Done int64
 
-	var counts [6]int
+	var counts [5]int
 	for counts[0] = 0; counts[0] <= dice.MaxN-1; counts[0]++ {
 		for counts[1] = 0; counts[1] <= dice.MaxN-1-counts[0]; counts[1]++ {
 			for counts[2] = 0; counts[2] <= dice.MaxN-1-counts[0]-counts[1]; counts[2]++ {
 				for counts[3] = 1; counts[3] <= dice.MaxN-1-counts[0]-counts[1]-counts[2]; counts[3]++ {
-					rem := dice.MaxN - 1 - counts[0] - counts[1] - counts[2] - counts[3]
-					for counts[4] = 0; counts[4] <= rem; counts[4]++ {
-						for counts[5] = 0; counts[5] <= rem-counts[4]; counts[5]++ {
-							total := counts[0] + counts[1] + counts[2] + counts[3] + counts[4] + counts[5]
-							avgBase := cache[dice.CacheIdx(counts)]
-							if math.IsNaN(avgBase) {
-								done := atomic.AddInt64(&p2Done, 1)
-								if done%100 == 0 || done == p2Total {
-									printProgress("PROGRESS2", done, p2Total)
-								}
+					for counts[4] = 0; counts[4] <= dice.MaxN-1-counts[0]-counts[1]-counts[2]-counts[3]; counts[4]++ {
+						sub := counts[0] + counts[1] + counts[2] + counts[3] + counts[4]
+						for d12 := 0; d12 <= 1; d12++ {
+							total := sub + d12
+							if total > dice.MaxN-1 {
 								continue
 							}
+							avgBase := cache[dice.CacheIdx(counts, d12)]
 							nOthers := total
 
-							for t := 0; t < 6; t++ {
+							for t := 0; t < 5; t++ {
 								counts[t]++
-								avgPlus := cache[dice.CacheIdx(counts)]
+								avgPlus := cache[dice.CacheIdx(counts, d12)]
 								counts[t]--
 								if math.IsNaN(avgPlus) {
 									continue
@@ -150,6 +149,14 @@ func RunFullEnumeration(trialsEnum int, outDir string, baseSeed int64) error {
 								diff := avgPlus - avgBase
 								table.Sum[t][nOthers] += diff
 								table.Cnt[t][nOthers]++
+							}
+							if d12 == 0 {
+								avgPlus := cache[dice.CacheIdx(counts, 1)]
+								if !math.IsNaN(avgPlus) {
+									diff := avgPlus - avgBase
+									table.Sum[5][nOthers] += diff
+									table.Cnt[5][nOthers]++
+								}
 							}
 
 							done := atomic.AddInt64(&p2Done, 1)
@@ -167,7 +174,7 @@ func RunFullEnumeration(trialsEnum int, outDir string, baseSeed int64) error {
 	return writeMarginalCSV(outDir, &table)
 }
 
-func writeMarginalCSV(outDir string, table *MarginalTable) error {
+func writeMarginalCSV(outDir string, table *MarginalTable) (err error) {
 	csvDir, err := dice.EnsureCSVDir(outDir)
 	if err != nil {
 		return err
@@ -177,7 +184,11 @@ func writeMarginalCSV(outDir string, table *MarginalTable) error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
+	defer func() {
+		if cerr := f.Close(); cerr != nil && err == nil {
+			err = cerr
+		}
+	}()
 
 	w := csv.NewWriter(f)
 	header := make([]string, 7)

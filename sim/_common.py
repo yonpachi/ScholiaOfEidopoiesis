@@ -42,36 +42,15 @@ def exe_path(name: str) -> Path:
     return SIM_DIR / "bin" / f"{name}.exe"
 
 
-def find_latest_data_dir() -> Path | None:
-    if not DATA_DIR.is_dir():
-        return None
-    dirs = [p for p in DATA_DIR.iterdir() if p.is_dir()]
-    if not dirs:
-        return None
-    return max(dirs, key=lambda p: p.name)
-
-
-def resolve_out_dir(out_dir: Path | None, *, create: bool) -> Path:
-    """Resolve output directory.
-
-    create=True → new timestamp folder; False → latest existing.
-    """
+def resolve_out_dir(out_dir: Path | None) -> Path:
+    """Resolve output directory (new timestamp folder unless --out-dir is given)."""
     if out_dir is not None:
         out_dir.mkdir(parents=True, exist_ok=True)
         return out_dir
-    if create:
-        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        d = DATA_DIR / ts
-        d.mkdir(parents=True, exist_ok=True)
-        return d
-    latest = find_latest_data_dir()
-    if latest is None:
-        print(
-            f"エラー: {DATA_DIR} に出力フォルダがありません。"
-            "Part1 を先に実行してください。"
-        )
-        sys.exit(1)
-    return latest
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    d = DATA_DIR / ts
+    d.mkdir(parents=True, exist_ok=True)
+    return d
 
 
 def build_go(parts: tuple[str, ...] = ("part1",)) -> None:
@@ -105,12 +84,15 @@ def run_go(exe: str, args: list[str], *, stream_progress: bool = False) -> None:
     prev_progress = False
     for raw in proc.stdout:
         line = raw.rstrip("\n").rstrip("\r")
-        if stream_progress and line.startswith(("PROGRESS1:", "PROGRESS2:")):
+        if stream_progress and (
+            line.startswith("PROGRESS1:") or line.startswith("PROGRESS2")
+        ):
             if line.startswith("PROGRESS1:"):
                 tag = "[パス1]"
+                body = line.split(":", 1)[1].strip()
             else:
                 tag = "[パス2]"
-            body = line.split(":", 1)[1].strip()
+                body = line.split(":", 1)[1].strip()
             print(f"\r    {tag} {body}    ", end="", flush=True)
             prev_progress = True
         else:
@@ -144,21 +126,14 @@ def part_main(
     )
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--trials", type=int, default=default_trials)
-    p.add_argument("--plot-only", action="store_true")
     args = p.parse_args()
 
-    if args.out_dir is not None:
-        out_dir = resolve_out_dir(args.out_dir, create=True)
-    elif args.plot_only:
-        out_dir = resolve_out_dir(None, create=False)
-    else:
-        out_dir = resolve_out_dir(None, create=True)
+    out_dir = resolve_out_dir(args.out_dir)
 
     print(f"出力: {out_dir}")
 
-    if not args.plot_only:
-        build_go((go_part,))
-        print(f"[{part_label}] Go シム実行中...")
-        run_sim_fn(out_dir, args.seed, args.trials)
+    build_go((go_part,))
+    print(f"[{part_label}] Go シム実行中...")
+    run_sim_fn(out_dir, args.seed, args.trials)
     print(f"[{part_label}] グラフ生成中...")
     plot_fn(out_dir)

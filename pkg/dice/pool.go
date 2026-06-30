@@ -7,47 +7,51 @@ type Die struct {
 	Face  int
 }
 
-type queue struct {
+type Queue struct {
 	buf  [MaxQueue]int
 	head int
 	tail int
 	size int
 }
 
-func (q *queue) clear() {
+func (q *Queue) clear() {
 	q.head, q.tail, q.size = 0, 0, 0
 }
 
-func (q *queue) empty() bool {
+func (q *Queue) empty() bool {
 	return q.size == 0
 }
 
-func (q *queue) push(v int) {
+func (q *Queue) push(v int) {
 	q.buf[q.tail] = v
 	q.tail = (q.tail + 1) % MaxQueue
 	q.size++
 }
 
-func (q *queue) pop() int {
+func (q *Queue) pop() int {
 	v := q.buf[q.head]
 	q.head = (q.head + 1) % MaxQueue
 	q.size--
 	return v
 }
 
-// BuildPool fills pool with dice according to counts per DiceSides entry.
-func BuildPool(counts [6]int, pool []int) int {
+// BuildPool fills pool: d4,d6,d8,d10,d20 counts then optional single d12 at end.
+func BuildPool(counts [5]int, hasD12 bool, pool []int) int {
 	np := 0
-	for t := 0; t < 6; t++ {
+	for t := 0; t < 5; t++ {
 		for k := 0; k < counts[t]; k++ {
 			pool[np] = DiceSides[t]
 			np++
 		}
 	}
+	if hasD12 {
+		pool[np] = 12
+		np++
+	}
 	return np
 }
 
-func effectD4(dice []Die, nDice *int, q *queue, idx int, rng *rand.Rand) {
+func effectD4(dice []Die, nDice *int, q *Queue, idx int, rng *rand.Rand) {
 	if dice[idx].Face < 3 {
 		return
 	}
@@ -58,7 +62,7 @@ func effectD4(dice []Die, nDice *int, q *queue, idx int, rng *rand.Rand) {
 	*nDice++
 }
 
-func effectD6(dice []Die, nDice int, q *queue, idx int) {
+func effectD6(dice []Die, nDice int, q *Queue, idx int) {
 	if dice[idx].Face != 6 {
 		return
 	}
@@ -92,7 +96,7 @@ func effectD6(dice []Die, nDice int, q *queue, idx int) {
 	}
 }
 
-func effectD8(dice []Die, nDice int, q *queue, idx int) {
+func effectD8(dice []Die, nDice int, q *Queue, idx int) {
 	if dice[idx].Face != 8 {
 		return
 	}
@@ -126,7 +130,7 @@ func effectD8(dice []Die, nDice int, q *queue, idx int) {
 	}
 }
 
-func effectD10(dice []Die, nDice int, q *queue, idx int) {
+func effectD10(dice []Die, nDice int, q *Queue, idx int) {
 	if dice[idx].Face != 10 {
 		return
 	}
@@ -157,7 +161,7 @@ func effectD10(dice []Die, nDice int, q *queue, idx int) {
 	}
 }
 
-func effectD12(dice []Die, nDice int, q *queue, idx int) {
+func effectD12(dice []Die, nDice int, q *Queue, idx int) {
 	if dice[idx].Face != 12 {
 		return
 	}
@@ -186,7 +190,7 @@ func effectD12(dice []Die, nDice int, q *queue, idx int) {
 	}
 }
 
-func effectD20(dice []Die, nDice int, q *queue, idx int, rng *rand.Rand) {
+func effectD20(dice []Die, nDice int, q *Queue, idx int, rng *rand.Rand) {
 	if dice[idx].Face != 20 {
 		return
 	}
@@ -229,7 +233,7 @@ func SimulatePool(poolSides []int, trials int, rng *rand.Rand) PoolStats {
 	totals := make([]int, trials)
 	var dice [MaxDice]Die
 	var used [MaxDice]int
-	var q queue
+	var q Queue
 
 	for t := 0; t < trials; t++ {
 		totals[t] = simulateTrialTotal(poolSides, rng, &dice, &used, &q)
@@ -252,7 +256,7 @@ func SimulatePool(poolSides []int, trials int, rng *rand.Rand) PoolStats {
 func SimulateSuccessRate(poolSides []int, trials, target int, rng *rand.Rand) float64 {
 	var dice [MaxDice]Die
 	var used [MaxDice]int
-	var q queue
+	var q Queue
 	success := 0
 	for t := 0; t < trials; t++ {
 		if simulateTrialTotal(poolSides, rng, &dice, &used, &q) >= target {
@@ -262,7 +266,7 @@ func SimulateSuccessRate(poolSides []int, trials, target int, rng *rand.Rand) fl
 	return float64(success) / float64(trials)
 }
 
-func simulateTrialTotal(poolSides []int, rng *rand.Rand, dice *[MaxDice]Die, used *[MaxDice]int, q *queue) int {
+func simulateTrialTotal(poolSides []int, rng *rand.Rand, dice *[MaxDice]Die, used *[MaxDice]int, q *Queue) int {
 	nDice := len(poolSides)
 	for i := 0; i < nDice; i++ {
 		dice[i] = Die{Sides: poolSides[i], Face: rng.Intn(poolSides[i]) + 1}

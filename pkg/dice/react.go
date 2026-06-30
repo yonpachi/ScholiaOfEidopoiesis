@@ -4,11 +4,11 @@ import "math/rand"
 
 // ReactAll applies greedy reactions until no reactive dice remain.
 func ReactAll(dice []Die, used []int, nDice *int, rng *rand.Rand) {
-	var q queue
+	var q Queue
 	RunReactLoop(dice, used, nDice, &q, rng, 0)
 }
 
-func applyReaction(dice []Die, nDice *int, used []int, q *queue, idx int, rng *rand.Rand) int {
+func applyReaction(dice []Die, nDice *int, used []int, q *Queue, idx int, rng *rand.Rand) int {
 	prevN := *nDice
 	switch dice[idx].Sides {
 	case 4:
@@ -28,7 +28,7 @@ func applyReaction(dice []Die, nDice *int, used []int, q *queue, idx int, rng *r
 }
 
 // RunReactLoop runs the reaction queue until empty. skipTriggerSides>0 skips enqueue on that Die size.
-func RunReactLoop(dice []Die, used []int, nDice *int, q *queue, rng *rand.Rand, skipTriggerSides int) {
+func RunReactLoop(dice []Die, used []int, nDice *int, q *Queue, rng *rand.Rand, skipTriggerSides int) {
 	q.clear()
 	for i := 0; i < *nDice; i++ {
 		if skipTriggerSides != 0 && dice[i].Sides == skipTriggerSides {
@@ -55,7 +55,7 @@ func RunReactLoop(dice []Die, used []int, nDice *int, q *queue, rng *rand.Rand, 
 }
 
 // RunReactLoopSteps runs at most maxSteps reactions; maxSteps<0 means unlimited. Returns steps executed.
-func RunReactLoopSteps(dice []Die, used []int, nDice *int, q *queue, rng *rand.Rand, maxSteps int) int {
+func RunReactLoopSteps(dice []Die, used []int, nDice *int, q *Queue, rng *rand.Rand, maxSteps int) int {
 	q.clear()
 	for i := 0; i < *nDice; i++ {
 		if triggers(dice[i].Sides, dice[i].Face) {

@@ -52,12 +52,12 @@ func TestSimulatePoolDeterministic(t *testing.T) {
 
 func TestBuildPoolIncludesD12(t *testing.T) {
 	pool := make([]int, 3)
-	counts := [6]int{0, 0, 0, 1, 1, 1} // d10, d12, d20
-	n := dice.BuildPool(counts, pool)
+	counts := [5]int{0, 0, 0, 1, 1} // d10, d20
+	n := dice.BuildPool(counts, true, pool)
 	if n != 3 {
 		t.Fatalf("BuildPool n = %d, want 3", n)
 	}
-	want := []int{10, 12, 20}
+	want := []int{10, 20, 12}
 	for i, w := range want {
 		if pool[i] != w {
 			t.Errorf("pool[%d] = %d, want %d", i, pool[i], w)
@@ -71,7 +71,7 @@ func TestEffectD12TargetsReactedDie(t *testing.T) {
 	diceArr[0] = dice.Die{Sides: 10, Face: 1}
 	diceArr[1] = dice.Die{Sides: 12, Face: 12}
 	var used [dice.MaxDice]int
-	used[0] = 1 // d10 already reacted; d12 should still target it
+	used[0] = 1 // d10 already reacted; d12 may still target it
 	nDice := 2
 
 	dice.ReactAll(diceArr[:], used[:], &nDice, rng)

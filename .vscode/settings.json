@@ -85,13 +85,13 @@
 					"command": "workbench.action.tasks.runTask",
 					"args": "Goビルド (sim)"
 				},
-				"Part1限界貢献度(sim+グラフ)": {
+				"Part1限界貢献度": {
 					"command": "workbench.action.tasks.runTask",
-					"args": "Part1限界貢献度(sim+グラフ)"
+					"args": "Part1限界貢献度"
 				},
-				"Part1グラフのみ": {
+				"Part2種族能力": {
 					"command": "workbench.action.tasks.runTask",
-					"args": "Part1グラフのみ"
+					"args": "Part2種族能力"
 				}
 			}
 		},

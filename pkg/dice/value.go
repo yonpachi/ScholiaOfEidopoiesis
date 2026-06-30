@@ -7,11 +7,11 @@ const (
 	Base     = 11
 )
 
-// DiceSides lists supported die sizes in attribute order: d4, d6, d8, d10, d12, d20.
-var DiceSides = [6]int{4, 6, 8, 10, 12, 20}
+// DiceSides lists pool-enumerable die sizes (d12 is optional, appended last by BuildPool).
+var DiceSides = [5]int{4, 6, 8, 10, 20}
 
-// DiceNames matches DiceSides index order.
-var DiceNames = [6]string{"d4", "d6", "d8", "d10", "d12", "d20"}
+// DiceNames column order for CSV output (d12 index 5).
+var DiceNames = [6]string{"d4", "d6", "d8", "d10", "d20", "d12"}
 
 // DieValue maps a rolled face to achievement contribution (with penalty rules).
 func DieValue(sides, face int) int {
