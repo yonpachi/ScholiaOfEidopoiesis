@@ -1,0 +1,56 @@
+{
+	"commands.workspaceCommands": {
+		"Github支援系": {
+			"nestedItems": {
+				"MainブランチをPullする": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "mainブランチをPull"
+				},
+				"現在ブランチをPullする": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "現在ブランチをPull"
+				},
+				"mainブランチから新規ブランチ作成": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "mainブランチから新規ブランチ作成"
+				},
+				"git commit (変更をコミットしてプッシュできる状態にします)": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "git commit (変更をコミットしてプッシュできる状態にします)"
+				},
+				"git push (現在ブランチをプッシュします。未コミットがないか確認すること。)": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "git push (現在ブランチをプッシュします。未コミットがないか確認すること。)"
+				}
+			}
+		},
+		"セットアップ": {
+			"nestedItems": {
+				"Python仮想環境を作成して依存をインストール": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Python仮想環境を作成して依存をインストール"
+				}
+			}
+		},
+		"データベース": {
+			"nestedItems": {
+				"DBを再生成": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "DBを再生成"
+				}
+			}
+		},
+		"ドキュメント": {
+			"nestedItems": {
+				"MkDocsビルド": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "MkDocsビルド"
+				},
+				"MkDocsプレビュー": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "MkDocsプレビュー"
+				}
+			}
+		}
+	}
+}

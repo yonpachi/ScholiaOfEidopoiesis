@@ -21,6 +21,8 @@ alwaysApply: true
 │   └── seeds/      # シードデータ
 ├── constants/      # 定数（JSON）
 ├── sim/            # Go エミュレーター
+├── scripts/        # ビルド・ユーティリティ
+├── .vscode/        # tasks.json / settings.json（Commands から実行）
 ├── temp/           # 議論ログ（gitignore、議題ごとに個別ファイル）
 ├── mkdocs.yml
 └── requirements.txt
