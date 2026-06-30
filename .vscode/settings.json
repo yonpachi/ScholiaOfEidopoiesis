@@ -1,4 +1,23 @@
 {
+	"[go]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "golang.go",
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit"
+		}
+	},
+	"go.formatTool": "goimports",
+	"go.lintOnSave": "package",
+	"[python]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "charliermarsh.ruff",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.ruff": "explicit",
+			"source.organizeImports.ruff": "explicit"
+		}
+	},
+	"ruff.configuration": "${workspaceFolder}/pyproject.toml",
+	"ruff.lint.run": "onSave",
 	"commands.workspaceCommands": {
 		"Github支援系": {
 			"nestedItems": {
@@ -65,6 +84,46 @@
 				"Goビルド (sim)": {
 					"command": "workbench.action.tasks.runTask",
 					"args": "Goビルド (sim)"
+				}
+			}
+		},
+		"コード品質": {
+			"nestedItems": {
+				"Goフォーマット": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Goフォーマット"
+				},
+				"Pythonフォーマット": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Pythonフォーマット"
+				},
+				"全コードフォーマット": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "全コードフォーマット"
+				},
+				"Goリント": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Goリント"
+				},
+				"Pythonリント": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Pythonリント"
+				},
+				"全コードリント": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "全コードリント"
+				},
+				"全てをチェック(Go)": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "全てをチェック(Go)"
+				},
+				"全てをチェック(python)": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "全てをチェック(python)"
+				},
+				"全てをチェック": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "全てをチェック"
 				}
 			}
 		}

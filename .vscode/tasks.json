@@ -90,6 +90,87 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": []
+		},
+		{
+			"label": "Goフォーマット",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Pythonフォーマット",
+			"type": "shell",
+			"command": ".venv\\Scripts\\ruff.exe format .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全コードフォーマット",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && .venv\\Scripts\\ruff.exe format .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Goリント",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./...",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Pythonリント",
+			"type": "shell",
+			"command": ".venv\\Scripts\\ruff.exe check .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全コードリント",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && .venv\\Scripts\\ruff.exe check .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全てをチェック(Go)",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && ${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && go mod tidy && go test ./... && go build -o sim/bin/sim.exe ./sim/",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全てをチェック(python)",
+			"type": "shell",
+			"command": ".venv\\Scripts\\ruff.exe format . && .venv\\Scripts\\ruff.exe check .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全てをチェック",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && ${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && go mod tidy && go test ./... && go build -o sim/bin/sim.exe ./sim/ && .venv\\Scripts\\ruff.exe format . && .venv\\Scripts\\ruff.exe check .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
 		}
 	],
 	"inputs": [

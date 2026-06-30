@@ -24,6 +24,7 @@ alwaysApply: true
 | データベース | DBを再生成 |
 | ドキュメント | MkDocsビルド / MkDocsプレビュー |
 | エミュレーター | Go mod tidy (sim) / Goテスト (sim) / Goビルド (sim) |
+| コード品質 | Goフォーマット / Pythonフォーマット / 全コードフォーマット / Goリント / Pythonリント / 全コードリント / 全てをチェック(Go) / 全てをチェック(python) / 全てをチェック |
 | Github支援系 | Pull / ブランチ作成 / commit / push |
 
 ## 新規コマンド追加時
