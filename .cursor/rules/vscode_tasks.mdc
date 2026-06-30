@@ -23,6 +23,7 @@ alwaysApply: true
 | セットアップ | Python仮想環境を作成して依存をインストール |
 | データベース | DBを再生成 |
 | ドキュメント | MkDocsビルド / MkDocsプレビュー |
+| エミュレーター | Go mod tidy (sim) / Goテスト (sim) / Goビルド (sim) |
 | Github支援系 | Pull / ブランチ作成 / commit / push |
 
 ## 新規コマンド追加時

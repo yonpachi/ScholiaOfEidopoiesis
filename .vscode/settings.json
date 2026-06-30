@@ -51,6 +51,22 @@
 					"args": "MkDocsプレビュー"
 				}
 			}
+		},
+		"エミュレーター": {
+			"nestedItems": {
+				"Go mod tidy (sim)": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Go mod tidy (sim)"
+				},
+				"Goテスト (sim)": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Goテスト (sim)"
+				},
+				"Goビルド (sim)": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Goビルド (sim)"
+				}
+			}
 		}
 	}
 }

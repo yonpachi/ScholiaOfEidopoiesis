@@ -59,6 +59,37 @@
 				"reveal": "always",
 				"panel": "dedicated"
 			}
+		},
+		{
+			"label": "Go mod tidy (sim)",
+			"type": "shell",
+			"command": "go mod tidy",
+			"options": {
+				"cwd": "${workspaceFolder}/sim"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Goテスト (sim)",
+			"type": "shell",
+			"command": "go test ./...",
+			"options": {
+				"cwd": "${workspaceFolder}/sim"
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": false
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Goビルド (sim)",
+			"type": "shell",
+			"command": "go build -o bin/sim.exe .",
+			"options": {
+				"cwd": "${workspaceFolder}/sim"
+			},
+			"problemMatcher": []
 		}
 	],
 	"inputs": [
