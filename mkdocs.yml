@@ -1,8 +1,9 @@
 site_name: 錬金術TRPG
 site_description: 錬金術TRPG ルールブック
+site_url: https://yonpachi.github.io/ScholiaOfEidopoiesis/
 
 repo_url: https://github.com/yonpachi/ScholiaOfEidopoiesis
-edit_uri: edit/soe001_restart/docs/
+edit_uri: edit/main/docs/
 
 docs_dir: docs
 site_dir: site
