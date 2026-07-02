@@ -104,11 +104,11 @@ func ScoreMakina(pool []int, rng *rand.Rand) int {
 	return dice.ScoreWithOpts(diceArr[:], n, dice.ScoreOpts{NoSticky: true})
 }
 
-// HomunculusOption indexes 進化 choices: 0=修正, 1=発現, 2=変異.
+// HomunculusOption indexes 進化 choices: 0=修正, 1=発現, 2=収束.
 const (
 	HomoFix = iota
 	HomoManifest
-	HomoMutate
+	HomoConverge
 )
 
 // ScoreHomunculus picks the best 進化 option for the trial.
@@ -143,67 +143,25 @@ func ScoreHomunculus(diceRaw []dice.Die, nRaw int, rng *rand.Rand) (int, int) {
 		}
 	}
 
-	if nRaw >= 2 {
-		var tmp0 [dice.MaxDice]dice.Die
-		var used0 [dice.MaxDice]int
-		dice.CopyDiceState(diceRaw, nRaw, tmp0[:], used0[:])
-		nn0 := nRaw
-		totalSteps := dice.RunReactLoopSteps(tmp0[:], used0[:], &nn0, &q, rng, -1)
-
-		for k := 0; k <= totalSteps; k++ {
-			var tmp [dice.MaxDice]dice.Die
-			var used [dice.MaxDice]int
-			dice.CopyDiceState(diceRaw, nRaw, tmp[:], used[:])
-			nn := nRaw
-			dice.RunReactLoopSteps(tmp[:], used[:], &nn, &q, rng, k)
-			activationCost := nn
-
-			drop := 0
-			bestVal := dice.DieValue(tmp[0].Sides, tmp[0].Face)
-			for i := 1; i < nn; i++ {
-				v := dice.DieValue(tmp[i].Sides, tmp[i].Face)
-				if v > bestVal {
-					bestVal = v
-					drop = i
-				}
-			}
-
-			var t2 [dice.MaxDice]dice.Die
-			var u2 [dice.MaxDice]int
-			nn2 := 0
-			for i := 0; i < nn; i++ {
-				if i == drop {
-					continue
-				}
-				t2[nn2] = tmp[i]
-				t2[nn2].Face = dice.CyclicAdjust(t2[nn2].Sides, t2[nn2].Face, 1)
-				u2[nn2] = used[i]
-				nn2++
-			}
-			dice.RunReactLoop(t2[:], u2[:], &nn2, &q, rng, 0)
-			rawScore := dice.ScoreBaseline(t2[:], nn2)
-			s := rawScore - activationCost
-			if s > bestScore {
-				bestScore = s
-				bestOption = HomoMutate
-			}
-		}
-	} else {
-		var tmp [dice.MaxDice]dice.Die
-		var used [dice.MaxDice]int
-		dice.CopyDiceState(diceRaw, nRaw, tmp[:], used[:])
-		tmp[0].Face = dice.CyclicAdjust(tmp[0].Sides, tmp[0].Face, 1)
-		nn := nRaw
-		dice.RunReactLoop(tmp[:], used[:], &nn, &q, rng, 0)
-		rawScore := dice.ScoreBaseline(tmp[:], nn)
-		s := rawScore - nn
-		if s > bestScore {
-			bestScore = s
-			bestOption = HomoMutate
+	{
+		bestConverge, ok := scoreHomunculusConverge(diceRaw, nRaw, rng)
+		if ok && bestConverge > bestScore {
+			bestScore = bestConverge
+			bestOption = HomoConverge
 		}
 	}
 
 	return bestScore, bestOption
+}
+
+// scoreHomunculusConverge applies 進化・収束: all faces to ⌊s/2⌋, skip reaction.
+func scoreHomunculusConverge(diceRaw []dice.Die, nRaw int, _ *rand.Rand) (int, bool) {
+	var tmp [dice.MaxDice]dice.Die
+	copy(tmp[:nRaw], diceRaw[:nRaw])
+	for i := 0; i < nRaw; i++ {
+		tmp[i].Face = tmp[i].Sides / 2
+	}
+	return dice.ScoreBaseline(tmp[:], nRaw), true
 }
 
 // ScoreRelicia applies 手馴.

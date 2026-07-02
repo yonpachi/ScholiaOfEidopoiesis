@@ -189,7 +189,7 @@ func printSummary(agg *raceAgg, trialsPerPool int) {
 	homoTotal := agg.homoOptionCnt[0] + agg.homoOptionCnt[1] + agg.homoOptionCnt[2]
 	if homoTotal > 0 {
 		fmt.Println("\nホムンクルス三択選択率:")
-		homoNames := [3]string{"修正", "発現", "変異"}
+		homoNames := [3]string{"修正", "発現", "収束"}
 		for o := 0; o < 3; o++ {
 			fmt.Printf("  %-14s : %6d  (%.1f%%)\n", homoNames[o], agg.homoOptionCnt[o],
 				100.0*float64(agg.homoOptionCnt[o])/float64(homoTotal))
@@ -345,7 +345,7 @@ func writeHomunculusDistCSV(path string, agg *raceAgg, homoTotal int64) (err err
 	if err := w.Write([]string{"option", "count", "rate"}); err != nil {
 		return err
 	}
-	names := [3]string{"fix", "manifest", "mutate"}
+	names := [3]string{"fix", "manifest", "converge"}
 	for o := 0; o < 3; o++ {
 		rate := 0.0
 		if homoTotal > 0 {
@@ -370,7 +370,7 @@ func writeHomunculusByNCSV(path string, agg *raceAgg) (err error) {
 		}
 	}()
 	w := csv.NewWriter(f)
-	if err := w.Write([]string{"n_pool", "fix_rate", "manifest_rate", "mutate_rate"}); err != nil {
+	if err := w.Write([]string{"n_pool", "fix_rate", "manifest_rate", "converge_rate"}); err != nil {
 		return err
 	}
 	for n := 1; n <= dice.MaxN; n++ {

@@ -49,9 +49,11 @@ sim/
 | `csv/race_ability_by_n.csv` | n_pool × 種族 avg_delta（ベースd10 + レシピd4/d6/d8/d20） |
 | `csv/race_use_rate_by_n.csv` | 能力使用率 |
 | `csv/race_delta_use_by_n.csv` | 使用時 avg_delta |
-| `csv/homunculus_option_distribution.csv` | 進化3択の選択率 |
+| `csv/homunculus_option_distribution.csv` | 進化3択の選択率（全体） |
+| `csv/homunculus_option_by_n.csv` | 進化3択の選択率（n_pool 別） |
 | `race_ability_by_n.png` | 折れ線グラフ |
-| `homunculus_options.png` | ホムンクルス棒グラフ |
+| `homunculus_options.png` | ホムンクルス三択棒グラフ（全体） |
+| `homunculus_options_by_n.png` | ホムンクルス三択折れ線グラフ（マナ別） |
 
 ## Part3 の出力
 

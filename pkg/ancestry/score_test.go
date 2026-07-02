@@ -17,6 +17,22 @@ func TestScoreMakinaReturnsScoreWithoutD10(t *testing.T) {
 	}
 }
 
+func TestHomunculusConvergeHomogenizeAllOnes(t *testing.T) {
+	rng := rand.New(rand.NewSource(0))
+	raw := []dice.Die{
+		{Sides: 10, Face: 1},
+		{Sides: 4, Face: 1},
+		{Sides: 6, Face: 1},
+	}
+	wantConverge := dice.DieValue(10, 5) + dice.DieValue(4, 2) + dice.DieValue(6, 3)
+	score, opt := ancestry.ScoreHomunculus(raw, 3, rng)
+	if score < wantConverge {
+		t.Errorf("homunculus score=%d opt=%d, want at least converge floor %d", score, opt, wantConverge)
+	}
+	if opt != ancestry.HomoConverge {
+		t.Errorf("homunculus opt=%d, want HomoConverge=%d on all-1 pool", opt, ancestry.HomoConverge)
+	}
+}
 func TestHomunculusFixDisablesStickyPenalty(t *testing.T) {
 	rng := rand.New(rand.NewSource(0))
 	raw := []dice.Die{

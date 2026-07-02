@@ -39,6 +39,23 @@ func BaselineFromRaw(diceRaw []Die, nRaw int, rng *rand.Rand) int {
 	return ScoreBaseline(baseDice[:], nBase)
 }
 
+// WrapFace maps face into 1..sides using cyclic wrap (for crossover overflow).
+func WrapFace(sides, face int) int {
+	if sides < 1 {
+		return face
+	}
+	idx := face - 1
+	idx = ((idx % sides) + sides) % sides
+	return idx + 1
+}
+
+// SwapCrossoverFaces swaps faces of two dice; out-of-range results wrap cyclically.
+func SwapCrossoverFaces(a, b *Die) {
+	fa, fb := a.Face, b.Face
+	a.Face = WrapFace(a.Sides, fb)
+	b.Face = WrapFace(b.Sides, fa)
+}
+
 // InvertFace returns the inverted face (N+1-face).
 func InvertFace(sides, face int) int {
 	return invertFace(sides, face)

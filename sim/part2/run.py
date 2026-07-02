@@ -37,12 +37,73 @@ RACE_MARKERS = {
     "Umbra": "*",
 }
 
+HOMO_OPTION_SERIES = (
+    ("fix_rate", "修正", "#2ecc71", "o"),
+    ("manifest_rate", "発現", "#e74c3c", "s"),
+    ("converge_rate", "収束", "#3498db", "^"),
+)
+HOMO_OPTION_LABELS = {
+    "fix": "修正",
+    "manifest": "発現",
+    "converge": "収束",
+    "mutate": "収束",  # 旧 CSV 互換
+}
+
 
 def run_sim(out_dir: Path, seed: int, trials: int) -> None:
     run_go(
         "part2",
         ["-out", str(out_dir), "-seed", str(seed), "-trials", str(trials)],
         stream_progress=True,
+    )
+
+
+def plot_homunculus_options_by_n(out_dir: Path) -> None:
+    homo_by_n_csv = csv_dir(out_dir) / "homunculus_option_by_n.csv"
+    if not homo_by_n_csv.exists():
+        return
+
+    xs: list[int] = []
+    rates: dict[str, list[float]] = {key: [] for key, _, _, _ in HOMO_OPTION_SERIES}
+    with open(homo_by_n_csv, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            fix = float(row.get("fix_rate", 0) or 0)
+            manifest = float(row.get("manifest_rate", 0) or 0)
+            converge = float(row.get("converge_rate") or row.get("mutate_rate", 0) or 0)
+            if fix + manifest + converge <= 0:
+                continue
+            xs.append(int(row["n_pool"]))
+            rates["fix_rate"].append(fix * 100.0)
+            rates["manifest_rate"].append(manifest * 100.0)
+            rates["converge_rate"].append(converge * 100.0)
+
+    if not xs:
+        return
+
+    save_line_chart(
+        LineChartSpec(
+            series=[
+                LineSeries(
+                    x=xs,
+                    y=rates[col],
+                    label=label,
+                    color=color,
+                    marker=marker,
+                )
+                for col, label, color, marker in HOMO_OPTION_SERIES
+            ],
+            axis=AxisSpec(
+                xlabel="プール内総ダイス数 (n_pool)",
+                ylabel="選択率 (%)",
+                title="ホムンクルス進化 — マナ別三択選択率",
+                x_major="integer",
+                ylim=(0, 100),
+                y_major=10,
+            ),
+            figsize=(12, 6),
+            legend_loc="upper right",
+        ),
+        out_dir / "homunculus_options_by_n.png",
     )
 
 
@@ -124,7 +185,7 @@ def plot(out_dir: Path) -> None:
         homo_labels, homo_rates, homo_counts = [], [], []
         with open(homo_csv, newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
-                homo_labels.append(row["option"])
+                homo_labels.append(HOMO_OPTION_LABELS.get(row["option"], row["option"]))
                 homo_counts.append(int(row["count"]))
                 homo_rates.append(float(row["rate"]) * 100.0)
 
@@ -148,6 +209,8 @@ def plot(out_dir: Path) -> None:
             ),
             out_dir / "homunculus_options.png",
         )
+
+    plot_homunculus_options_by_n(out_dir)
 
 
 def main() -> None:
