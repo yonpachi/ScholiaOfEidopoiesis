@@ -1,41 +1,76 @@
-site_name: 錬金術TRPG
+site_name: 想成のスコーリア
 site_description: 錬金術TRPG ルールブック
 site_url: https://yonpachi.github.io/ScholiaOfEidopoiesis/
 
-repo_url: https://github.com/yonpachi/ScholiaOfEidopoiesis
-edit_uri: edit/main/docs/
-
-docs_dir: docs
-site_dir: site
+validation:
+  links:
+    not_found: ignore
 
 theme:
   name: material
   language: ja
+  palette:
+    - scheme: default
+      primary: indigo # ヘッダー色
+      accent: amber # リンク・ボタンのアクセント
+      toggle:
+        icon: material/brightness-7
+        name: ダークモード
+    - scheme: slate
+      primary: indigo
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: ライトモード
   features:
-    - navigation.tabs
     - navigation.sections
+    - navigation.top
     - search.suggest
     - search.highlight
     - content.code.copy
 
+  font:
+    text: Noto Sans JP
+    code: Inconsolata
+  logo: assets/logo.png
+  favicon: assets/icon.png
+
 markdown_extensions:
+  - mdx_truly_sane_lists:
+      nested_indent: 2
+      truly_sane: true
   - admonition
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.highlight:
+      pygments_style: monokai
+  - pymdownx.arithmatex:
+      generic: true
+  - tables
   - toc:
       permalink: true
+  - def_list
+  - attr_list
+
+nav:
+  - はじめに: about.md
+  - ルール:
+      - 判定: rules/dice.md
+      - 種族: rules/ancestry.md
+  - 用語集: glossary.md
+
+extra:
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js
 
 plugins:
   - search
-  - macros:
-      module_name: macros
-
-nav:
-  - ホーム: index.md
-  - 用語集: glossary.md
-  - ルール:
-    - rules/index.md
-    - ダイスシステム: rules/dice.md
-    - 種族・種族能力: rules/ancestry.md
+  - glightbox
