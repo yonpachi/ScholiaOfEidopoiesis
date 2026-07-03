@@ -32,6 +32,7 @@ sim/
 | Part1限界貢献度 | 列挙シム → CSV → PNG |
 | Part2種族能力 | 種族能力比較 sim → CSV → PNG |
 | Part3種族平均スコア | 種族別平均スコア sim → CSV → PNG |
+| 全Part実行 | `sim/partN/run.py` を番号順に一括実行（`result/<timestamp>/` に集約） |
 
 ## Part1 の出力
 

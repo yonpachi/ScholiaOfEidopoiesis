@@ -119,6 +119,15 @@
 			"problemMatcher": []
 		},
 		{
+			"label": "全Part実行",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe sim/run_all.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
 			"label": "Goフォーマット",
 			"type": "shell",
 			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim",
