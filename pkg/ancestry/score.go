@@ -164,49 +164,26 @@ func scoreHomunculusConverge(diceRaw []dice.Die, nRaw int, _ *rand.Rand) (int, b
 	return dice.ScoreBaseline(tmp[:], nRaw), true
 }
 
-// ScoreRelicia applies 手馴.
+// ScoreRelicia applies 手馴: before reaction, reroll all dice (activation cost: subtract nRaw from score).
 func ScoreRelicia(diceRaw []dice.Die, nRaw int, rng *rand.Rand) (int, bool) {
-	bestTarget := -1
-	bestExpGain := 0.0
-	for i := 0; i < nRaw; i++ {
-		n := diceRaw[i].Sides
-		oldFace := diceRaw[i].Face
-		oldVal := dice.DieValue(n, oldFace)
-		expNew := 0.0
-		for f := 1; f <= n; f++ {
-			val := dice.DieValue(n, f)
-			if f <= oldFace {
-				val = oldVal
-			}
-			expNew += float64(val)
-		}
-		expNew /= float64(n)
-		if g := expNew - float64(oldVal); g > bestExpGain {
-			bestExpGain = g
-			bestTarget = i
-		}
-	}
+	best := dice.BaselineFromRaw(diceRaw, nRaw, rng)
 
 	var tmp [dice.MaxDice]dice.Die
 	var used [dice.MaxDice]int
 	var q dice.Queue
 	dice.CopyDiceState(diceRaw, nRaw, tmp[:], used[:])
-	abilityUsed := bestTarget >= 0
-	if abilityUsed {
-		oldFace := tmp[bestTarget].Face
-		newFace := rng.Intn(tmp[bestTarget].Sides) + 1
-		if newFace <= oldFace {
-			newFace = oldFace
-		}
-		tmp[bestTarget].Face = newFace
-		used[bestTarget] = 1
+	for i := 0; i < nRaw; i++ {
+		tmp[i].Face = rng.Intn(tmp[i].Sides) + 1
 	}
 	n := nRaw
 	dice.RunReactLoop(tmp[:], used[:], &n, &q, rng, 0)
-	return dice.ScoreBaseline(tmp[:], n) + 1, abilityUsed
+	if s := dice.ScoreBaseline(tmp[:], n) - nRaw; s > best {
+		return s, true
+	}
+	return best, false
 }
 
-// ScoreUmbra applies 越境.
+// ScoreUmbra applies 越境: rewind one reacted die, or +1 achievement when none reacted.
 func ScoreUmbra(diceRaw []dice.Die, nRaw int, rng *rand.Rand) (int, bool) {
 	var tmp [dice.MaxDice]dice.Die
 	var used [dice.MaxDice]int
@@ -214,38 +191,43 @@ func ScoreUmbra(diceRaw []dice.Die, nRaw int, rng *rand.Rand) (int, bool) {
 	dice.CopyDiceState(diceRaw, nRaw, tmp[:], used[:])
 	n := nRaw
 	dice.RunReactLoop(tmp[:], used[:], &n, &q, rng, 0)
-	baseScore := dice.ScoreBaseline(tmp[:], n)
+
+	bestScore := dice.ScoreBaseline(tmp[:], n)
+
+	reactedCount := 0
+	for i := 0; i < n; i++ {
+		reactedCount += used[i]
+	}
+	if reactedCount == 0 {
+		return bestScore + 1, true
+	}
 
 	bestTarget := -1
-	bestGain := 0.0
 	for i := 0; i < n; i++ {
 		if used[i] == 0 {
 			continue
 		}
-		if !dice.Triggers(tmp[i].Sides, tmp[i].Face) {
-			continue
-		}
-		var t2 [dice.MaxDice]dice.Die
-		var u2 [dice.MaxDice]int
-		copy(t2[:n], tmp[:n])
-		copy(u2[:n], used[:n])
-		u2[i] = 0
-		n2 := n
-		dice.RunReactLoop(t2[:], u2[:], &n2, &q, rng, 0)
-		if g := float64(dice.ScoreBaseline(t2[:], n2) - baseScore); g > bestGain {
-			bestGain = g
+		var trial [dice.MaxDice]dice.Die
+		var trialUsed [dice.MaxDice]int
+		copy(trial[:n], tmp[:n])
+		copy(trialUsed[:n], used[:n])
+		trialUsed[i] = 0
+		nTrial := n
+		dice.RunReactLoop(trial[:], trialUsed[:], &nTrial, &q, rng, 0)
+		if s := dice.ScoreBaseline(trial[:], nTrial); s > bestScore {
+			bestScore = s
 			bestTarget = i
 		}
 	}
 	if bestTarget < 0 {
-		return baseScore, false
+		return dice.ScoreBaseline(tmp[:], n), false
 	}
 	used[bestTarget] = 0
 	dice.RunReactLoop(tmp[:], used[:], &n, &q, rng, 0)
 	return dice.ScoreBaseline(tmp[:], n), true
 }
 
-// ScoreByRace applies race r (only Hume / Homunculus have activation cost).
+// ScoreByRace applies race r (Hume and Relicia subtract nPool from score when ability is used).
 func ScoreByRace(race int, pool []int, diceRaw []dice.Die, nPool int, rng *rand.Rand) (int, bool) {
 	switch race {
 	case 0:

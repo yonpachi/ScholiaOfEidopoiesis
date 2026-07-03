@@ -12,6 +12,7 @@ func TestDieValue(t *testing.T) {
 		sides, face, want int
 	}{
 		{10, 1, -1},
+		{10, 2, 2},
 		{10, 5, 5},
 		{20, 1, -1},
 		{20, 2, -1},
@@ -24,6 +25,22 @@ func TestDieValue(t *testing.T) {
 	for _, c := range cases {
 		if got := dice.DieValue(c.sides, c.face); got != c.want {
 			t.Errorf("DieValue(%d,%d) = %d, want %d", c.sides, c.face, got, c.want)
+		}
+	}
+}
+
+func TestDieValueNoPenalty(t *testing.T) {
+	cases := []struct {
+		sides, face, want int
+	}{
+		{10, 1, 1},
+		{20, 1, 0},
+		{20, 2, 1},
+		{20, 4, 2},
+	}
+	for _, c := range cases {
+		if got := dice.DieValueNoPenalty(c.sides, c.face); got != c.want {
+			t.Errorf("DieValueNoPenalty(%d,%d) = %d, want %d", c.sides, c.face, got, c.want)
 		}
 	}
 }

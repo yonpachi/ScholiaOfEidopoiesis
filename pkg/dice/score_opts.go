@@ -4,7 +4,7 @@ import "math/rand"
 
 // ScoreOpts controls achievement scoring variants.
 type ScoreOpts struct {
-	NoSticky    bool // 澱み無効: 出目を−1に換算しない（d4-d12 の1も1、d20は÷2のみ）
+	NoSticky    bool // 澱み無効: 換算後1以下を−1にしない
 	PerDieMinus int  // 各ダイス換算から減算（将来拡張用）
 }
 

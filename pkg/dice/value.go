@@ -18,26 +18,26 @@ var AttrSides = [4]int{4, 6, 8, 20}
 
 const BaseD10 = 10
 
-// DieValue maps a rolled face to achievement contribution (with penalty rules).
-func DieValue(sides, face int) int {
-	if face == 1 {
-		return -1
-	}
-	if sides == 20 && face <= 3 {
-		return -1
-	}
+// readAchievement converts a rolled face to achievement value before sticky.
+func readAchievement(sides, face int) int {
 	if sides == 20 {
 		return face / 2
 	}
 	return face
 }
 
-// DieValueNoPenalty maps a face without sticky (-1) penalty.
-func DieValueNoPenalty(sides, face int) int {
-	if sides == 20 {
-		return face / 2
+// DieValue maps a rolled face to achievement contribution (with sticky).
+func DieValue(sides, face int) int {
+	v := readAchievement(sides, face)
+	if v <= 1 {
+		return -1
 	}
-	return face
+	return v
+}
+
+// DieValueNoPenalty maps a face without sticky penalty.
+func DieValueNoPenalty(sides, face int) int {
+	return readAchievement(sides, face)
 }
 
 func cyclicAdjust(sides, face, delta int) int {

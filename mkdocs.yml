@@ -38,3 +38,4 @@ nav:
   - ルール:
     - rules/index.md
     - ダイスシステム: rules/dice.md
+    - 種族・種族能力: rules/ancestry.md
