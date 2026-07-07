@@ -1,228 +1,226 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Python: Part1 単一ダイス参照表",
-      "type": "shell",
-      "command": ".\\.venv\\Scripts\\python.exe sim/part1/run.py",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "focus": true
-      }
-    },
-    {
-      "label": "Python: Part2 限界貢献度",
-      "type": "shell",
-      "command": ".\\.venv\\Scripts\\python.exe sim/part2/run.py",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "focus": true
-      }
-    },
-    {
-      "label": "Python: Part3 難易度テーブル",
-      "type": "shell",
-      "command": ".\\.venv\\Scripts\\python.exe sim/part3/run.py",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "focus": true
-      }
-    },
-    {
-      "label": "Python: Part4 種族効果比較",
-      "type": "shell",
-      "command": ".\\.venv\\Scripts\\python.exe sim/part4/run.py",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "focus": true
-      }
-    },
-    {
-      "label": "Python: Part5 basic4プール",
-      "type": "shell",
-      "command": ".\\.venv\\Scripts\\python.exe sim/part5/run.py",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "focus": true
-      }
-    },
-    {
-      "label": "Python: Part6 品質成長",
-      "type": "shell",
-      "command": ".\\.venv\\Scripts\\python.exe sim/part6/run.py",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "focus": true
-      }
-    },
-    {
-      "label": "Python: Part7 実効戦闘値",
-      "type": "shell",
-      "command": ".\\.venv\\Scripts\\python.exe sim/part7/run.py",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "focus": true
-      }
-    },
-    {
-      "label": "Python: 全Part実行",
-      "type": "shell",
-      "command": ".\\.venv\\Scripts\\python.exe sim/run_all.py",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "focus": true
-      }
-    },
-    {
-      "label": "Python: プレビュー",
-      "type": "shell",
-      "command": ".\\.venv\\Scripts\\mkdocs serve"
-    },
-    {
-      "label": "Go: テスト実行",
-      "type": "shell",
-      "command": "go test ./... ./dice/__tests__/ ./part2/__tests__/ ./part3/__tests__/ ./part4/__tests__/ ./part5/__tests__/ ./part6/__tests__/ -count=1",
-      "options": {
-        "cwd": "${workspaceFolder}/sim"
-      },
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      },
-      "problemMatcher": ["$go"],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated"
-      }
-    },
-    {
-      "label": "Go: C版CSV比較テスト (要 monte_carlo.exe)",
-      "type": "shell",
-      "command": "$env:RUN_C_COMPARE='1'; go test ./... -v -run TestMarginalCSVAgainstC -count=1 -timeout 30m",
-      "dependsOn": [],
-      "options": {
-        "cwd": "${workspaceFolder}/sim",
-        "shell": {
-          "executable": "powershell.exe",
-          "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command"]
-        }
-      },
-      "problemMatcher": ["$go"],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "focus": true
-      }
-    },
-    {
-      "label": "Python: venv セットアップ (matplotlib/numpy)",
-      "type": "shell",
-      "command": "python -m venv .venv; .\\.venv\\Scripts\\pip.exe install -r requirements.txt matplotlib numpy",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      }
-    },
-    {
-      "label": "GitHub: ラベル・マイルストーン作成",
-      "type": "shell",
-      "command": "powershell -ExecutionPolicy Bypass -File scripts/setup-github-labels.ps1",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      }
-    },
-    {
-      "label": "git: main を Pull",
-      "type": "shell",
-      "command": "git checkout main; git pull",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "git: 現在ブランチを Pull",
-      "type": "shell",
-      "command": "git pull",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "git: commit",
-      "type": "shell",
-      "command": "git add .; git commit -m \"${input:commitMessage}\"",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "git: push",
-      "type": "shell",
-      "command": "git push -u origin HEAD",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": []
-    }
-  ],
-  "inputs": [
-    {
-      "type": "promptString",
-      "id": "commitMessage",
-      "description": "コミットメッセージを入力",
-      "default": ""
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "mainブランチをPull",
+			"type": "shell",
+			"command": "git checkout main && git pull",
+			"problemMatcher": []
+		},
+		{
+			"label": "現在ブランチをPull",
+			"type": "shell",
+			"command": "git pull",
+			"problemMatcher": []
+		},
+		{
+			"label": "mainブランチから新規ブランチ作成",
+			"type": "shell",
+			"command": "git checkout main && git pull && git checkout -b ${input:branch}",
+			"problemMatcher": []
+		},
+		{
+			"label": "git commit (変更をコミットしてプッシュできる状態にします)",
+			"type": "shell",
+			"command": "git add . && git commit -m \"${input:message}\"",
+			"problemMatcher": []
+		},
+		{
+			"label": "git push (現在ブランチをプッシュします。未コミットがないか確認すること。)",
+			"type": "shell",
+			"command": "git push -u origin HEAD",
+			"problemMatcher": []
+		},
+		{
+			"label": "Python仮想環境を作成して依存をインストール",
+			"type": "shell",
+			"command": "python -m venv .venv && .venv\\Scripts\\pip install -r requirements.txt",
+			"problemMatcher": []
+		},
+		{
+			"label": "DBを再生成",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe scripts/build_db.py",
+			"problemMatcher": []
+		},
+		{
+			"label": "MkDocsビルド",
+			"type": "shell",
+			"command": ".venv\\Scripts\\mkdocs.exe build",
+			"problemMatcher": []
+		},
+		{
+			"label": "MkDocsプレビュー",
+			"type": "shell",
+			"command": ".venv\\Scripts\\mkdocs.exe serve",
+			"isBackground": true,
+			"problemMatcher": [],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated"
+			}
+		},
+		{
+			"label": "Go mod tidy (sim)",
+			"type": "shell",
+			"command": "go mod tidy",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Goテスト (sim)",
+			"type": "shell",
+			"command": "go test ./...",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": false
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Goビルド (sim)",
+			"type": "shell",
+			"command": "go build -o sim/bin/sim.exe ./sim/ && go build -o sim/bin/part1.exe ./sim/part1 && go build -o sim/bin/part2.exe ./sim/part2 && go build -o sim/bin/part3.exe ./sim/part3",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Part1限界貢献度",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe sim/part1/run.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Part2種族能力",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe sim/part2/run.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Part3種族平均スコア",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe sim/part3/run.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全Part実行",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe sim/run_all.py",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Goフォーマット",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Pythonフォーマット",
+			"type": "shell",
+			"command": ".venv\\Scripts\\ruff.exe format .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全コードフォーマット",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && .venv\\Scripts\\ruff.exe format .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Goリント",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./...",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Pythonリント",
+			"type": "shell",
+			"command": ".venv\\Scripts\\ruff.exe check .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全コードリント",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && .venv\\Scripts\\ruff.exe check .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全てをチェック(Go)",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && ${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && go mod tidy && go test ./... && go build -o sim/bin/sim.exe ./sim/ && go build -o sim/bin/part1.exe ./sim/part1 && go build -o sim/bin/part2.exe ./sim/part2 && go build -o sim/bin/part3.exe ./sim/part3",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全てをチェック(python)",
+			"type": "shell",
+			"command": ".venv\\Scripts\\ruff.exe format . && .venv\\Scripts\\ruff.exe check .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "全てをチェック",
+			"type": "shell",
+			"command": "${env:USERPROFILE}\\go\\bin\\goimports.exe -w pkg sim && ${env:USERPROFILE}\\go\\bin\\golangci-lint.exe run ./... && go mod tidy && go test ./... && go build -o sim/bin/sim.exe ./sim/ && .venv\\Scripts\\ruff.exe format . && .venv\\Scripts\\ruff.exe check .",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "message",
+			"description": "コミット変更内容を入力してください。",
+			"default": ""
+		},
+		{
+			"type": "promptString",
+			"id": "branch",
+			"description": "ブランチ名を入力してください。",
+			"default": ""
+		}
+	]
 }

@@ -3,81 +3,212 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
+	"math"
 	"math/rand"
 	"os"
 	"path/filepath"
-	"github.com/yonpachi/ScholiaOfEidopoiesis/sim/dice"
+	"runtime"
+	"sync"
+	"sync/atomic"
+
+	"github.com/yonpachi/ScholiaOfEidopoiesis/pkg/dice"
 )
 
-// RefDice lists dice types for Part1 reference (name aligned with sides).
-var RefDice = []struct {
-	Name  string
-	Sides int
-}{
-	{"d4", 4},
-	{"d6", 6},
-	{"d8", 8},
-	{"d10", 10},
-	{"d12", 12},
-	{"d20", 20},
+// MarginalTable holds per-n_others marginal contribution averages.
+type MarginalTable struct {
+	Sum [6][dice.MaxN]float64
+	Cnt [6][dice.MaxN]int64
 }
 
-// RunPart1Reference prints single-die x5 reference stats and optionally writes CSV.
-func RunPart1Reference(trials int, outDir string, rng *rand.Rand) error {
-	fmt.Printf("=== Part1: single die x5 reference (trials=%d) ===\n", trials)
-	fmt.Printf("%-6s  avg/die  p50/die  p90/die  p99/die\n", "pool")
-	fmt.Printf("------  -------  -------  -------  -------\n")
+type pass1Job struct {
+	counts [5]int
+	d12    int
+	idx    int
+}
 
-	type row struct {
-		name            string
-		avg, p50, p90, p99 float64
-	}
-	rows := make([]row, 0, len(RefDice))
-
-	for _, ref := range RefDice {
-		pool := make([]int, 5)
-		for i := range pool {
-			pool[i] = ref.Sides
+func collectPass1Jobs() []pass1Job {
+	var jobs []pass1Job
+	var counts [5]int
+	for counts[0] = 0; counts[0] <= dice.MaxN; counts[0]++ {
+		for counts[1] = 0; counts[1] <= dice.MaxN-counts[0]; counts[1]++ {
+			for counts[2] = 0; counts[2] <= dice.MaxN-counts[0]-counts[1]; counts[2]++ {
+				for counts[3] = 1; counts[3] <= dice.MaxN-counts[0]-counts[1]-counts[2]; counts[3]++ {
+					for counts[4] = 0; counts[4] <= dice.MaxN-counts[0]-counts[1]-counts[2]-counts[3]; counts[4]++ {
+						for d12 := 0; d12 <= 1; d12++ {
+							jobs = append(jobs, pass1Job{
+								counts: counts,
+								d12:    d12,
+								idx:    dice.PoolCacheIdx(counts, d12),
+							})
+						}
+					}
+				}
+			}
 		}
-		stats := dice.SimulatePool(pool, trials, rng)
-		r := row{
-			name: ref.Name,
-			avg:  stats.Avg / 5.0,
-			p50:  float64(stats.P50) / 5.0,
-			p90:  float64(stats.P90) / 5.0,
-			p99:  float64(stats.P99) / 5.0,
+	}
+	return jobs
+}
+
+func countPass2Steps() int64 {
+	var n int64
+	var counts [5]int
+	for counts[0] = 0; counts[0] <= dice.MaxN-1; counts[0]++ {
+		for counts[1] = 0; counts[1] <= dice.MaxN-1-counts[0]; counts[1]++ {
+			for counts[2] = 0; counts[2] <= dice.MaxN-1-counts[0]-counts[1]; counts[2]++ {
+				for counts[3] = 1; counts[3] <= dice.MaxN-1-counts[0]-counts[1]-counts[2]; counts[3]++ {
+					for counts[4] = 0; counts[4] <= dice.MaxN-1-counts[0]-counts[1]-counts[2]-counts[3]; counts[4]++ {
+						sub := counts[0] + counts[1] + counts[2] + counts[3] + counts[4]
+						for d12 := 0; d12 <= 1; d12++ {
+							if sub+d12 <= dice.MaxN-1 {
+								n++
+							}
+						}
+					}
+				}
+			}
 		}
-		rows = append(rows, r)
-		fmt.Printf("%-6s  %7.3f  %7.1f  %7.1f  %7.1f\n",
-			r.name, r.avg, r.p50, r.p90, r.p99)
+	}
+	return n
+}
+
+func printProgress(prefix string, done, total int64) {
+	pct := 100.0 * float64(done) / float64(total)
+	fmt.Printf("%s: %d / %d  (%.1f%%)\n", prefix, done, total, pct)
+}
+
+// RunFullEnumeration computes marginal contributions and writes marginal_by_n.csv.
+func RunFullEnumeration(trialsEnum int, outDir string, baseSeed int64) error {
+	cache := make([]float64, dice.PoolCacheSize())
+	for i := range cache {
+		cache[i] = math.NaN()
 	}
 
-	if outDir == "" {
-		return nil
+	jobs := collectPass1Jobs()
+	nTotal := int64(len(jobs))
+	fmt.Printf("  総構成数: %d\n", nTotal)
+
+	var nComputed int64
+	workers := runtime.NumCPU()
+	if workers < 1 {
+		workers = 1
 	}
+	jobCh := make(chan pass1Job, workers*2)
+	var wg sync.WaitGroup
+
+	for w := 0; w < workers; w++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			var pool [dice.MaxDice]int
+			for job := range jobCh {
+				subRng := rand.New(rand.NewSource(baseSeed + int64(job.idx)*9973))
+				np := dice.BuildPool(job.counts, job.d12 == 1, pool[:])
+				stats := dice.SimulatePool(pool[:np], trialsEnum, subRng)
+				cache[job.idx] = stats.Avg
+
+				done := atomic.AddInt64(&nComputed, 1)
+				if done%100 == 0 || done == nTotal {
+					printProgress("PROGRESS1", done, nTotal)
+				}
+			}
+		}()
+	}
+	for _, job := range jobs {
+		jobCh <- job
+	}
+	close(jobCh)
+	wg.Wait()
+	fmt.Printf("\n  キャッシュ完了: %d 構成\n", nTotal)
+
+	var table MarginalTable
+	p2Total := countPass2Steps()
+	var p2Done int64
+
+	var counts [5]int
+	for counts[0] = 0; counts[0] <= dice.MaxN-1; counts[0]++ {
+		for counts[1] = 0; counts[1] <= dice.MaxN-1-counts[0]; counts[1]++ {
+			for counts[2] = 0; counts[2] <= dice.MaxN-1-counts[0]-counts[1]; counts[2]++ {
+				for counts[3] = 1; counts[3] <= dice.MaxN-1-counts[0]-counts[1]-counts[2]; counts[3]++ {
+					for counts[4] = 0; counts[4] <= dice.MaxN-1-counts[0]-counts[1]-counts[2]-counts[3]; counts[4]++ {
+						sub := counts[0] + counts[1] + counts[2] + counts[3] + counts[4]
+						for d12 := 0; d12 <= 1; d12++ {
+							total := sub + d12
+							if total > dice.MaxN-1 {
+								continue
+							}
+							avgBase := cache[dice.PoolCacheIdx(counts, d12)]
+							nOthers := total
+
+							for t := 0; t < 5; t++ {
+								counts[t]++
+								avgPlus := cache[dice.PoolCacheIdx(counts, d12)]
+								counts[t]--
+								if math.IsNaN(avgPlus) {
+									continue
+								}
+								diff := avgPlus - avgBase
+								table.Sum[t][nOthers] += diff
+								table.Cnt[t][nOthers]++
+							}
+							if d12 == 0 {
+								avgPlus := cache[dice.PoolCacheIdx(counts, 1)]
+								if !math.IsNaN(avgPlus) {
+									diff := avgPlus - avgBase
+									table.Sum[5][nOthers] += diff
+									table.Cnt[5][nOthers]++
+								}
+							}
+
+							done := atomic.AddInt64(&p2Done, 1)
+							if done%100 == 0 || done == p2Total {
+								printProgress("PROGRESS2", done, p2Total)
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	fmt.Println("\n  集計完了")
+
+	return writeMarginalCSV(outDir, &table)
+}
+
+func writeMarginalCSV(outDir string, table *MarginalTable) (err error) {
 	csvDir, err := dice.EnsureCSVDir(outDir)
 	if err != nil {
 		return err
 	}
-	path := filepath.Join(csvDir, "part1_reference.csv")
+	path := filepath.Join(csvDir, "marginal_by_n.csv")
 	f, err := os.Create(path)
 	if err != nil {
 		return err
 	}
-	defer f.Close()
+	defer func() {
+		if cerr := f.Close(); cerr != nil && err == nil {
+			err = cerr
+		}
+	}()
 
 	w := csv.NewWriter(f)
-	if err := w.Write([]string{"dice", "avg_per_die", "p50_per_die", "p90_per_die", "p99_per_die"}); err != nil {
+	header := make([]string, 7)
+	header[0] = "n_others"
+	for i, name := range dice.DiceNames {
+		header[i+1] = name
+	}
+	if err := w.Write(header); err != nil {
 		return err
 	}
-	for _, r := range rows {
-		if err := w.Write([]string{
-			r.name,
-			fmt.Sprintf("%.4f", r.avg),
-			fmt.Sprintf("%.1f", r.p50),
-			fmt.Sprintf("%.1f", r.p90),
-			fmt.Sprintf("%.1f", r.p99),
-		}); err != nil {
+
+	for n := 0; n < dice.MaxN; n++ {
+		row := make([]string, 7)
+		row[0] = fmt.Sprintf("%d", n)
+		for t := 0; t < 6; t++ {
+			if table.Cnt[t][n] > 0 {
+				row[t+1] = fmt.Sprintf("%.4f", table.Sum[t][n]/float64(table.Cnt[t][n]))
+			}
+		}
+		if err := w.Write(row); err != nil {
 			return err
 		}
 	}

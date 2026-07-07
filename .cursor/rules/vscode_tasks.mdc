@@ -1,0 +1,34 @@
+---
+description: コマンド実行は VS Code tasks / settings に登録必須
+alwaysApply: true
+---
+
+# VS Code タスク
+
+## 方針
+
+ターミナルで手打ちする実行コマンドは作らない。  
+**必ず `.vscode/tasks.json` と `.vscode/settings.json`（`commands.workspaceCommands`）の両方に登録する。**
+
+## 追加手順
+
+1. `tasks.json` に task を追加（`label` が識別子）
+2. `settings.json` の `commands.workspaceCommands` に同じ `label` で紐付け
+3. README 等に手順を書く場合も「Commands から実行」と記載する
+
+## 現在登録済み
+
+| カテゴリ | コマンド |
+|---------|---------|
+| セットアップ | Python仮想環境を作成して依存をインストール |
+| データベース | DBを再生成 |
+| ドキュメント | MkDocsビルド / MkDocsプレビュー |
+| エミュレーター | Go mod tidy (sim) / Goテスト (sim) / Goビルド (sim) / Part1限界貢献度 / Part2種族能力 / Part3種族平均スコア / 全Part実行 |
+| コード品質 | Goフォーマット / Pythonフォーマット / 全コードフォーマット / Goリント / Pythonリント / 全コードリント / 全てをチェック(Go) / 全てをチェック(python) / 全てをチェック |
+| Github支援系 | Pull / ブランチ作成 / commit / push |
+
+## 新規コマンド追加時
+
+- スクリプト・ビルド・テスト・デプロイ等、実行可能なものは例外なく登録
+- `label` は日本語で用途が分かる名前にする
+- 長時間実行は `isBackground: true` を検討

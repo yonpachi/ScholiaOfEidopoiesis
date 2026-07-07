@@ -6,14 +6,12 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/yonpachi/ScholiaOfEidopoiesis/sim/dice"
 )
 
 func main() {
 	outDir := flag.String("out", "", "output directory (required)")
-	seed := flag.Int64("seed", 42, "RNG seed for reproducibility")
-	trials := flag.Int("trials", 5000, "trials per composition")
+	seed := flag.Int64("seed", 42, "RNG seed")
+	trials := flag.Int("trials", 10000, "trials per pool composition")
 	flag.Parse()
 
 	if flag.NArg() > 0 && *outDir == "" {
@@ -30,8 +28,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("=== Part2: full enumeration marginal (trials/comp=%d, max=%d) ===\n", *trials, dice.MaxN)
-	if err := RunFullEnumeration(*trials, out, *seed); err != nil {
+	if err := RunRaceAbilityComparison(*trials, out, *seed); err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
 	}

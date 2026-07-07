@@ -81,7 +81,9 @@ def apply_dark_style(ax: Axes) -> None:
     ax.title.set_color("#eeeeee")
 
 
-def read_matrix_csv(path: Path, row_key: str) -> tuple[list[str], dict[str, dict[str, list]]]:
+def read_matrix_csv(
+    path: Path, row_key: str
+) -> tuple[list[str], dict[str, dict[str, list]]]:
     """Read a wide CSV into series dicts keyed by column name."""
     names: list[str] = []
     data: dict[str, dict[str, list]] = {}
@@ -224,7 +226,9 @@ def save_line_chart(
     apply_dark_style(ax)
 
     for span in vspans:
-        ax.axvspan(span.xmin, span.xmax, alpha=span.alpha, color=span.color, label=span.label)
+        ax.axvspan(
+            span.xmin, span.xmax, alpha=span.alpha, color=span.color, label=span.label
+        )
 
     for s in spec.series:
         ax.plot(
@@ -253,9 +257,23 @@ def save_line_chart(
                 )
 
     for hl in hlines:
-        ax.axhline(y=hl.y, color=hl.color, linestyle=hl.linestyle, linewidth=hl.linewidth, alpha=hl.alpha)
+        ax.axhline(
+            y=hl.y,
+            color=hl.color,
+            linestyle=hl.linestyle,
+            linewidth=hl.linewidth,
+            alpha=hl.alpha,
+        )
         if hl.label is not None and hl.label_x is not None:
-            ax.text(hl.label_x, hl.y, hl.label, color=hl.color, fontsize=hl.label_fontsize, va="center", ha="left")
+            ax.text(
+                hl.label_x,
+                hl.y,
+                hl.label,
+                color=hl.color,
+                fontsize=hl.label_fontsize,
+                va="center",
+                ha="left",
+            )
 
     if post_draw is not None:
         post_draw(ax)

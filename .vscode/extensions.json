@@ -1,9 +1,6 @@
 {
 	"recommendations": [
-		"usernamehw.commands",
 		"golang.go",
-		"ms-python.python",
-		"ms-vscode.cpptools",
-		"qwtel.sqlite-viewer"
+		"charliermarsh.ruff"
 	]
 }

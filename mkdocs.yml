@@ -1,5 +1,5 @@
 site_name: 想成のスコーリア
-
+site_description: 錬金術TRPG ルールブック
 site_url: https://yonpachi.github.io/ScholiaOfEidopoiesis/
 
 validation:
@@ -55,22 +55,11 @@ markdown_extensions:
   - attr_list
 
 nav:
-  - ホーム: index.md
   - はじめに: about.md
   - ルール:
-      - キャラクター作成(工事中): character.md
-      - セッションの流れ(工事中): session.md
-      - 判定: checks.md
-      - 種族: ancestry.md
-      - 探索(工事中): exploration.md
-      - 戦闘(工事中): combat.md
-      - 印記とタグ(工事中): marksTags.md
-      - 錬金とアイテム(工事中): alchemy.md
-      - 町と工房(工事中): town.md
-      - 倉庫と経済(工事中): economy.md
-      - 世界と用語(工事中): world.md
-      - マップと地景(工事中): map.md
-      - 運営(工事中): operations.md
+      - 判定: rules/dice.md
+      - 種族: rules/ancestry.md
+  - 用語集: glossary.md
 
 extra:
   generator: false
@@ -85,6 +74,3 @@ extra_javascript:
 plugins:
   - search
   - glightbox
-
-hooks:
-  - hooks/balance_tokens.py

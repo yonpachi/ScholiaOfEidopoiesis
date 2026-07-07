@@ -1,7 +1,8 @@
-"""Part3: difficulty table sim + plot."""
+"""Part3: race average score sim + 8-line plot."""
 
 from __future__ import annotations
 
+import csv
 import sys
 from pathlib import Path
 
@@ -17,26 +18,52 @@ from plotting import (  # noqa: E402
     save_line_chart,
 )
 
-DIFF_LEVELS = [
-    ("易(85%)", 85, "#44ff44"),
-    ("普通(70%)", 70, "#ffff44"),
-    ("難(55%)", 55, "#ffaa22"),
-    ("超難(30%)", 30, "#ff4444"),
-    ("ほぼ不可能(3%)", 3, "#ff00ff"),
-]
-COMBO_COLORS = {
-    "d10only": "#9b59b6",
-    "d10+d4(Fire)": "#e74c3c",
-    "d10+d6(Earth)": "#8b4513",
-    "d10+d8(Wind)": "#2ecc71",
-    "d10+d20(Water)": "#3498db",
+RACE_COLORS = {
+    "Baseline": "#888888",
+    "Hume": "#ffffff",
+    "Makina": "#f39c12",
+    "Bestia": "#e74c3c",
+    "Homunculus": "#2ecc71",
+    "Relicia": "#d966ff",
+    "Umbra": "#ffff66",
+    "RaceMean": "#cccccc",
 }
-COMBO_MARKERS = {
-    "d10only": "D",
-    "d10+d4(Fire)": "o",
-    "d10+d6(Earth)": "s",
-    "d10+d8(Wind)": "^",
-    "d10+d20(Water)": "v",
+RACE_MARKERS = {
+    "Baseline": "x",
+    "Hume": "o",
+    "Makina": "D",
+    "Bestia": "^",
+    "Homunculus": "s",
+    "Relicia": "P",
+    "Umbra": "*",
+    "RaceMean": "h",
+}
+LINE_ORDER = [
+    "Baseline",
+    "Hume",
+    "Makina",
+    "Bestia",
+    "Homunculus",
+    "Relicia",
+    "Umbra",
+    "RaceMean",
+]
+PCT_LINE_ORDER = [
+    "Baseline",
+    "Hume",
+    "Makina",
+    "Bestia",
+    "Homunculus",
+    "Relicia",
+    "Umbra",
+]
+LINE_WIDTH = {
+    "Baseline": 1.5,
+    "RaceMean": 2.5,
+}
+LINE_STYLE = {
+    "Baseline": "--",
+    "RaceMean": "-",
 }
 
 
@@ -48,40 +75,113 @@ def run_sim(out_dir: Path, seed: int, trials: int) -> None:
     )
 
 
+def pct_vs_race_mean(data: dict[str, dict[str, list]]) -> dict[str, dict[str, list]]:
+    """Convert absolute scores to % deviation from RaceMean (RaceMean => 0%)."""
+    ref = data["RaceMean"]
+    ref_map = dict(zip(ref["x"], ref["y"]))
+    out: dict[str, dict[str, list]] = {}
+    for nm in PCT_LINE_ORDER:
+        if nm not in data:
+            continue
+        xs, ys = [], []
+        for x, y in zip(data[nm]["x"], data[nm]["y"]):
+            base = ref_map.get(x)
+            if base is None or base == 0:
+                continue
+            xs.append(x)
+            ys.append((y / base - 1.0) * 100.0)
+        out[nm] = {"x": xs, "y": ys}
+    return out
+
+
+def write_pct_csv(path: Path, pct_data: dict[str, dict[str, list]]) -> None:
+    xs = sorted({x for series in pct_data.values() for x in series["x"]})
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["n_pool", *PCT_LINE_ORDER])
+        for x in xs:
+            row = [x]
+            for nm in PCT_LINE_ORDER:
+                val_map = dict(zip(pct_data[nm]["x"], pct_data[nm]["y"]))
+                row.append(f"{val_map[x]:.4f}" if x in val_map else "")
+            w.writerow(row)
+
+
+def _build_series(
+    data: dict[str, dict[str, list]],
+    names: list[str],
+) -> list[LineSeries]:
+    series = []
+    for nm in names:
+        if nm not in data:
+            continue
+        series.append(
+            LineSeries(
+                x=data[nm]["x"],
+                y=data[nm]["y"],
+                label=nm,
+                color=RACE_COLORS.get(nm, "#ffffff"),
+                marker=RACE_MARKERS.get(nm, "o"),
+                linewidth=LINE_WIDTH.get(nm, 1.8),
+                linestyle=LINE_STYLE.get(nm, "-"),
+            )
+        )
+    return series
+
+
 def plot(out_dir: Path) -> None:
-    csv_path = csv_dir(out_dir) / "difficulty_table.csv"
-    require_csv(csv_path)
-    dice_names, data = read_matrix_csv(csv_path, "target")
+    score_csv = csv_dir(out_dir) / "race_score_by_n.csv"
+    require_csv(score_csv)
+
+    _, data = read_matrix_csv(score_csv, "n_pool")
 
     save_line_chart(
         LineChartSpec(
-            series=[
-                LineSeries(
-                    x=data[name]["x"],
-                    y=[y * 100.0 for y in data[name]["y"]],
-                    label=name,
-                    color=COMBO_COLORS.get(name, "#ffffff"),
-                    marker=COMBO_MARKERS.get(name, "o"),
-                    markersize=4,
-                )
-                for name in dice_names
-            ],
+            series=_build_series(data, LINE_ORDER),
             axis=AxisSpec(
-                xlabel="目標値",
-                ylabel="成功率 (%)",
-                title="難易度表: 目標値別成功率\n(1d10 + 属性ダイス1個)",
-                xlim=(1, 27),
-                ylim=(-2, 103),
-                x_major=1,
-                y_major=10,
+                xlabel="プール内総ダイス数 (n_pool)",
+                ylabel="平均達成値",
+                title=(
+                    "種族別平均スコア — レシピプール（1d10 + d4/d6/d8/d20）\n"
+                    "（種族なし / 6種族 / 試行内6種族平均）"
+                ),
+                x_major="integer",
             ),
-            figsize=(13, 7),
-            legend_loc="lower right",
+            figsize=(14, 7),
+            legend_loc="upper left",
         ),
-        out_dir / "difficulty_table.png",
+        out_dir / "race_score_by_n.png",
+    )
+
+    pct_data = pct_vs_race_mean(data)
+    pct_csv = csv_dir(out_dir) / "race_score_pct_by_n.csv"
+    write_pct_csv(pct_csv, pct_data)
+
+    save_line_chart(
+        LineChartSpec(
+            series=_build_series(pct_data, PCT_LINE_ORDER),
+            axis=AxisSpec(
+                xlabel="プール内総ダイス数 (n_pool)",
+                ylabel="種族平均比 (%)",
+                title=(
+                    "種族別スコア — 6種族平均比（0% = 試行内6種族平均）\n"
+                    "レシピプール（1d10 + d4/d6/d8/d20）"
+                ),
+                x_major="integer",
+            ),
+            figsize=(14, 7),
+            legend_loc="upper left",
+        ),
+        out_dir / "race_score_pct_by_n.png",
         hlines=[
-            HLineOverlay(y=pct, color=col, label=label, label_x=25.2)
-            for label, pct, col in DIFF_LEVELS
+            HLineOverlay(
+                y=0,
+                color="#cccccc",
+                linestyle="-",
+                linewidth=1.2,
+                alpha=0.9,
+                label="種族平均 (0%)",
+            )
         ],
     )
 
@@ -90,8 +190,8 @@ def main() -> None:
     part_main(
         part_label="Part3",
         go_part="part3",
-        description="Part3 sim + plot",
-        default_trials=100000,
+        description="Part3: race average score sim + plot",
+        default_trials=10000,
         plot_fn=plot,
         run_sim_fn=run_sim,
     )

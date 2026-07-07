@@ -3,21 +3,22 @@
 *.o
 /sim/bin/
 
+# MkDocs ビルド成果物
+site/
+
 # Python 仮想環境
 .venv/
 __pycache__/
 
-# シム出力（大量 CSV は追跡しない）
-/data/**/*.csv
-/marginal/
+# SQLite 生成物（正は data/schema/, data/seeds/ の SQL/CSV）
+data/*.db
+
+# シミュレーション実行結果（result/<タイムスタンプ>/）
+/result/
+
 
 # OS
 .DS_Store
 Thumbs.db
 
-/data
-/sim/data
-
-# MkDocs
-/site/
-/docs/catalog/
+.cursor/plans

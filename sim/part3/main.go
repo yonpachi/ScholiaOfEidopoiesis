@@ -11,7 +11,7 @@ import (
 func main() {
 	outDir := flag.String("out", "", "output directory (required)")
 	seed := flag.Int64("seed", 42, "RNG seed")
-	trials := flag.Int("trials", 100000, "trials per target/combo")
+	trials := flag.Int("trials", 10000, "trials per pool composition")
 	flag.Parse()
 
 	if flag.NArg() > 0 && *outDir == "" {
@@ -28,7 +28,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err := RunDifficultyTable(*trials, out, *seed); err != nil {
+	if err := RunRaceScoreComparison(*trials, out, *seed); err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
 	}

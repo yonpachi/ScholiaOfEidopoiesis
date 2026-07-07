@@ -1,0 +1,35 @@
+---
+description: 下書き文書（draft）の書き方と正式化フロー
+globs: draft/**
+alwaysApply: false
+---
+
+# 下書き（draft）
+
+## 位置づけ
+
+```
+temp/（議論ログ） → draft/（下書き） → docs/（公開）
+```
+
+- **temp/**: 話し合いの記録・決定事項メモ（非公開・gitignore）
+- **draft/**: ルール文書の下書き（git 管理、MkDocs 非掲載）
+- **docs/**: 公開ルールブック（GitHub Pages）
+
+## 構成
+
+- ルール下書き: `draft/rules/`
+- 用語集下書き: `draft/glossary.md`（必要時）
+- ファイル名・章立ては `docs/` と同じ規則（snake_case、日本語）
+
+## 執筆方針
+
+- 議論ログの内容を整理し、**ルール（how）** と **フレーバー** として `draft/` に書く
+- **why**（設計理由・試行錯誤・変更履歴）は `temp/` に残し、本文には書かない（`docs_writing.mdc` 参照）
+- 定数参照は確定後に macros 展開する想定で、下書き中は仮値でも可（確定時に `constants/` と揃える）
+
+## 正式化
+
+- 内容が固まったら `docs/` へ移す（またはコピー後に draft をアーカイブ）
+- `docs/` 移行時に `constants/*.json` との整合を確認する
+- コロケーション: `draft/rules/combat.md` ↔ `docs/rules/combat.md` ↔ `constants/combat.json`
