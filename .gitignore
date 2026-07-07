@@ -16,8 +16,6 @@ data/*.db
 # シミュレーション実行結果（result/<タイムスタンプ>/）
 /result/
 
-# 作業用（話し合いログ・計画書）
-temp/
 
 # OS
 .DS_Store
