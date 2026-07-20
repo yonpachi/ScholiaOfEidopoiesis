@@ -50,3 +50,4 @@
 | 015 | [015_lineage_candidates.md](015_lineage_candidates.md)                   | 系統候補リスト（flash-idea / D1・フレーバー優先）            | [議論中]                       |
 | 015 | [015_lineage_candidates_v2.md](015_lineage_candidates_v2.md)             | 系統候補リストv2（機能軸・クセ優先、flash-idea×D1統合）      | [議論中]                       |
 | 016 | [016_light_dark_mana_substitution.md](016_light_dark_mana_substitution.md) | 光・闇マナの代用支払い（対立ペア／四属性集約）             | [議論中]                       |
+| 017 | [017_lineage.md](017_lineage.md)                                         | アイテム系統（採用候補10・地形／歯車の差・見送り方針）     | [議論中]                       |
