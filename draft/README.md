@@ -14,4 +14,8 @@ temp/ で話し合う → draft/ に下書き → docs/ に正式化
 ## 構成
 
 - `rules/` — ルール文書の下書き
+  - `alchemy.md` — 錬金（α″・材料スロット）
+  - `combat.md` — 戦闘（タイムライン・カード・使用／想成）
+  - `character.md` — キャラクター作成（初期装備）
+  - `ancestry.md` — 種族（docs コロケーション）
 - `glossary.md` — 用語集の下書き（必要時）
