@@ -51,5 +51,4 @@
 | 015 | [015_lineage_candidates_v2.md](015_lineage_candidates_v2.md)             | 系統候補リストv2（機能軸・クセ優先、flash-idea×D1統合）      | [議論中]                       |
 | 016 | [016_light_dark_mana_substitution.md](016_light_dark_mana_substitution.md) | 光・闇マナの代用支払い（対立ペア／四属性集約）             | [議論中]                       |
 | 017 | [017_lineage.md](017_lineage.md)                                         | アイテム系統（**β専門7**・札→歯車・召喚制限つき・造園・変異） | [議論中]                       |
-| 018 | [018_effect_catalog.md](018_effect_catalog.md)                           | 効果パターン P01〜P12・**書き方テンプレ**（材料／タグ／コスト・発動／距離／対象） | [議論中]                       |
-| 019 | [019_effect_text_generation.md](019_effect_text_generation.md)           | 効果文の **生成方式**（正＝構造化データ、見せ物＝コーパスから生成する日本語） | [方向合意]                     |
+| 018 | [018_effect_catalog.md](018_effect_catalog.md)                           | 効果パターン P01〜P12・**書き方テンプレ**（間合い等は本文外） | [議論中]                       |
