@@ -53,5 +53,5 @@
 | 017 | [017_lineage.md](017_lineage.md)                                         | アイテム系統（**β専門7**・札→歯車・召喚制限つき・造園・変異） | [議論中]                       |
 | 018 | [018_effect_catalog.md](018_effect_catalog.md)                           | 効果パターン・テンプレ（**間合**／対象**カウント**／設置カウント廃止） | [議論中]                       |
 | 019 | [019_effect_text_generation.md](019_effect_text_generation.md)           | 効果文の生成（data／prose、テンプレエンジン）                 | [議論中]                       |
-| 020 | [020_data_builder.md](020_data_builder.md)                               | ぬる／爆弾岩／こうもり。**能力が先**（018・012）。敵専用カタログは作らない | [議論中]                       |
+| 020 | [020_data_builder.md](020_data_builder.md)                               | 敵ビルダー議論。**区切り** — 能力追加はエージェント。ぬる／爆弾岩／こうもりまで | [議論中]                       |
 | 021 | [021_game_balance.md](021_game_balance.md)                               | 長寿RPG・学術のバランス方式。TTK／予算／レベル×役。020接続 | [議論中]                       |
