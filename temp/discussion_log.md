@@ -40,15 +40,18 @@
 | 005 | [005_races.md](005_races.md)                               | 種族・種族能力（判定時 **ほぼ確定** / 戦闘時 **先送り**・docs仮案） | [決定]（戦闘除く）             |
 | 006 | [006_part3_race_avg.md](006_part3_race_avg.md)             | Part3 種族別平均スコア sim（8本線グラフ）                    | [決定]                         |
 | 007 | [007_docs_dice_ancestry_revision.md](007_docs_dice_ancestry_revision.md) | ダイス・種族ルール文書の比較と改稿（backup vs docs）       | [決定]                         |
-| 008 | [008_alchemy.md](008_alchemy.md)                                         | 錬金（**α″決定** / 数値・装備想成・タグは議論中）            | [議論中]                       |
+| 008 | [008_alchemy.md](008_alchemy.md)                                         | 錬金（**α″** / 単体 `{品質}` / 再錬金の最良） | [議論中]                       |
 | 009 | [009_world_setting.md](009_world_setting.md)                             | 世界観・背景（設計者向け下敷き）                             | [決定]（下敷き） / 地景ルール未 |
 | 010 | [010_landscape.md](010_landscape.md)                                     | 地景・界標（据置・拓荒・隣接・解放条件）                     | [未決]                         |
-| 011 | [011_combat.md](011_combat.md)                                           | 戦闘（**骨格・効果スキーマ一部決定** / 印記・数値は議論中）  | [議論中]                       |
+| 011 | [011_combat.md](011_combat.md)                                           | 戦闘（骨格／単体＝品質／**初期雑魚HP20**／役・頭数は020） | [議論中]                       |
 | 012 | [012_marks_tags.md](012_marks_tags.md)                                   | 印記・タグ・効果文（**大部分決定** / 一覧は後日）            | [議論中]                       |
-| 013 | [013_expression.md](013_expression.md)                                   | 式・計算・括弧記法（**除算・{} 決定** / 変数一覧は未）       | [議論中]                       |
+| 013 | [013_expression.md](013_expression.md)                                   | 式（`品質` のみ／範囲 `{品質/2}`／**β手採点**／点表は変数にしない） | [議論中]                       |
 | 014 | [014_lineage_proposals.md](014_lineage_proposals.md)                     | 系統案まとめ（txt/ 各AI回答の整理・比較）                    | [議論中]                       |
 | 015 | [015_lineage_candidates.md](015_lineage_candidates.md)                   | 系統候補リスト（flash-idea / D1・フレーバー優先）            | [議論中]                       |
 | 015 | [015_lineage_candidates_v2.md](015_lineage_candidates_v2.md)             | 系統候補リストv2（機能軸・クセ優先、flash-idea×D1統合）      | [議論中]                       |
 | 016 | [016_light_dark_mana_substitution.md](016_light_dark_mana_substitution.md) | 光・闇マナの代用支払い（対立ペア／四属性集約）             | [議論中]                       |
 | 017 | [017_lineage.md](017_lineage.md)                                         | アイテム系統（**β専門7**・札→歯車・召喚制限つき・造園・変異） | [議論中]                       |
-| 018 | [018_effect_catalog.md](018_effect_catalog.md)                           | 効果パターン P01〜P12・**書き方テンプレ**（間合い等は本文外） | [議論中]                       |
+| 018 | [018_effect_catalog.md](018_effect_catalog.md)                           | 効果パターン・テンプレ（**間合**／対象**カウント**／設置カウント廃止） | [議論中]                       |
+| 019 | [019_effect_text_generation.md](019_effect_text_generation.md)           | 効果文の生成（data／prose、テンプレエンジン）                 | [議論中]                       |
+| 020 | [020_data_builder.md](020_data_builder.md)                               | ぬる／爆弾岩／こうもり。**能力が先**（018・012）。敵専用カタログは作らない | [議論中]                       |
+| 021 | [021_game_balance.md](021_game_balance.md)                               | 長寿RPG・学術のバランス方式。TTK／予算／レベル×役。020接続 | [議論中]                       |

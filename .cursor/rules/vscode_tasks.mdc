@@ -23,7 +23,7 @@ alwaysApply: true
 | セットアップ | Python仮想環境を作成して依存をインストール |
 | データベース | DBを再生成 |
 | ドキュメント | MkDocsビルド / MkDocsプレビュー |
-| エミュレーター | Go mod tidy (sim) / Goテスト (sim) / Goビルド (sim) / Part1限界貢献度 / Part2種族能力 / Part3種族平均スコア / 全Part実行 |
+| エミュレーター | Go mod tidy (sim) / Goテスト (sim) / Goビルド (sim) / Part1限界貢献度 / Part2種族能力 / Part3種族平均スコア / Part4品質試行 / 全Part実行 |
 | コード品質 | Goフォーマット / Pythonフォーマット / 全コードフォーマット / Goリント / Pythonリント / 全コードリント / 全てをチェック(Go) / 全てをチェック(python) / 全てをチェック |
 | Github支援系 | Pull / ブランチ作成 / commit / push |
 

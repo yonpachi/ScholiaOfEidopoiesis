@@ -97,6 +97,10 @@
 					"command": "workbench.action.tasks.runTask",
 					"args": "Part3種族平均スコア"
 				},
+				"Part4品質試行": {
+					"command": "workbench.action.tasks.runTask",
+					"args": "Part4品質試行"
+				},
 				"全Part実行": {
 					"command": "workbench.action.tasks.runTask",
 					"args": "全Part実行"
