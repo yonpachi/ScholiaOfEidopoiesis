@@ -55,3 +55,4 @@
 | 019 | [019_effect_text_generation.md](019_effect_text_generation.md)           | 効果文の生成（data／prose、テンプレエンジン）                 | [議論中]                       |
 | 020 | [020_data_builder.md](020_data_builder.md)                               | 敵ビルダー議論。**区切り** — 能力追加はエージェント。ぬる／爆弾岩／こうもりまで | [議論中]                       |
 | 021 | [021_game_balance.md](021_game_balance.md)                               | 長寿RPG・学術のバランス方式。TTK／予算／レベル×役。020接続 | [議論中]                       |
+| 022 | [022_beta_ports.md](022_beta_ports.md)                                   | βポート表。**系統12＝[決定]**（獣鳥鱗節甲柔草木菌鉱造霊）。性質・副作用は未凍結 | [議論中]                       |
